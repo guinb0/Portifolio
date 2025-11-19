@@ -78,25 +78,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ===== THEME TOGGLE =====
     const themeToggle = document.getElementById('theme-toggle');
-    const body = document.body;
+    const html = document.documentElement;
 
-    // Verifica tema salvo
-    const currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark') {
-        body.classList.add('dark');
+    // Aplica tema salvo ao carregar a página
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+        html.setAttribute('data-theme', 'dark');
+    } else {
+        html.setAttribute('data-theme', 'light');
     }
 
     // Toggle do tema
     if (themeToggle) {
         themeToggle.addEventListener('click', function(e) {
             e.stopPropagation();
-            body.classList.toggle('dark');
+            e.preventDefault();
             
-            if (body.classList.contains('dark')) {
-                localStorage.setItem('theme', 'dark');
-            } else {
-                localStorage.setItem('theme', 'light');
-            }
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            console.log('Tema alterado para:', newTheme);
         });
     }
 

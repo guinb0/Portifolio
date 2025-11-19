@@ -19,21 +19,26 @@
         </div>
         
         <ul class="navbar-list">
-            <li><a href="{% url 'portfolio:home' %}#home"><i class='bx bx-home-alt'></i> Home</a></li>
-            <li><a href="{% url 'portfolio:home' %}#about"><i class='bx bx-user'></i> Sobre</a></li>
-            <li><a href="{% url 'portfolio:home' %}#services"><i class='bx bx-briefcase'></i> Serviços</a></li>
-            <li><a href="{% url 'portfolio:home' %}#portfolio"><i class='bx bx-folder'></i> Portfolio</a></li>
+            <li><a href="{% url 'portfolio:home' %}#home"><i class='bx bx-home-alt'></i> {% if language == 'en' %}Home{% elif language == 'es' %}Inicio{% else %}Home{% endif %}</a></li>
+            {% if language == 'en' %}
+            <li><a href="{% url 'portfolio:about_en' %}"><i class='bx bx-user'></i> About</a></li>
+            {% elif language == 'es' %}
+            <li><a href="{% url 'portfolio:about_es' %}"><i class='bx bx-user'></i> Sobre</a></li>
+            {% else %}
+            <li><a href="{% url 'portfolio:sobre' %}"><i class='bx bx-user'></i> Sobre</a></li>
+            {% endif %}
+            <li><a href="{% url 'portfolio:home' %}#services"><i class='bx bx-briefcase'></i> {% if language == 'en' %}Services{% elif language == 'es' %}Servicios{% else %}Serviços{% endif %}</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:projects_en' %}{% elif language == 'es' %}{% url 'portfolio:proyectos_es' %}{% else %}{% url 'portfolio:projetos' %}{% endif %}"><i class='bx bx-folder'></i> {% if language == 'en' %}Projects{% elif language == 'es' %}Proyectos{% else %}Projetos{% endif %}</a></li>
             <li><a href="{% url 'portfolio:blog' %}"><i class='bx bx-book-alt'></i> Blog</a></li>
-            <li><a href="{% url 'portfolio:certificados' %}"><i class='bx bx-certification'></i> Certificados</a></li>
-            <li><a href="{% url 'portfolio:redes_sociais' %}"><i class='bx bx-share-alt'></i> Redes Sociais</a></li>
-            <li><a href="{% url 'portfolio:receitas' %}"><i class='bx bx-restaurant'></i> Receitas</a></li>
-            <li><a href="{% url 'portfolio:mapa_visitantes' %}"><i class='bx bx-world'></i> Mapa de Visitantes</a></li>
-            <li><a href="{% url 'portfolio:home' %}#contact"><i class='bx bx-envelope'></i> Contato</a></li>
+            <li><a href="{% url 'portfolio:certificados' %}"><i class='bx bx-certification'></i> {% if language == 'en' %}Certificates{% elif language == 'es' %}Certificados{% else %}Certificados{% endif %}</a></li>
+            <li><a href="{% url 'portfolio:redes_sociais' %}"><i class='bx bx-share-alt'></i> {% if language == 'en' %}Social Media{% elif language == 'es' %}Redes Sociales{% else %}Redes Sociais{% endif %}</a></li>
+            <li><a href="{% url 'portfolio:mapa_visitantes' %}"><i class='bx bx-world'></i> {% if language == 'en' %}Visitor Map{% elif language == 'es' %}Mapa de Visitantes{% else %}Mapa de Visitantes{% endif %}</a></li>
+            <li><a href="{% url 'portfolio:home' %}#contact"><i class='bx bx-envelope'></i> {% if language == 'en' %}Contact{% elif language == 'es' %}Contacto{% else %}Contato{% endif %}</a></li>
             
             <!-- Dropdown de Idiomas -->
             <li class="dropdown">
                 <button class="dropdown-btn">
-                    <i class='bx bx-globe'></i> Idioma
+                    <i class='bx bx-globe'></i> {% if language == 'en' %}Language{% elif language == 'es' %}Idioma{% else %}Idioma{% endif %}
                     <i class='bx bx-chevron-down'></i>
                 </button>
                 <ul class="dropdown-content">

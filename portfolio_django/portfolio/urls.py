@@ -18,7 +18,12 @@ urlpatterns = [
     # Outras páginas
     path('certificados/', views.CertificadosView.as_view(), name='certificados'),
     path('redes/', views.RedesSociaisView.as_view(), name='redes_sociais'),
-    path('receitas/', views.ReceitasView.as_view(), name='receitas'),
+    path('projetos/', views.ProjectsPtView.as_view(), name='projetos'),
+    path('en/projects/', views.ProjectsEnView.as_view(), name='projects_en'),
+    path('es/proyectos/', views.ProjectsEsView.as_view(), name='proyectos_es'),
+    path('sobre/', views.AboutView.as_view(), name='sobre'),
+    path('en/about/', views.AboutEnView.as_view(), name='about_en'),
+    path('es/sobre/', views.AboutEsView.as_view(), name='about_es'),
     
     # Blog
     path('blog/', views.BlogView.as_view(), name='blog'),

@@ -6,7 +6,8 @@
     scroll-behavior: smooth;
 }
 
-:root {
+:root,
+html[data-theme="light"] {
     --primary-color: #667eea;
     --secondary-color: #764ba2;
     --accent-color: #f093fb;
@@ -22,7 +23,7 @@
 }
 
 /* Dark Mode Variables */
-body.dark {
+html[data-theme="dark"] {
     --text-dark: #f7fafc;
     --text-light: #cbd5e0;
     --bg-light: #1a202c;

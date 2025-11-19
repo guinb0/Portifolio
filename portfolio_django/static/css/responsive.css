@@ -69,7 +69,7 @@
         transition: clip-path 0.3s;
     }
 
-    body.dark .navbar {
+    html[data-theme="dark"] .navbar {
         background: rgba(45, 55, 72, 0.95);
     }
 
@@ -147,8 +147,8 @@
         height: 24px;
     }
 
-    body.dark .theme-toggle-btn span {
-        left: 33px;
+    html[data-theme="dark"] .theme-toggle-btn span {
+        left: 28px;
     }
     
     .contact-info {

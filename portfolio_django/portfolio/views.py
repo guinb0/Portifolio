@@ -19,8 +19,10 @@ class HomeView(TemplateView):
     template_name = 'portfolio/home.html'
     
     def get_context_data(self, **kwargs):
+        from .models import Project
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Guilherme Nunes - Data Scientist'
+        context['projects'] = Project.objects.filter(is_active=True)
         context['stats'] = {
             'experience': '3+',
             'projects': '15+',
@@ -49,39 +51,117 @@ class RedesSociaisView(TemplateView):
         return context
 
 
-class ReceitasView(TemplateView):
-    """View para assistente de receitas"""
-    template_name = 'portfolio/receitas.html'
-    
+class ProjectsPtView(TemplateView):
+    """Página de projetos (Português)"""
+    template_name = 'portfolio/projetos.html'
+
     def get_context_data(self, **kwargs):
+        from .models import Project
         context = super().get_context_data(**kwargs)
-        context['page_title'] = 'Assistente de Receitas - Guilherme Nunes'
+        context['page_title'] = 'Projetos - Guilherme Nunes'
+        context['language'] = 'pt'
+        context['projects'] = Project.objects.filter(is_active=True)
+        return context
+
+class ProjectsEnView(TemplateView):
+    """Projects page (English)"""
+    template_name = 'portfolio/projects_en.html'
+
+    def get_context_data(self, **kwargs):
+        from .models import Project
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Projects - Guilherme Nunes'
+        context['language'] = 'en'
+        context['projects'] = Project.objects.filter(is_active=True)
+        return context
+
+class ProjectsEsView(TemplateView):
+    """Página de proyectos (Español)"""
+    template_name = 'portfolio/proyectos_es.html'
+
+    def get_context_data(self, **kwargs):
+        from .models import Project
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Proyectos - Guilherme Nunes'
+        context['language'] = 'es'
+        context['projects'] = Project.objects.filter(is_active=True)
         return context
 
 
 # Views para diferentes idiomas
 def home_pt(request):
     """Home em português"""
+    from .models import Project, Certificate
+    stats = {
+        'experience': '3+',
+        'projects': Project.objects.filter(is_active=True).count(),
+        'certifications': Certificate.objects.filter(is_active=True).count()
+    }
     return render(request, 'portfolio/home.html', {
         'language': 'pt',
-        'page_title': 'Guilherme Nunes - Cientista de Dados'
+        'page_title': 'Guilherme Nunes - Cientista de Dados',
+        'stats': stats
     })
 
 
 def home_en(request):
     """Home em inglês"""
+    from .models import Project, Certificate
+    stats = {
+        'experience': '3+',
+        'projects': Project.objects.filter(is_active=True).count(),
+        'certifications': Certificate.objects.filter(is_active=True).count()
+    }
     return render(request, 'portfolio/home_en.html', {
         'language': 'en',
-        'page_title': 'Guilherme Nunes - Data Scientist'
+        'page_title': 'Guilherme Nunes - Data Scientist',
+        'stats': stats
     })
 
 
 def home_es(request):
     """Home em espanhol"""
+    from .models import Project, Certificate
+    stats = {
+        'experience': '3+',
+        'projects': Project.objects.filter(is_active=True).count(),
+        'certifications': Certificate.objects.filter(is_active=True).count()
+    }
     return render(request, 'portfolio/home_es.html', {
         'language': 'es',
-        'page_title': 'Guilherme Nunes - Científico de Datos'
+        'page_title': 'Guilherme Nunes - Científico de Datos',
+        'stats': stats
     })
+
+class AboutView(TemplateView):
+    """Página Sobre mim separada"""
+    template_name = 'portfolio/sobre.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Sobre - Guilherme Nunes'
+        context['language'] = 'pt'
+        return context
+
+class AboutEnView(TemplateView):
+    """English About page"""
+    template_name = 'portfolio/about_en.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'About - Guilherme Nunes'
+        context['language'] = 'en'
+        return context
+
+class AboutEsView(TemplateView):
+    """Spanish About page"""
+    template_name = 'portfolio/about_es.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Sobre - Guilherme Nunes'
+        context['language'] = 'es'
+        return context
 
 
 class BlogView(ListView):
