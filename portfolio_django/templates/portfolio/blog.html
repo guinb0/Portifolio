@@ -3,31 +3,33 @@
 
 {% block title %}{{ page_title }}{% endblock %}
 
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/blog.css' %}">{% endblock %}
+
 {% block content %}
-<section class="blog" id="blog" style="padding: 7rem 7% 4rem;">
-  <div class="about-title" style="text-align:center; margin-bottom: 2rem;">
+<section class="blog" id="blog">
+  <div class="about-title">
     <h1><span>Blog</span> & Novidades</h1>
     <h2>Artigos, atualizações e bastidores dos projetos</h2>
   </div>
 
-  <div class="posts-grid" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+  <div class="posts-grid">
     {% if posts %}
       {% for post in posts %}
-        <article class="post-card" style="background: var(--card-bg, #fff); border-radius: 16px; box-shadow: 0 10px 30px var(--shadow, rgba(0,0,0,0.1)); padding: 1.25rem;">
-          <div class="post-meta" style="font-size: .9rem; color: var(--text-muted, #666); margin-bottom: .5rem;">
+        <article class="post-card">
+          <div class="post-meta">
             <i class='bx bx-calendar'></i> {{ post.created_at|date:"d/m/Y" }}
           </div>
-          <h3 style="margin: .25rem 0 0.75rem;">{{ post.title }}</h3>
-          <p style="color: var(--text-muted, #666);">{{ post.excerpt }}</p>
-          <a href="{{ post.get_absolute_url }}" class="btn" style="display:inline-flex; align-items:center; gap:.5rem; margin-top: .75rem;">
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt }}</p>
+          <a href="{{ post.get_absolute_url }}" class="btn">
             Ler mais <i class='bx bx-right-arrow-alt'></i>
           </a>
         </article>
       {% endfor %}
     {% else %}
-      <div class="empty" style="text-align:center; opacity:.8;">
-        <i class='bx bx-news' style="font-size:3rem;"></i>
-        <p style="margin-top:.5rem;">Sem posts ainda. Em breve novidades por aqui! 🚀</p>
+      <div class="empty">
+        <i class='bx bx-news'></i>
+        <p>Sem posts ainda. Em breve novidades por aqui! 🚀</p>
       </div>
     {% endif %}
   </div>

@@ -3,30 +3,31 @@
 
 {% block title %}Certificados - Guilherme Nunes{% endblock %}
 
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/certificates.css' %}">{% endblock %}
+
 {% block content %}
-<section class="certificates" style="padding: 140px 7% 80px; min-height: 100vh; background: var(--bg-light);">
-    <div class="heading">
-        <h1><span>Certificados</span></h1>
-    </div>
-    
-    <div class="certificates-container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-        <!-- Aqui você pode adicionar certificados dinamicamente ou estaticamente -->
-        <div class="certificate-card" style="background: var(--bg-white); padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px var(--shadow); transition: all 0.3s;">
-            <div class="certificate-icon" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
-                <i class='bx bx-award'></i>
-            </div>
-            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-dark);">Certificado Exemplo</h3>
-            <p style="color: var(--text-light); margin-bottom: 1rem;">Instituição - Data</p>
-            <p style="color: var(--text-light);">Descrição do certificado</p>
+<section class="certificates" id="certificates">
+    <div class="certificates-inner">
+        <div class="heading">
+            <h1><span>{% if language == 'en' %}Certificates{% elif language == 'es' %}Certificados{% else %}Certificados{% endif %}</span></h1>
+            <h2 class="subtitle">{% if language == 'en' %}Achievements and professional milestones{% elif language == 'es' %}Logros y hitos profesionales{% else %}Conquistas e marcos profissionais{% endif %}</h2>
         </div>
-        
-        <!-- Adicione mais certificados conforme necessário -->
-    </div>
-    
-    <div style="text-align: center; margin-top: 3rem;">
-        <a href="{% url 'portfolio:home' %}" class="btn">
-            <i class='bx bx-arrow-back'></i> Voltar ao Início
-        </a>
+        <div class="certificates-grid">
+            {% if certificates %}
+                {% for cert in certificates %}
+                    <article class="certificate-card">
+                        <div class="certificate-icon"><i class='bx bx-award'></i></div>
+                        <h3 class="certificate-title">{{ cert.title }}</h3>
+                        <p class="certificate-meta">{{ cert.institution }} - {{ cert.date_issued|date:"d/m/Y" }}</p>
+                        {% if cert.description %}<p class="certificate-description">{{ cert.description|truncatechars:160 }}</p>{% endif %}
+                        {% if cert.url %}<a href="{{ cert.url }}" target="_blank" class="certificate-link">{% if language == 'en' %}View Certificate{% elif language == 'es' %}Ver Certificado{% else %}Ver Certificado{% endif %} →</a>{% endif %}
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p class="no-certificates">{% if language == 'en' %}No certificates added yet.{% elif language == 'es' %}Aún no hay certificados.{% else %}Nenhum certificado cadastrado ainda.{% endif %}</p>
+            {% endif %}
+        </div>
+        <div class="back-link"><a href="{% url 'portfolio:home' %}" class="btn btn-secondary"><i class='bx bx-arrow-back'></i> {% if language == 'en' %}Back Home{% elif language == 'es' %}Volver al Inicio{% else %}Voltar ao Início{% endif %}</a></div>
     </div>
 </section>
 {% endblock %}
