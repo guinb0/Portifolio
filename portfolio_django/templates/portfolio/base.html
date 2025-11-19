@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{{ page_title|default:"Guilherme Nunes - Data Scientist" }}{% endblock %}</title>
+    
+    <!-- Boxicons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/services.css' %}">
+    <link rel="stylesheet" href="{% static 'css/portfolio.css' %}">
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Elementos Flutuantes Decorativos -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+
+    <!-- Header -->
+    {% include 'portfolio/partials/_header.html' %}
+
+    <!-- Conteúdo Principal -->
+    {% block content %}{% endblock %}
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{% static 'js/theme-toggle.js' %}"></script>
+    <script src="{% static 'js/menu-mobile.js' %}"></script>
+    <script src="{% static 'js/scroll-reveal.js' %}"></script>
+    <script src="{% static 'js/stats-animation.js' %}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

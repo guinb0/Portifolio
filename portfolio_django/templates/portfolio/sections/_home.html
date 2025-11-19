@@ -1,0 +1,25 @@
+{% load static %}
+<!-- Home Section -->
+<section class="home" id="home">
+    <div class="home-content">
+        <div class="home-text">
+            <span>Olá, eu sou</span>
+            <h1>Guilherme Nunes</h1>
+            <h2>Data Scientist</h2>
+            <p>Transformando dados em insights valiosos.<br>Especialista em análise, extração e visualização de dados.</p>
+            <div class="btn-group">
+                <a href="#contact" class="btn">
+                    <i class='bx bx-chat'></i> Entre em contato
+                </a>
+                <a href="{% url 'portfolio:certificados' %}" class="btn btn-secondary">
+                    <i class='bx bx-award'></i> Ver Certificados
+                </a>
+            </div>
+        </div>
+        <div class="home-img">
+            <div class="img-wrapper">
+                <img src="{% static 'img/Foto3.png' %}" alt="Guilherme Nunes">
+            </div>
+        </div>
+    </div>
+</section>

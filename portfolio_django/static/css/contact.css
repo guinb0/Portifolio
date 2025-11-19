@@ -1,0 +1,78 @@
+/* ===== CONTACT SECTION ===== */
+.contact {
+    padding: 6rem 7%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    position: relative;
+}
+
+.contact .heading h1 {
+    color: white !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.contact .heading h1 span {
+    color: white !important;
+}
+
+.contact .heading h1::after {
+    background: white;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+}
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+}
+
+.contact-box {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(20px);
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: all 0.3s;
+    min-height: 140px;
+}
+
+.contact-box:hover {
+    transform: translateY(-8px);
+    background: rgba(255, 255, 255, 0.25);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.contact-box i {
+    font-size: 3rem;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 1.2rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.contact-box .text {
+    flex: 1;
+    overflow: hidden;
+}
+
+.contact-box .text h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: white;
+    font-weight: 600;
+}
+
+.contact-box .text p {
+    color: rgba(255, 255, 255, 0.95);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}

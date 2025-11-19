@@ -1,0 +1,32 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}Certificados - Guilherme Nunes{% endblock %}
+
+{% block content %}
+<section class="certificates" style="padding: 140px 7% 80px; min-height: 100vh; background: var(--bg-light);">
+    <div class="heading">
+        <h1>Meus <span>Certificados</span></h1>
+    </div>
+    
+    <div class="certificates-container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <!-- Aqui você pode adicionar certificados dinamicamente ou estaticamente -->
+        <div class="certificate-card" style="background: var(--bg-white); padding: 2rem; border-radius: 20px; box-shadow: 0 10px 30px var(--shadow); transition: all 0.3s;">
+            <div class="certificate-icon" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;">
+                <i class='bx bx-award'></i>
+            </div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--text-dark);">Certificado Exemplo</h3>
+            <p style="color: var(--text-light); margin-bottom: 1rem;">Instituição - Data</p>
+            <p style="color: var(--text-light);">Descrição do certificado</p>
+        </div>
+        
+        <!-- Adicione mais certificados conforme necessário -->
+    </div>
+    
+    <div style="text-align: center; margin-top: 3rem;">
+        <a href="{% url 'portfolio:home' %}" class="btn">
+            <i class='bx bx-arrow-back'></i> Voltar ao Início
+        </a>
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% load static %}
+<header>
+    <a href="{% url 'portfolio:home' %}" class="logo">Guinb</a>
+    
+    <div class="header-right">
+        <div class="bx bx-menu" id="menu-icon"></div>
+        
+        <ul class="navbar">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#services">Serviços</a></li>
+            <li><a href="{% url 'portfolio:certificados' %}">Certificados</a></li>
+            <li><a href="{% url 'portfolio:redes_sociais' %}">Redes Sociais</a></li>
+            <li class="dropdown">
+                <button class="dropdown-btn">
+                    <img src="{% static 'img/mundo.png' %}" alt="Idioma" class="flag-icon">
+                    <i class='bx bx-chevron-down'></i>
+                </button>
+                <ul class="dropdown-content">
+                    <li>
+                        <a href="{% url 'portfolio:home' %}">
+                            <img src="{% static 'img/brazil-flag.png' %}" alt="PT" class="flag-icon">Português
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'portfolio:home_en' %}">
+                            <img src="{% static 'img/uk-flag.png' %}" alt="EN" class="flag-icon">English
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'portfolio:home_es' %}">
+                            <img src="{% static 'img/esp-flag.png' %}" alt="ES" class="flag-icon">Español
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+        <!-- Theme Toggle Button -->
+        <div class="theme-toggle-btn" id="theme-toggle">
+            <i class='bx bx-sun'></i>
+            <i class='bx bx-moon'></i>
+            <span></span>
+        </div>
+    </div>
+</header>

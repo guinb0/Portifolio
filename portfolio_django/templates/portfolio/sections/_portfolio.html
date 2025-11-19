@@ -1,0 +1,94 @@
+{% load static %}
+<!-- Portfolio Section -->
+<section class="portfolio" id="portfolio">
+    <div class="heading">
+        <h1>Meus <span>Projetos</span></h1>
+    </div>
+    <div class="portfolio-container">
+        <div class="box">
+            <div class="box-img">
+                <img src="{% static 'img/automacao.png' %}" alt="Automação">
+            </div>
+            <div class="content">
+                <a href="https://colab.research.google.com/drive/1SO-nGi783-yHkXV03sQuOSnhj-mATxCh?usp=sharing" target="_blank" title="Ver Projeto"><i class='bx bx-link-external'></i></a>
+                <h3>Automação de Processos</h3>
+                <div class="project-description">
+                    <p>Sistema inteligente de automação que integra Python com APIs e planilhas para otimizar fluxos de trabalho.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Automação</span>
+                        <span class="project-tag">APIs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-img">
+                <img src="{% static 'img/Portifólio1.png' %}" alt="Portfólio">
+            </div>
+            <div class="content">
+                <a href="https://guinb.herokuapp.com" target="_blank" title="Ver Projeto"><i class='bx bx-link-external'></i></a>
+                <h3>Portfolio Profissional</h3>
+                <div class="project-description">
+                    <p>Portfólio interativo e responsivo desenvolvido com design moderno, dark mode e animações suaves.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML/CSS</span>
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">Flask</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-img">
+                <img src="{% static 'img/carrosonline.png' %}" alt="E-commerce">
+            </div>
+            <div class="content">
+                <a href="https://colab.research.google.com/drive/1-Y7B-TQJk-Zto6guVw9LtTr8dY1vnmNm?usp=sharing" target="_blank" title="Ver Projeto"><i class='bx bx-link-external'></i></a>
+                <h3>E-commerce de Veículos</h3>
+                <div class="project-description">
+                    <p>Plataforma completa de vendas online para carros e peças automotivas com sistema de busca e filtros avançados.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">E-commerce</span>
+                        <span class="project-tag">Web Design</span>
+                        <span class="project-tag">UX/UI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-img">
+                <img src="{% static 'img/API.png' %}" alt="API">
+            </div>
+            <div class="content">
+                <a href="https://monitoramentolegislativo.streamlit.app/" target="_blank" title="Ver Projeto"><i class='bx bx-link-external'></i></a>
+                <h3>Extração de Dados Legislativo SP</h3>
+                <div class="project-description">
+                    <p>Monitoramento do legislativo de São Paulo por meio de APIs</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">API REST</span>
+                        <span class="project-tag">SQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box">
+            <div class="box-img">
+                <img src="{% static 'img/receitas.png' %}" alt="Assistente de Receitas" style="object-fit: cover;">
+            </div>
+            <div class="content">
+                <a href="{% url 'portfolio:receitas' %}" title="Ver Projeto"><i class='bx bx-link-external'></i></a>
+                <h3>Assistente de Receitas AI</h3>
+                <div class="project-description">
+                    <p>Aplicação inteligente que sugere receitas baseado nos ingredientes disponíveis, com filtros por tipo de cozinha e restrições alimentares.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">JavaScript</span>
+                        <span class="project-tag">API Integration</span>
+                        <span class="project-tag">UX/UI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
