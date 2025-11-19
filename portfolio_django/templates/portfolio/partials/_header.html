@@ -19,13 +19,14 @@
         </div>
         
         <ul class="navbar-list">
-            <li><a href="#home"><i class='bx bx-home-alt'></i> Home</a></li>
-            <li><a href="#about"><i class='bx bx-user'></i> Sobre</a></li>
-            <li><a href="#services"><i class='bx bx-briefcase'></i> Serviços</a></li>
-            <li><a href="#portfolio"><i class='bx bx-folder'></i> Portfolio</a></li>
+            <li><a href="{% url 'portfolio:home' %}#home"><i class='bx bx-home-alt'></i> Home</a></li>
+            <li><a href="{% url 'portfolio:home' %}#about"><i class='bx bx-user'></i> Sobre</a></li>
+            <li><a href="{% url 'portfolio:home' %}#services"><i class='bx bx-briefcase'></i> Serviços</a></li>
+            <li><a href="{% url 'portfolio:home' %}#portfolio"><i class='bx bx-folder'></i> Portfolio</a></li>
             <li><a href="{% url 'portfolio:certificados' %}"><i class='bx bx-certification'></i> Certificados</a></li>
             <li><a href="{% url 'portfolio:redes_sociais' %}"><i class='bx bx-share-alt'></i> Redes Sociais</a></li>
-            <li><a href="#contact"><i class='bx bx-envelope'></i> Contato</a></li>
+            <li><a href="{% url 'portfolio:receitas' %}"><i class='bx bx-restaurant'></i> Receitas</a></li>
+            <li><a href="{% url 'portfolio:home' %}#contact"><i class='bx bx-envelope'></i> Contato</a></li>
             
             <!-- Dropdown de Idiomas -->
             <li class="dropdown">
