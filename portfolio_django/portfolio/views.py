@@ -108,31 +108,35 @@ def home_pt(request):
 
 def home_en(request):
     """Home em inglês"""
-    from .models import Project, Certificate
+    from .models import Project, Certificate, Post
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
+    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home_en.html', {
         'language': 'en',
         'page_title': 'Guilherme Nunes - Data Scientist',
-        'stats': stats
+        'stats': stats,
+        'recent_posts': recent_posts
     })
 
 
 def home_es(request):
     """Home em espanhol"""
-    from .models import Project, Certificate
+    from .models import Project, Certificate, Post
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
+    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home_es.html', {
         'language': 'es',
         'page_title': 'Guilherme Nunes - Científico de Datos',
-        'stats': stats
+        'stats': stats,
+        'recent_posts': recent_posts
     })
 
 class AboutView(TemplateView):

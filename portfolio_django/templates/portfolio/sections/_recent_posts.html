@@ -2,7 +2,7 @@
 <section class="recent-posts" id="recent">
     <div class="recent-posts-container">
         <div class="heading">
-            <h1><span>Atividade recente</span></h1>
+            <h1><span>{% if language == 'en' %}Recent Activity{% elif language == 'es' %}Actividad reciente{% else %}Atividade recente{% endif %}</span></h1>
         </div>
         <div class="posts-grid">
             {% if recent_posts %}
@@ -22,9 +22,9 @@
                     </article>
                 {% endfor %}
             {% else %}
-                <p class="no-posts">Nenhuma publicação ainda.</p>
+                <p class="no-posts">{% if language == 'en' %}No posts yet.{% elif language == 'es' %}Sin publicaciones aún.{% else %}Nenhuma publicação ainda.{% endif %}</p>
             {% endif %}
         </div>
-        <div class="more-link"><a class="btn btn-secondary" href="{% url 'portfolio:blog' %}">Ver todas as publicações →</a></div>
+        <div class="more-link"><a class="btn btn-secondary" href="{% url 'portfolio:blog' %}">{% if language == 'en' %}View all posts →{% elif language == 'es' %}Ver todas las publicaciones →{% else %}Ver todas as publicações →{% endif %}</a></div>
     </div>
 </section>

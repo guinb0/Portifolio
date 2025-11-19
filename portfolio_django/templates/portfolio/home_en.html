@@ -50,29 +50,7 @@
     </div>
 </section>
 
-<!-- About Section -->
-<section class="about" id="about">
-    <div class="about-title">
-        <h1><span>About</span> Me</h1>
-        <h2>Learn a little about my journey</h2>
-    </div>
-    <div class="about-container">
-        <div class="about-img-wrapper">
-            <div class="about-img">
-                <img src="{% static 'img/IMG_2024_07_04_175231.png' %}" alt="Guilherme">
-            </div>
-        </div>
-        <div class="about-text">
-            <p>I'm a data intern at CGU (Federal Comptroller General's Office), Brazil's federal internal control agency. I perform user journey testing, cross-referencing different databases for decision support using SQL Server, Python, and R.</p>
-            <p>I'm pursuing a degree in Computer Science and my work focuses on the data field, with emphasis on skills: Power BI, Python, SQL Server, R. However, I'm also familiar with web development, where I've worked on several projects, including e-commerce websites and my professional portfolio.</p>
-            <p>Besides my internship, I volunteer at São Paulo Social Observatory, an institution that monitors São Paulo's political activities, from parliamentary sessions to public tenders. At the Observatory, I work with data extraction and processing for database integration.</p>
-            <div class="social">
-                <a href="https://github.com/guinb0" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
-                <a href="https://www.linkedin.com/in/guinb/" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
-            </div>
-        </div>
-    </div>
-</section>
+{% include 'portfolio/sections/_recent_posts.html' %}
 
 <!-- Services -->
 {% include 'portfolio/sections/_services.html' %}
