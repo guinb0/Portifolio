@@ -19,4 +19,12 @@ urlpatterns = [
     path('certificados/', views.CertificadosView.as_view(), name='certificados'),
     path('redes/', views.RedesSociaisView.as_view(), name='redes_sociais'),
     path('receitas/', views.ReceitasView.as_view(), name='receitas'),
+    
+    # Blog
+    path('blog/', views.BlogView.as_view(), name='blog'),
+    path('blog/<slug:slug>/', views.BlogDetailView.as_view(), name='blog_detail'),
+    
+    # Mapa de visitantes
+    path('mapa-visitantes/', views.VisitorMapView.as_view(), name='mapa_visitantes'),
+    path('api/visitor-data/', views.visitor_data_api, name='visitor_data_api'),
 ]

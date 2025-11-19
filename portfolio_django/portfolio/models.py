@@ -2,6 +2,7 @@
 Models para o portfolio
 """
 from django.db import models
+from django.urls import reverse
 
 
 class Project(models.Model):
@@ -83,3 +84,47 @@ class ContactMessage(models.Model):
     
     def __str__(self):
         return f"{self.name} - {self.subject}"
+
+
+class Post(models.Model):
+    """Modelo para posts do blog"""
+    title = models.CharField('Título', max_length=200)
+    slug = models.SlugField('Slug', max_length=220, unique=True)
+    excerpt = models.TextField('Resumo', blank=True)
+    content = models.TextField('Conteúdo')
+    cover_image = models.ImageField('Imagem de capa', upload_to='blog/', blank=True, null=True)
+    published = models.BooleanField('Publicado', default=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Atualizado em', auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts'
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return self.title
+    
+    def get_absolute_url(self):
+        return reverse('portfolio:blog_detail', kwargs={'slug': self.slug})
+
+
+class Visitor(models.Model):
+    """Modelo para rastreamento de visitantes"""
+    ip_address = models.GenericIPAddressField('Endereço IP')
+    country = models.CharField('País', max_length=100, blank=True)
+    country_code = models.CharField('Código do País', max_length=10, blank=True)
+    region = models.CharField('Região/Estado', max_length=100, blank=True)
+    city = models.CharField('Cidade', max_length=100, blank=True)
+    latitude = models.DecimalField('Latitude', max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField('Longitude', max_digits=9, decimal_places=6, null=True, blank=True)
+    user_agent = models.TextField('User Agent', blank=True)
+    visited_at = models.DateTimeField('Visitado em', auto_now_add=True)
+    
+    class Meta:
+        verbose_name = 'Visitante'
+        verbose_name_plural = 'Visitantes'
+        ordering = ['-visited_at']
+    
+    def __str__(self):
+        return f"{self.ip_address} - {self.country} ({self.visited_at.strftime('%d/%m/%Y %H:%M')})"

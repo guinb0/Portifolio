@@ -1,0 +1,182 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<style>
+    .map-container {
+        padding: 80px 20px 40px;
+        min-height: 100vh;
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    }
+    
+    .map-content {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .map-header {
+        text-align: center;
+        color: white;
+        margin-bottom: 2rem;
+    }
+    
+    .map-header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .map-header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+    }
+    
+    #visitor-map {
+        width: 100%;
+        height: 600px;
+        border-radius: 10px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .map-stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-top: 2rem;
+    }
+    
+    .stat-card {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        padding: 1.5rem;
+        border-radius: 10px;
+        text-align: center;
+        color: white;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    .stat-card i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        color: var(--accent-color);
+    }
+    
+    .stat-card h3 {
+        font-size: 2rem;
+        margin: 0.5rem 0;
+    }
+    
+    .stat-card p {
+        opacity: 0.9;
+        font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+        .map-header h1 {
+            font-size: 2rem;
+        }
+        
+        #visitor-map {
+            height: 400px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="map-container">
+    <div class="map-content">
+        <div class="map-header">
+            <h1><i class='bx bx-world'></i> Mapa de Visitantes</h1>
+            <p>Visitantes do mundo todo que acessaram este portfólio</p>
+        </div>
+        
+        <div id="visitor-map"></div>
+        
+        <div class="map-stats">
+            <div class="stat-card">
+                <i class='bx bx-user'></i>
+                <h3 id="total-visitors">-</h3>
+                <p>Total de Visitantes</p>
+            </div>
+            <div class="stat-card">
+                <i class='bx bx-world'></i>
+                <h3 id="total-countries">-</h3>
+                <p>Países</p>
+            </div>
+            <div class="stat-card">
+                <i class='bx bx-map-pin'></i>
+                <h3 id="total-cities">-</h3>
+                <p>Cidades</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializa o mapa
+    const map = L.map('visitor-map').setView([0, 0], 2);
+    
+    // Adiciona camada de tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© OpenStreetMap contributors',
+        maxZoom: 18
+    }).addTo(map);
+    
+    // Ícone personalizado para marcadores
+    const customIcon = L.divIcon({
+        className: 'custom-marker',
+        html: '<div style="background-color: var(--accent-color); width: 12px; height: 12px; border-radius: 50%; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.3);"></div>',
+        iconSize: [12, 12],
+        iconAnchor: [6, 6]
+    });
+    
+    // Busca dados dos visitantes
+    fetch('{% url "portfolio:visitor_data_api" %}')
+        .then(response => response.json())
+        .then(data => {
+            const locations = data.locations;
+            
+            // Adiciona marcadores ao mapa
+            locations.forEach(location => {
+                const marker = L.marker([location.latitude, location.longitude], {
+                    icon: customIcon
+                }).addTo(map);
+                
+                // Popup com informações
+                const popupContent = `
+                    <div style="text-align: center;">
+                        <strong>${location.city || 'Desconhecido'}, ${location.region || ''}</strong><br>
+                        <span style="color: #666;">${location.country}</span><br>
+                        <small>Visitantes: ${location.count}</small><br>
+                        <small>Última visita: ${new Date(location.last_visit).toLocaleDateString('pt-BR')}</small>
+                    </div>
+                `;
+                marker.bindPopup(popupContent);
+            });
+            
+            // Atualiza estatísticas
+            const totalVisitors = locations.reduce((sum, loc) => sum + loc.count, 0);
+            const uniqueCountries = new Set(locations.map(loc => loc.country)).size;
+            const uniqueCities = new Set(locations.map(loc => `${loc.city}, ${loc.country}`)).size;
+            
+            document.getElementById('total-visitors').textContent = totalVisitors;
+            document.getElementById('total-countries').textContent = uniqueCountries;
+            document.getElementById('total-cities').textContent = uniqueCities;
+            
+            // Ajusta o zoom para mostrar todos os marcadores
+            if (locations.length > 0) {
+                const bounds = L.latLngBounds(locations.map(loc => [loc.latitude, loc.longitude]));
+                map.fitBounds(bounds, { padding: [50, 50] });
+            }
+        })
+        .catch(error => {
+            console.error('Erro ao carregar dados dos visitantes:', error);
+        });
+});
+</script>
+{% endblock %}
