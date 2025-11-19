@@ -15,22 +15,22 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Menu Overlay:', menuOverlay);
     console.log('Navbar Close:', navbarClose);
 
-    // Abrir menu
+    // Toggle menu (abrir/fechar)
     if (menuIcon) {
         menuIcon.addEventListener('click', function(e) {
             e.preventDefault();
             console.log('=== MENU CLICADO! ===');
             
-            navbar.classList.add('active');
-            menuOverlay.classList.add('active');
-            menuIcon.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            
-            console.log('Classes adicionadas:', {
-                navbar: navbar.classList.contains('active'),
-                overlay: menuOverlay.classList.contains('active'),
-                icon: menuIcon.classList.contains('active')
-            });
+            // Se já está aberto, fecha. Se está fechado, abre.
+            if (navbar.classList.contains('active')) {
+                closeMenu();
+            } else {
+                navbar.classList.add('active');
+                menuOverlay.classList.add('active');
+                menuIcon.classList.add('active');
+                
+                console.log('Menu aberto');
+            }
         });
     } else {
         console.error('ERRO: menu-icon não encontrado!');
@@ -41,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function() {
         navbar.classList.remove('active');
         menuOverlay.classList.remove('active');
         menuIcon.classList.remove('active');
-        document.body.style.overflow = '';
         console.log('Menu fechado');
     }
 
