@@ -255,3 +255,114 @@ html[data-theme="dark"] .home {
     color: var(--text-light);
     font-size: 1rem;
 }
+
+/* ===== RECENT POSTS SECTION ===== */
+.recent-posts {
+    padding: 4.5rem 7% 3.5rem;
+    background: var(--bg-white);
+    position: relative;
+    transition: background 0.3s ease;
+}
+
+.recent-posts-container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.recent-posts .heading h1 span {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+.post-card {
+    background: var(--bg-white);
+    border-radius: 24px;
+    box-shadow: 0 10px 35px var(--shadow);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    transition: all 0.4s;
+}
+
+.post-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 5px;
+    background: var(--gradient-1);
+    transform: scaleX(0);
+    transition: transform 0.35s ease;
+}
+
+.post-card:hover::before { transform: scaleX(1); }
+
+.post-card-inner { padding: 2.2rem 2rem 2rem; }
+
+.post-title a {
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text-dark);
+    background: linear-gradient(90deg, var(--text-dark), var(--text-dark));
+    background-size: 0 2px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.35s;
+}
+
+.post-card:hover .post-title a { background-size: 100% 2px; }
+
+.post-excerpt p {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin: 1rem 0 1.4rem;
+    font-size: 1.05rem;
+}
+
+.post-meta {
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--primary-color);
+}
+
+.post-meta i {
+    font-size: 1rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.no-posts { color: var(--text-light); font-style: italic; }
+
+.recent-posts .more-link { margin-top: 2.5rem; text-align: center; }
+
+.recent-posts .btn.btn-secondary {
+    padding: 0.9rem 2.2rem;
+    box-shadow: 0 8px 25px var(--shadow);
+}
+
+.recent-posts .btn.btn-secondary:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 45px var(--shadow-hover);
+}
+
+/* Dark theme adjustments */
+html[data-theme="dark"] .post-card { background: var(--bg-dark-2); }
+html[data-theme="dark"] .post-excerpt p { color: var(--text-light); }
+html[data-theme="dark"] .post-title a { color: var(--text-white); background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); background-size: 0 2px; }
+html[data-theme="dark"] .post-card:hover .post-title a { background-size: 100% 2px; }

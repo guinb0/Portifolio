@@ -1,0 +1,30 @@
+<!-- Atividade recente: últimos 2 posts do blog -->
+<section class="recent-posts" id="recent">
+    <div class="recent-posts-container">
+        <div class="heading">
+            <h1><span>Atividade recente</span></h1>
+        </div>
+        <div class="posts-grid">
+            {% if recent_posts %}
+                {% for post in recent_posts %}
+                    <article class="post-card">
+                        <div class="post-card-inner">
+                            <h3 class="post-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h3>
+                            <div class="post-excerpt">
+                                {% if post.excerpt %}
+                                    <p>{{ post.excerpt|truncatechars:140 }}</p>
+                                {% else %}
+                                    <p>{{ post.content|truncatechars:140 }}</p>
+                                {% endif %}
+                            </div>
+                            <div class="post-meta"><i class='bx bx-time'></i> {{ post.created_at|date:"d/m/Y" }}</div>
+                        </div>
+                    </article>
+                {% endfor %}
+            {% else %}
+                <p class="no-posts">Nenhuma publicação ainda.</p>
+            {% endif %}
+        </div>
+        <div class="more-link"><a class="btn btn-secondary" href="{% url 'portfolio:blog' %}">Ver todas as publicações →</a></div>
+    </div>
+</section>

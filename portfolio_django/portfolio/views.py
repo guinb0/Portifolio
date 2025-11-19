@@ -91,16 +91,18 @@ class ProjectsEsView(TemplateView):
 # Views para diferentes idiomas
 def home_pt(request):
     """Home em português"""
-    from .models import Project, Certificate
+    from .models import Project, Certificate, Post
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
+    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home.html', {
         'language': 'pt',
         'page_title': 'Guilherme Nunes - Cientista de Dados',
-        'stats': stats
+        'stats': stats,
+        'recent_posts': recent_posts
     })
 
 
