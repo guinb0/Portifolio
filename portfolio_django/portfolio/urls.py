@@ -7,12 +7,13 @@ from . import views
 app_name = 'portfolio'
 
 urlpatterns = [
-    # Página principal (português)
-    path('', views.home_pt, name='home'),
+    # Seleção de idioma (primeira tela)
+    path('', views.language_selector, name='language_selector'),
     
-    # Páginas em outros idiomas
-    path('EN/', views.home_en, name='home_en'),
-    path('ES/', views.home_es, name='home_es'),
+    # Páginas em diferentes idiomas
+    path('pt/', views.home_pt, name='home'),
+    path('en/', views.home_en, name='home_en'),
+    path('es/', views.home_es, name='home_es'),
     
     # Outras páginas
     path('certificados/', views.CertificadosView.as_view(), name='certificados'),

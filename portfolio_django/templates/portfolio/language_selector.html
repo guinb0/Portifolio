@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Language | Guilherme Nunes</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/language-selector.css' %}">
+</head>
+<body>
+    <div class="language-container">
+        <div class="language-content">
+            <h1 class="language-title">Select Your Language</h1>
+            <p class="language-subtitle">Selecione seu idioma | Selecciona tu idioma</p>
+            
+            <div class="language-options">
+                <!-- Português -->
+                <a href="{% url 'portfolio:home' %}" class="language-card">
+                    <div class="flag-container">
+                        <img src="{% static 'images/flags/brazil.png' %}" alt="Português" class="flag-image">
+                    </div>
+                    <h2 class="language-name">Português</h2>
+                    <p class="language-region">Brasil</p>
+                </a>
+                
+                <!-- English -->
+                <a href="{% url 'portfolio:home_en' %}" class="language-card">
+                    <div class="flag-container">
+                        <img src="{% static 'images/flags/usa.png' %}" alt="English" class="flag-image">
+                    </div>
+                    <h2 class="language-name">English</h2>
+                    <p class="language-region">United States</p>
+                </a>
+                
+                <!-- Español -->
+                <a href="{% url 'portfolio:home_es' %}" class="language-card">
+                    <div class="flag-container">
+                        <img src="{% static 'images/flags/spain.png' %}" alt="Español" class="flag-image">
+                    </div>
+                    <h2 class="language-name">Español</h2>
+                    <p class="language-region">España</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

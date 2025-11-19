@@ -37,12 +37,10 @@
     {% block content %}{% endblock %}
 
     <!-- Scripts -->
+    <script src="{% static 'js/menu.js' %}"></script>
     <script src="https://unpkg.com/scrollreveal"></script>
-    <script src="{% static 'js/theme-toggle.js' %}"></script>
-    <script src="{% static 'js/menu-mobile.js' %}"></script>
     <script src="{% static 'js/scroll-reveal.js' %}"></script>
     <script src="{% static 'js/stats-animation.js' %}"></script>
-    
     {% block extra_js %}{% endblock %}
 </body>
 </html>

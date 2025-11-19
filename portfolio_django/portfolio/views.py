@@ -5,6 +5,13 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 
+def language_selector(request):
+    """Tela de seleção de idioma"""
+    return render(request, 'portfolio/language_selector.html', {
+        'page_title': 'Select Your Language - Guilherme Nunes'
+    })
+
+
 class HomeView(TemplateView):
     """View principal do portfolio"""
     template_name = 'portfolio/home.html'
