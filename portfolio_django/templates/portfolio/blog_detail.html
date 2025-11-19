@@ -1,0 +1,31 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }} | Blog{% endblock %}
+
+{% block content %}
+<section class="blog-detail" style="padding: 7rem 7% 4rem; max-width: 900px; margin: 0 auto;">
+  <nav style="margin-bottom:1rem;">
+    <a href="{% url 'portfolio:blog' %}" class="btn btn-secondary" style="display:inline-flex; align-items:center; gap:.5rem;">
+      <i class='bx bx-left-arrow-alt'></i> Voltar ao Blog
+    </a>
+  </nav>
+
+  <article>
+    <h1 style="margin-bottom:.25rem;">{{ post.title }}</h1>
+    <div style="color: var(--text-muted, #666); margin-bottom: 1rem;">
+      <i class='bx bx-calendar'></i> {{ post.created_at|date:"d/m/Y" }}
+    </div>
+
+    {% if post.cover_image %}
+      <div style="margin-bottom:1.25rem;">
+        <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" style="width:100%; border-radius: 12px;" />
+      </div>
+    {% endif %}
+
+    <div class="post-content">
+      {{ post.content|linebreaks }}
+    </div>
+  </article>
+</section>
+{% endblock %}
