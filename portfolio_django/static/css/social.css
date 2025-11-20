@@ -2,12 +2,12 @@
 .social-page {
     padding: 140px 7% 80px;
     min-height: 100vh;
-    background: var(--bg-white);
+    background: var(--bg-light);
     transition: background 0.3s ease;
 }
 
 html[data-theme="dark"] .social-page {
-    background: #000;
+    background: var(--bg-light);
 }
 
 .social-page .heading {
@@ -19,7 +19,7 @@ html[data-theme="dark"] .social-page {
 }
 
 html[data-theme="dark"] .social-page .heading h1 {
-    color: #fff;
+    color: var(--text-dark);
 }
 
 .social-page .heading h1 span {
@@ -27,7 +27,7 @@ html[data-theme="dark"] .social-page .heading h1 {
 }
 
 html[data-theme="dark"] .social-page .heading h1 span {
-    color: #fff;
+    color: var(--text-dark);
 }
 
 .social-container {
@@ -95,7 +95,7 @@ html[data-theme="dark"] .social-link:hover {
 }
 
 html[data-theme="dark"] .social-info h3 {
-    color: #fff;
+    color: var(--text-dark);
 }
 
 .social-info .handle {
@@ -106,7 +106,7 @@ html[data-theme="dark"] .social-info h3 {
 }
 
 html[data-theme="dark"] .social-info .handle {
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-dark);
 }
 
 .social-info .description {

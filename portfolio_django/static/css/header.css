@@ -1,6 +1,6 @@
 /* ===== HEADER STYLES ===== */
 header.site-header {
-    position: fixed;
+    position: absolute;
     top: 0;
     width: 100%;
     padding: 1.2rem 7%;
@@ -298,47 +298,62 @@ html[data-theme="dark"] .dropdown-content {
     width: 70px;
     height: 35px;
     background: var(--gradient-1);
-    padding: 4px;
     border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 8px;
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+    overflow: hidden;
 }
 
 .theme-toggle-btn:hover {
     box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+    transform: scale(1.05);
 }
 
 .theme-toggle-btn i {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: white;
     z-index: 2;
     transition: all 0.3s;
+    pointer-events: none;
 }
 
 .theme-toggle-btn .bx-sun {
-    margin-left: 4px;
+    opacity: 1;
 }
 
 .theme-toggle-btn .bx-moon {
-    margin-right: 4px;
+    opacity: 0.5;
+}
+
+html[data-theme="dark"] .theme-toggle-btn .bx-sun {
+    opacity: 0.5;
+}
+
+html[data-theme="dark"] .theme-toggle-btn .bx-moon {
+    opacity: 1;
 }
 
 .theme-toggle-btn span {
     position: absolute;
-    left: 3px;
-    width: 29px;
-    height: 29px;
+    left: 4px;
+    top: 4px;
+    width: 27px;
+    height: 27px;
     background: white;
     border-radius: 50%;
-    transition: left 0.3s ease;
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 
-html[data-theme="dark"] .theme-toggle-btn span { left: 28px; }
+html[data-theme="dark"] .theme-toggle-btn span { 
+    left: 39px;
+}
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {

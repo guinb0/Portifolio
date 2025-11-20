@@ -1,12 +1,12 @@
 /* ===== CONTACT SECTION ===== */
 .contact {
     padding: 6rem 7%;
-    background: var(--bg-white);
+    background: var(--bg-light);
     position: relative;
     transition: background 0.3s ease, color 0.3s ease;
 }
 html[data-theme="dark"] .contact {
-    background: #000;
+    background: var(--bg-light);
 }
 
 html[data-theme="light"] .contact .heading h1 {

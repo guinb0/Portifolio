@@ -6,15 +6,17 @@
     scroll-behavior: smooth;
 }
 
-:root,
-html[data-theme="light"] {
+:root, html[data-theme="light"] {
     --primary-color: #667eea;
     --secondary-color: #764ba2;
     --accent-color: #f093fb;
     --text-dark: #1a202c;
     --text-light: #718096;
+    --text-white: #ffffff;
     --bg-light: #f7fafc;
     --bg-white: #ffffff;
+    --bg-dark: #2d3748;
+    --bg-dark-2: #1a202c;
     --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
     --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
@@ -26,10 +28,23 @@ html[data-theme="light"] {
 html[data-theme="dark"] {
     --text-dark: #f7fafc;
     --text-light: #cbd5e0;
+    --text-white: #ffffff;
     --bg-light: #1a202c;
     --bg-white: #2d3748;
+    --bg-dark: #2d3748;
+    --bg-dark-2: #1a202c;
     --shadow: rgba(0,0,0,0.3);
     --shadow-hover: rgba(0,0,0,0.5);
+}
+
+/* Força o fundo do HTML e Body no dark mode */
+html {
+    background: var(--bg-white);
+    transition: background 0.3s ease;
+}
+
+html[data-theme="dark"] {
+    background: var(--bg-dark-2);
 }
 
 body {
@@ -37,7 +52,12 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
+    background: var(--bg-white);
     transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+html[data-theme="dark"] body {
+    background: var(--bg-dark-2);
 }
 
 /* ===== FLOATING SHAPES ===== */

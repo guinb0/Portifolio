@@ -44,6 +44,10 @@ html[data-theme="dark"] .courses-section {
     flex-direction: column;
 }
 
+html[data-theme="dark"] .course-card {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
 .course-card:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 30px var(--shadow-hover);
@@ -200,6 +204,10 @@ html[data-theme="dark"] .course-meta {
     box-shadow: 0 5px 20px var(--shadow);
 }
 
+html[data-theme="dark"] .course-header {
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
 .course-cover {
     width: 100%;
     height: 350px;
@@ -271,6 +279,10 @@ html[data-theme="dark"] .course-meta {
     box-shadow: 0 3px 15px var(--shadow);
     overflow: hidden;
     transition: all 0.3s ease;
+}
+
+html[data-theme="dark"] .lesson-item {
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
 }
 
 .lesson-item:hover {
@@ -425,6 +437,10 @@ html[data-theme="dark"] .no-video {
     font-weight: 600;
     transition: all 0.3s ease;
     box-shadow: 0 3px 10px var(--shadow);
+}
+
+html[data-theme="dark"] .btn-back {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
 }
 
 .btn-back:hover {

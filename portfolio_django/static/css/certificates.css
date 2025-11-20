@@ -2,13 +2,13 @@
 .certificates {
     padding: 140px 7% 80px;
     min-height: 100vh;
-    background: var(--bg-white);
+    background: var(--bg-light);
     position: relative;
     transition: background 0.3s ease;
 }
 
 html[data-theme="dark"] .certificates {
-    background: var(--bg-dark-2);
+    background: var(--bg-light);
 }
 
 .certificates-inner { max-width: 1300px; margin: 0 auto; }
@@ -40,7 +40,7 @@ html[data-theme="dark"] .certificates {
     transition: all .4s;
 }
 
-html[data-theme="dark"] .certificate-card { background: var(--bg-dark); }
+html[data-theme="dark"] .certificate-card { background: var(--bg-white); }
 
 .certificate-card::before {
     content: '';
@@ -55,7 +55,7 @@ html[data-theme="dark"] .certificate-card { background: var(--bg-dark); }
 
 .certificate-icon { font-size: 3rem; margin-bottom: 1.2rem; background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 .certificate-title { font-size: 1.3rem; margin: 0 0 .4rem; color: var(--text-dark); font-weight: 700; }
-html[data-theme="dark"] .certificate-title { color: var(--text-white); }
+html[data-theme="dark"] .certificate-title { color: var(--text-dark); }
 
 .certificate-meta { color: var(--primary-color); font-weight: 600; font-size: .85rem; letter-spacing: .5px; margin-bottom: .9rem; }
 .certificate-description { color: var(--text-light); line-height: 1.7; font-size: 1rem; margin-bottom: 1.1rem; }

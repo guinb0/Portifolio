@@ -1,173 +1,289 @@
-{% extends 'portfolio/base.html' %}
-{% load static %}
+/* ===== BLOG SECTION ===== */
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/courses.css' %}">
-{% endblock %}
+/* Força o body a ter o mesmo background da página */
+body:has(.blog) {
+    background: var(--bg-white);
+    transition: background 0.3s ease;
+}
 
-{% block content %}
-<section class="course-detail-section">
-    <div class="container">
-        <!-- Course Header -->
-        <div class="course-header">
-            {% if course.cover_image %}
-            <div class="course-cover">
-                <img src="{{ course.cover_image.url }}" alt="{{ course.title }}">
-            </div>
-            {% endif %}
-            
-            <div class="course-info">
-                <h1>{{ course.title }}</h1>
-                <p class="course-full-description">{{ course.description }}</p>
-                
-                <div class="course-stats">
-                    <div class="stat-item">
-                        <i class='bx bx-video'></i>
-                        <span>{{ lessons.count }}
-                            {% if language == 'en' %}
-                                {% if lessons.count == 1 %}Lesson{% else %}Lessons{% endif %}
-                            {% elif language == 'es' %}
-                                {% if lessons.count == 1 %}Clase{% else %}Clases{% endif %}
-                            {% else %}
-                                {% if lessons.count == 1 %}Aula{% else %}Aulas{% endif %}
-                            {% endif %}
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+body:has(.blog-detail) {
+    background: var(--bg-white);
+    transition: background 0.3s ease;
+}
 
-        <!-- Lessons List -->
-        {% if lessons %}
-        <div class="lessons-container">
-            <h2 class="lessons-title">
-                {% if language == 'en' %}
-                    Course Content
-                {% elif language == 'es' %}
-                    Contenido del Curso
-                {% else %}
-                    Conteúdo do Curso
-                {% endif %}
-            </h2>
-            
-            <div class="lessons-list">
-                {% for lesson in lessons %}
-                <div class="lesson-item" data-lesson-id="{{ lesson.id }}">
-                    <div class="lesson-header" data-toggle-lesson="{{ lesson.id }}">
-                        <div class="lesson-number">{{ forloop.counter }}</div>
-                        <div class="lesson-info">
-                            <h3>{{ lesson.title }}</h3>
-                            {% if lesson.duration %}
-                            <span class="lesson-duration">
-                                <i class='bx bx-time'></i> {{ lesson.duration }}
-                            </span>
-                            {% endif %}
-                        </div>
-                        <button class="toggle-lesson-btn">
-                            <i class='bx bx-chevron-down'></i>
-                        </button>
-                    </div>
-                    
-                    <div class="lesson-content" id="lesson-content-{{ lesson.id }}">
-                        <p class="lesson-description">{{ lesson.description }}</p>
-                        
-                        <!-- Video Player -->
-                        <div class="video-container">
-                            {% if lesson.video_type == 'youtube' and lesson.youtube_url %}
-                                <iframe 
-                                    src="{{ lesson.get_youtube_embed_url }}" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                                    allowfullscreen>
-                                </iframe>
-                            {% elif lesson.video_type == 'upload' and lesson.video_file %}
-                                <video controls controlsList="nodownload">
-                                    <source src="{{ lesson.video_file.url }}" type="video/mp4">
-                                    {% if language == 'en' %}
-                                        Your browser does not support the video tag.
-                                    {% elif language == 'es' %}
-                                        Tu navegador no soporta la etiqueta de video.
-                                    {% else %}
-                                        Seu navegador não suporta a tag de vídeo.
-                                    {% endif %}
-                                </video>
-                            {% else %}
-                                <div class="no-video">
-                                    <i class='bx bx-video-off'></i>
-                                    <p>
-                                        {% if language == 'en' %}
-                                            Video not available
-                                        {% elif language == 'es' %}
-                                            Video no disponible
-                                        {% else %}
-                                            Vídeo não disponível
-                                        {% endif %}
-                                    </p>
-                                </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-        {% else %}
-        <div class="empty-state">
-            <i class='bx bx-video-off'></i>
-            <p>
-                {% if language == 'en' %}
-                    No lessons available for this course yet.
-                {% elif language == 'es' %}
-                    Aún no hay clases disponibles para este curso.
-                {% else %}
-                    Nenhuma aula disponível para este curso ainda.
-                {% endif %}
-            </p>
-        </div>
-        {% endif %}
-        
-        <!-- Back Button -->
-        <div class="back-button-container">
-            <a href="{% url 'portfolio:cursos' %}" class="btn-back">
-                <i class='bx bx-left-arrow-alt'></i>
-                {% if language == 'en' %}
-                    Back to Courses
-                {% elif language == 'es' %}
-                    Volver a Cursos
-                {% else %}
-                    Voltar para Cursos
-                {% endif %}
-            </a>
-        </div>
-    </div>
-</section>
+.blog {
+    padding: 7rem 7% 4rem;
+    background: var(--bg-white);
+    min-height: 100vh;
+    transition: background 0.3s ease;
+}
 
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    // Add click handlers to all lesson headers
-    const lessonHeaders = document.querySelectorAll('[data-toggle-lesson]');
+.blog .about-title {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.blog .about-title h1 span {
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.blog .about-title h2 {
+    color: var(--text-light);
+    font-size: 1.05rem;
+    margin-top: 0.8rem;
+}
+
+.blog .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.blog .post-card {
+    background: var(--bg-white);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--shadow);
+    padding: 1.5rem;
+    transition: all 0.4s;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.blog .post-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--gradient-1);
+    transform: scaleX(0);
+    transition: transform 0.35s;
+}
+
+.blog .post-card:hover::before {
+    transform: scaleX(1);
+}
+
+.blog .post-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.25);
+    border-color: rgba(102, 126, 234, 0.2);
+}
+
+.blog .post-meta {
+    font-size: 0.85rem;
+    color: var(--primary-color);
+    margin-bottom: 0.6rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.blog .post-card h3 {
+    margin: 0.5rem 0 0.75rem;
+    color: var(--text-dark);
+    font-size: 1.3rem;
+}
+
+.blog .post-card p {
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.blog .post-card .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.95rem;
+}
+
+.blog .empty {
+    text-align: center;
+    opacity: 0.8;
+    grid-column: 1 / -1;
+    padding: 3rem 1rem;
+}
+
+.blog .empty i {
+    font-size: 3rem;
+    background: var(--gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.blog .empty p {
+    margin-top: 0.5rem;
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* ===== BLOG DETAIL ===== */
+.blog-detail {
+    padding: 7rem 7% 4rem;
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--bg-white);
+    min-height: 100vh;
+    transition: background 0.3s ease;
+}
+
+.blog-detail nav {
+    margin-bottom: 1.5rem;
+}
+
+.blog-detail article h1 {
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-size: 2.5rem;
+    line-height: 1.3;
+}
+
+.blog-detail .post-meta {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.blog-detail article > div:has(img) {
+    margin-bottom: 1.5rem;
+}
+
+.blog-detail article img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px var(--shadow);
+}
+
+.blog-detail .post-content {
+    color: var(--text-dark);
+    line-height: 1.9;
+    font-size: 1.05rem;
+}
+
+.blog-detail .post-content p {
+    margin-bottom: 1.2rem;
+}
+
+.blog-detail .post-content a {
+    color: var(--primary-color);
+    text-decoration: none;
+    position: relative;
+    font-weight: 600;
+}
+
+.blog-detail .post-content a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
+    background: var(--gradient-1);
+    transform: scaleX(0);
+    transition: transform .35s ease;
+}
+
+.blog-detail .post-content a:hover::after {
+    transform: scaleX(1);
+}
+
+/* ===== DARK MODE ===== */
+html[data-theme="dark"] body:has(.blog) {
+    background: var(--bg-dark-2) !important;
+}
+
+html[data-theme="dark"] body:has(.blog-detail) {
+    background: var(--bg-dark-2) !important;
+}
+
+html[data-theme="dark"] .blog {
+    background: var(--bg-dark-2) !important;
+}
+
+html[data-theme="dark"] .blog .post-card {
+    background: var(--bg-dark) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .blog .post-card:hover {
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+}
+
+html[data-theme="dark"] .blog .post-card h3 {
+    color: var(--text-white);
+}
+
+html[data-theme="dark"] .blog .post-card p {
+    color: var(--text-light);
+    opacity: 0.85;
+}
+
+html[data-theme="dark"] .blog-detail {
+    background: var(--bg-dark-2) !important;
+}
+
+html[data-theme="dark"] .blog-detail article h1 {
+    color: var(--text-white);
+}
+
+html[data-theme="dark"] .blog-detail .post-content {
+    color: var(--text-light);
+}
+
+html[data-theme="dark"] .blog-detail .post-content a {
+    color: var(--accent-color);
+}
+
+/* Fallback para dark mode do sistema */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme]) body:has(.blog),
+    html:not([data-theme]) body:has(.blog-detail) {
+        background: var(--bg-dark-2) !important;
+    }
     
-    lessonHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const lessonId = this.getAttribute('data-toggle-lesson');
-            const content = document.getElementById('lesson-content-' + lessonId);
-            const item = content.closest('.lesson-item');
-            const button = item.querySelector('.toggle-lesson-btn i');
-            
-            // Toggle active class
-            item.classList.toggle('active');
-            
-            // Rotate icon
-            if (item.classList.contains('active')) {
-                button.style.transform = 'rotate(180deg)';
-            } else {
-                button.style.transform = 'rotate(0deg)';
-            }
-        });
-        
-        // Add cursor pointer style
-        header.style.cursor = 'pointer';
-    });
-});
-</script>
-{% endblock %}
+    html:not([data-theme]) .blog,
+    html:not([data-theme]) .blog-detail {
+        background: var(--bg-dark-2) !important;
+    }
+    
+    html:not([data-theme]) .blog .post-card {
+        background: var(--bg-dark) !important;
+    }
+    
+    html:not([data-theme]) .blog .post-card h3 {
+        color: var(--text-white);
+    }
+    
+    html:not([data-theme]) .blog-detail .post-content {
+        color: var(--text-light);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .blog, .blog-detail {
+        padding: 6rem 6% 3rem;
+    }
+    
+    .blog .posts-grid {
+        gap: 1.2rem;
+    }
+    
+    .blog-detail article h1 {
+        font-size: 2rem;
+    }
+}
