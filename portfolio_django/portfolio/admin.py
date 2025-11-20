@@ -2,7 +2,7 @@
 Configuração do Django Admin para portfolio
 """
 from django.contrib import admin
-from .models import Project, Certificate, Service, ContactMessage, Post, Visitor, Course, Lesson
+from .models import Project, Certificate, Service, ContactMessage, Post, Visitor, Course, Lesson, SiteConfig
 
 
 @admin.register(Project)
@@ -128,3 +128,40 @@ class LessonAdmin(admin.ModelAdmin):
             'classes': ('collapse',)
         }),
     )
+
+
+@admin.register(SiteConfig)
+class SiteConfigAdmin(admin.ModelAdmin):
+    """Admin para configurações do site (Singleton)"""
+    
+    def has_add_permission(self, request):
+        """Impede criação de mais instâncias"""
+        return not SiteConfig.objects.exists()
+    
+    def has_delete_permission(self, request, obj=None):
+        """Impede deleção"""
+        return False
+    
+    fieldsets = (
+        ('Cargo/Título', {
+            'fields': ('job_title_pt', 'job_title_en', 'job_title_es'),
+            'description': 'Seu cargo profissional exibido na home'
+        }),
+        ('Slogan', {
+            'fields': ('slogan_pt', 'slogan_en', 'slogan_es'),
+            'description': 'Frase de efeito exibida na home'
+        }),
+        ('Imagem', {
+            'fields': ('profile_image',),
+            'description': 'Foto de perfil exibida no site'
+        }),
+        ('Sobre (Seção About)', {
+            'fields': ('about_pt', 'about_en', 'about_es'),
+            'description': 'Texto da seção sobre em cada idioma'
+        }),
+        ('Metadados', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+    readonly_fields = ['created_at', 'updated_at']

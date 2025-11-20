@@ -215,7 +215,8 @@ class ProjectsEsView(TemplateView):
 # Views para diferentes idiomas
 def home_pt(request):
     """Home em português"""
-    from .models import Project, Certificate, Post
+    from .models import Project, Certificate, Post, SiteConfig
+    site_config = SiteConfig.load()
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
@@ -224,15 +225,17 @@ def home_pt(request):
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home.html', {
         'language': 'pt',
-        'page_title': 'Guilherme Nunes - Cientista de Dados',
+        'page_title': f'Guilherme Nunes - {site_config.job_title_pt}',
         'stats': stats,
-        'recent_posts': recent_posts
+        'recent_posts': recent_posts,
+        'site_config': site_config
     })
 
 
 def home_en(request):
     """Home em inglês"""
-    from .models import Project, Certificate, Post
+    from .models import Project, Certificate, Post, SiteConfig
+    site_config = SiteConfig.load()
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
@@ -241,15 +244,17 @@ def home_en(request):
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home_en.html', {
         'language': 'en',
-        'page_title': 'Guilherme Nunes - Data Scientist',
+        'page_title': f'Guilherme Nunes - {site_config.job_title_en}',
         'stats': stats,
-        'recent_posts': recent_posts
+        'recent_posts': recent_posts,
+        'site_config': site_config
     })
 
 
 def home_es(request):
     """Home em espanhol"""
-    from .models import Project, Certificate, Post
+    from .models import Project, Certificate, Post, SiteConfig
+    site_config = SiteConfig.load()
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
@@ -258,9 +263,10 @@ def home_es(request):
     recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home_es.html', {
         'language': 'es',
-        'page_title': 'Guilherme Nunes - Científico de Datos',
+        'page_title': f'Guilherme Nunes - {site_config.job_title_es}',
         'stats': stats,
-        'recent_posts': recent_posts
+        'recent_posts': recent_posts,
+        'site_config': site_config
     })
 
 
@@ -269,9 +275,11 @@ class AboutView(TemplateView):
     template_name = 'portfolio/sobre.html'
 
     def get_context_data(self, **kwargs):
+        from .models import SiteConfig
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Sobre - Guilherme Nunes'
         context['language'] = 'pt'
+        context['site_config'] = SiteConfig.load()
         return context
 
 
@@ -280,9 +288,11 @@ class AboutEnView(TemplateView):
     template_name = 'portfolio/about_en.html'
 
     def get_context_data(self, **kwargs):
+        from .models import SiteConfig
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'About - Guilherme Nunes'
         context['language'] = 'en'
+        context['site_config'] = SiteConfig.load()
         return context
 
 
@@ -291,9 +301,11 @@ class AboutEsView(TemplateView):
     template_name = 'portfolio/about_es.html'
 
     def get_context_data(self, **kwargs):
+        from .models import SiteConfig
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Sobre - Guilherme Nunes'
         context['language'] = 'es'
+        context['site_config'] = SiteConfig.load()
         return context
 
 

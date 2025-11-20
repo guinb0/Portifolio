@@ -12,9 +12,13 @@
             </div>
         </div>
         <div class="about-text">
-            <p>Sou estagiário de dados na CGU (Controladoria-Geral-Da-União), órgão de controle interno do governo Federal. Realizo testes de jornada do usuário, cruzando diferentes bases de dados para apoio a decisão. Utilizando nesse trabalho SQL Server, Python e R.</p>
-            <p>Estou me graduando em Ciência Da Computação e meus trabalhos se voltam para a área de dados, com ênfase nas habilidades: Power BI, Python, SQL Server, R. Porém, também possuo familiaridade com desenvolvimento web, onde já trabalhei em alguns projetos, incluindo lojas virtuais e o meu portfólio profissional.</p>
-            <p>Além do estágio, realizo um trabalho voluntário no Observatório Social De São Paulo, uma instituição que visa monitorar as atividades políticas de São Paulo, desde sessões parlamentares até licitações realizadas. No Observatório, trabalho com a extração e tratamento de dados para integração à base de dados.</p>
+            {% if site_config.about_pt %}
+                {{ site_config.about_pt|linebreaks }}
+            {% else %}
+                <p>Sou estagiário de dados na CGU (Controladoria-Geral-Da-União), órgão de controle interno do governo Federal. Realizo testes de jornada do usuário, cruzando diferentes bases de dados para apoio a decisão. Utilizando nesse trabalho SQL Server, Python e R.</p>
+                <p>Estou me graduando em Ciência Da Computação e meus trabalhos se voltam para a área de dados, com ênfase nas habilidades: Power BI, Python, SQL Server, R. Porém, também possuo familiaridade com desenvolvimento web, onde já trabalhei em alguns projetos, incluindo lojas virtuais e o meu portfólio profissional.</p>
+                <p>Além do estágio, realizo um trabalho voluntário no Observatório Social De São Paulo, uma instituição que visa monitorar as atividades políticas de São Paulo, desde sessões parlamentares até licitações realizadas. No Observatório, trabalho com a extração e tratamento de dados para integração à base de dados.</p>
+            {% endif %}
             <div class="social">
                 <a href="https://github.com/guinb0" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
                 <a href="https://www.linkedin.com/in/guinb/" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>

@@ -3,6 +3,7 @@ Models para o portfolio
 """
 from django.db import models
 from django.urls import reverse
+from django.core.exceptions import ValidationError
 
 
 class Project(models.Model):
@@ -197,3 +198,49 @@ class Lesson(models.Model):
                 video_id = self.youtube_url.split('youtu.be/')[1].split('?')[0]
                 return f"https://www.youtube.com/embed/{video_id}"
         return self.youtube_url
+
+
+class SiteConfig(models.Model):
+    """Configurações gerais do site (Singleton)"""
+    # Cargo e slogan
+    job_title_pt = models.CharField('Cargo (PT)', max_length=200, default='Data Scientist')
+    job_title_en = models.CharField('Cargo (EN)', max_length=200, default='Data Scientist')
+    job_title_es = models.CharField('Cargo (ES)', max_length=200, default='Científico de Datos')
+    
+    slogan_pt = models.CharField('Slogan (PT)', max_length=300, default='Transformando dados em insights')
+    slogan_en = models.CharField('Slogan (EN)', max_length=300, default='Transforming data into insights')
+    slogan_es = models.CharField('Slogan (ES)', max_length=300, default='Transformando datos en información')
+    
+    # Foto do portfólio
+    profile_image = models.ImageField('Foto de Perfil', upload_to='profile/', blank=True, null=True)
+    
+    # Seção Sobre
+    about_pt = models.TextField('Sobre (PT)', blank=True, help_text='Texto da seção sobre em português')
+    about_en = models.TextField('Sobre (EN)', blank=True, help_text='Texto da seção sobre em inglês')
+    about_es = models.TextField('Sobre (ES)', blank=True, help_text='Texto da seção sobre em espanhol')
+    
+    # Meta
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Atualizado em', auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Configuração do Site'
+        verbose_name_plural = 'Configurações do Site'
+    
+    def __str__(self):
+        return "Configurações do Site"
+    
+    def save(self, *args, **kwargs):
+        """Garante que só existe uma instância"""
+        self.pk = 1
+        super().save(*args, **kwargs)
+    
+    def delete(self, *args, **kwargs):
+        """Previne deleção"""
+        pass
+    
+    @classmethod
+    def load(cls):
+        """Carrega ou cria a única instância"""
+        obj, created = cls.objects.get_or_create(pk=1)
+        return obj

@@ -16,9 +16,13 @@
             </div>
         </div>
         <div class="about-text">
-            <p>Soy pasante de datos en la CGU (Controladoría General de la Unión), órgano de control interno del gobierno federal de Brasil. Realizo pruebas de jornada del usuario y cruzo diferentes bases de datos para apoyar la toma de decisiones utilizando SQL Server, Python y R.</p>
-            <p>Estoy cursando Ciencias de la Computación y mi trabajo se enfoca en el área de datos, con énfasis en Power BI, Python, SQL Server y R. También tengo experiencia en desarrollo web, habiendo trabajado en proyectos como tiendas virtuales y mi portafolio profesional.</p>
-            <p>Además de la pasantía, realizo trabajo voluntario en el Observatorio Social de São Paulo, institución que monitorea la actividad política de la ciudad: desde sesiones parlamentarias hasta licitaciones. Allí trabajo con extracción y tratamiento de datos para su integración en la base analítica.</p>
+            {% if site_config.about_es %}
+                {{ site_config.about_es|linebreaks }}
+            {% else %}
+                <p>Soy pasante de datos en la CGU (Contraladoría General de la Unión), órgano de control interno del gobierno federal de Brasil. Realizo pruebas de jornada del usuario y cruzo diferentes bases de datos para apoyar la toma de decisiones utilizando SQL Server, Python y R.</p>
+                <p>Estoy cursando Ciencias de la Computación y mi trabajo se enfoca en el área de datos, con énfasis en Power BI, Python, SQL Server y R. También tengo experiencia en desarrollo web, habiendo trabajado en proyectos como tiendas virtuales y mi portafolio profesional.</p>
+                <p>Además de la pasantía, realizo trabajo voluntario en el Observatorio Social de São Paulo, institución que monitorea la actividad política de la ciudad: desde sesiones parlamentarias hasta licitaciones. Allí trabajo con extracción y tratamiento de datos para su integración en la base analítica.</p>
+            {% endif %}
             <div class="social">
                 <a href="https://github.com/guinb0" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
                 <a href="https://www.linkedin.com/in/guinb/" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>

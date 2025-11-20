@@ -10,8 +10,8 @@
         <div class="home-text">
             <span>Hola, soy</span>
             <h1>Guilherme Nunes</h1>
-            <h2>Científico de Datos</h2>
-            <p>Transformando datos en información valiosa.<br>Especialista en análisis, extracción y visualización de datos.</p>
+            <h2>{{ site_config.job_title_es|default:"Científico de Datos" }}</h2>
+            <p>{{ site_config.slogan_es|default:"Transformando datos en información valiosa." }}<br>Especialista en análisis, extracción y visualización de datos.</p>
             <div class="btn-group">
                 <a href="#contact" class="btn">
                     <i class='bx bx-chat'></i> Contáctame
@@ -23,7 +23,11 @@
         </div>
         <div class="home-img">
             <div class="img-wrapper">
-                <img src="{% static 'img/Foto3.png' %}" alt="Guilherme Nunes">
+                {% if site_config.profile_image %}
+                    <img src="{{ site_config.profile_image.url }}" alt="Guilherme Nunes">
+                {% else %}
+                    <img src="{% static 'img/Foto3.png' %}" alt="Guilherme Nunes">
+                {% endif %}
             </div>
         </div>
     </div>
