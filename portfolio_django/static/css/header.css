@@ -287,7 +287,7 @@ html[data-theme="dark"] .dropdown-content {
 /* ===== THEME TOGGLE ===== */
 /* Global Theme Toggle Wrapper */
 .global-theme-toggle {
-    position: fixed;
+    position: absolute;
     top: 1.2rem;
     right: 1.2rem;
     z-index: 1100;
