@@ -1,0 +1,166 @@
+/* ===== SOCIAL PAGE ===== */
+.social-page {
+    padding: 140px 7% 80px;
+    min-height: 100vh;
+    background: var(--bg-white);
+    transition: background 0.3s ease;
+}
+
+html[data-theme="dark"] .social-page {
+    background: #000;
+}
+
+.social-page .heading {
+    margin-bottom: 4rem;
+}
+
+.social-page .heading h1 {
+    color: var(--text-dark);
+}
+
+html[data-theme="dark"] .social-page .heading h1 {
+    color: #fff;
+}
+
+.social-page .heading h1 span {
+    color: var(--text-dark);
+}
+
+html[data-theme="dark"] .social-page .heading h1 span {
+    color: #fff;
+}
+
+.social-container {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+html[data-theme="dark"] .social-link {
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-link:hover {
+    transform: translateY(-10px);
+    background: rgba(0, 0, 0, 0.08);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+html[data-theme="dark"] .social-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+.social-icon {
+    font-size: 4rem;
+    color: var(--primary-color);
+    background: rgba(102, 126, 234, 0.1);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover .social-icon {
+    background: rgba(102, 126, 234, 0.2);
+    transform: scale(1.1);
+}
+
+.social-info {
+    flex: 1;
+}
+
+.social-info h3 {
+    color: var(--text-dark);
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+}
+
+html[data-theme="dark"] .social-info h3 {
+    color: #fff;
+}
+
+.social-info .handle {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+html[data-theme="dark"] .social-info .handle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.social-info .description {
+    color: var(--text-light);
+    margin-top: 0.5rem;
+}
+
+.back-button {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.back-button .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    background: var(--gradient-1);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.back-button .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.back-button .btn i {
+    font-size: 1.3rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .social-page {
+        padding: 120px 5% 60px;
+    }
+    
+    .social-link {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 2rem;
+    }
+    
+    .social-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 3rem;
+    }
+    
+    .social-info h3 {
+        font-size: 1.5rem;
+    }
+}

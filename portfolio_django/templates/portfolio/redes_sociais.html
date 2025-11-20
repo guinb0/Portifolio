@@ -3,64 +3,60 @@
 
 {% block title %}Redes Sociais - Guilherme Nunes{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/social.css' %}">
+{% endblock %}
+
 {% block content %}
-<section class="social-page" style="padding: 140px 7% 80px; min-height: 100vh; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-    <div class="heading" style="margin-bottom: 4rem;">
-        <h1 style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">Minhas <span style="color: white;">Redes Sociais</span></h1>
+<section class="social-page">
+    <div class="heading">
+        <h1><span>Redes Sociais</span></h1>
     </div>
     
-    <div class="social-container" style="max-width: 800px; margin: 0 auto; display: grid; gap: 2rem;">
+    <div class="social-container">
         
         <!-- GitHub -->
-        <a href="https://github.com/guinb0" target="_blank" class="social-link" style="display: flex; align-items: center; gap: 2rem; background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 2px solid rgba(255,255,255,0.3); text-decoration: none; transition: all 0.3s;">
-            <div class="social-icon" style="font-size: 4rem; color: white; background: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <a href="https://github.com/guinb0" target="_blank" class="social-link">
+            <div class="social-icon">
                 <i class='bx bxl-github'></i>
             </div>
             <div class="social-info">
-                <h3 style="color: white; font-size: 1.8rem; margin-bottom: 0.5rem;">GitHub</h3>
-                <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">@guinb0</p>
-                <p style="color: rgba(255,255,255,0.8); margin-top: 0.5rem;">Veja meus projetos e contribuições</p>
+                <h3>GitHub</h3>
+                <p class="handle">@guinb0</p>
+                <p class="description">Veja meus projetos e contribuições</p>
             </div>
         </a>
         
         <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/guinb/" target="_blank" class="social-link" style="display: flex; align-items: center; gap: 2rem; background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 2px solid rgba(255,255,255,0.3); text-decoration: none; transition: all 0.3s;">
-            <div class="social-icon" style="font-size: 4rem; color: white; background: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <a href="https://www.linkedin.com/in/guinb/" target="_blank" class="social-link">
+            <div class="social-icon">
                 <i class='bx bxl-linkedin'></i>
             </div>
             <div class="social-info">
-                <h3 style="color: white; font-size: 1.8rem; margin-bottom: 0.5rem;">LinkedIn</h3>
-                <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">guinb</p>
-                <p style="color: rgba(255,255,255,0.8); margin-top: 0.5rem;">Conecte-se comigo profissionalmente</p>
+                <h3>LinkedIn</h3>
+                <p class="handle">guinb</p>
+                <p class="description">Conecte-se comigo profissionalmente</p>
             </div>
         </a>
         
         <!-- Email -->
-        <a href="mailto:guilhermenunesfev26@gmail.com" class="social-link" style="display: flex; align-items: center; gap: 2rem; background: rgba(255,255,255,0.15); backdrop-filter: blur(20px); padding: 2.5rem; border-radius: 20px; border: 2px solid rgba(255,255,255,0.3); text-decoration: none; transition: all 0.3s;">
-            <div class="social-icon" style="font-size: 4rem; color: white; background: rgba(255,255,255,0.2); width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+        <a href="mailto:guilhermenunesfev26@gmail.com" class="social-link">
+            <div class="social-icon">
                 <i class='bx bxs-envelope'></i>
             </div>
             <div class="social-info">
-                <h3 style="color: white; font-size: 1.8rem; margin-bottom: 0.5rem;">Email</h3>
-                <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem;">guilhermenunesfev26@gmail.com</p>
-                <p style="color: rgba(255,255,255,0.8); margin-top: 0.5rem;">Entre em contato por email</p>
+                <h3>Email</h3>
+                <p class="handle">guilhermenunesfev26@gmail.com</p>
+                <p class="description">Entre em contato por email</p>
             </div>
         </a>
         
     </div>
     
-    <div style="text-align: center; margin-top: 3rem;">
-        <a href="{% url 'portfolio:home' %}" class="btn" style="background: white; color: var(--primary-color);">
+    <div class="back-button">
+        <a href="{% url 'portfolio:home' %}" class="btn">
             <i class='bx bx-arrow-back'></i> Voltar ao Início
         </a>
     </div>
 </section>
-
-<style>
-.social-link:hover {
-    transform: translateY(-10px);
-    background: rgba(255,255,255,0.25) !important;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
-}
-</style>
 {% endblock %}

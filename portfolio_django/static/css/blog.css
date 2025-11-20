@@ -6,10 +6,6 @@
     transition: background 0.3s ease;
 }
 
-html[data-theme="dark"] .blog {
-    background: var(--bg-dark-2);
-}
-
 .blog .about-title {
     text-align: center;
     margin-bottom: 2rem;
@@ -45,10 +41,6 @@ html[data-theme="dark"] .blog {
     border: 2px solid transparent;
     position: relative;
     overflow: hidden;
-}
-
-html[data-theme="dark"] .blog .post-card {
-    background: var(--bg-dark);
 }
 
 .blog .post-card::before {
@@ -87,15 +79,6 @@ html[data-theme="dark"] .blog .post-card {
     margin: 0.5rem 0 0.75rem;
     color: var(--text-dark);
     font-size: 1.3rem;
-}
-
-html[data-theme="dark"] .blog .post-card h3 {
-    color: var(--text-white);
-}
-
-html[data-theme="dark"] .blog .post-card p {
-    color: var(--text-light);
-    opacity: 0.85;
 }
 
 .blog .post-card p {
@@ -143,10 +126,6 @@ html[data-theme="dark"] .blog .post-card p {
     transition: background 0.3s ease;
 }
 
-html[data-theme="dark"] .blog-detail {
-    background: var(--bg-dark-2);
-}
-
 .blog-detail nav {
     margin-bottom: 1.5rem;
 }
@@ -156,10 +135,6 @@ html[data-theme="dark"] .blog-detail {
     color: var(--text-dark);
     font-size: 2.5rem;
     line-height: 1.3;
-}
-
-html[data-theme="dark"] .blog-detail article h1 {
-    color: var(--text-white);
 }
 
 .blog-detail .post-meta {
@@ -187,39 +162,90 @@ html[data-theme="dark"] .blog-detail article h1 {
     font-size: 1.05rem;
 }
 
-html[data-theme="dark"] .blog-detail .post-content {
-    color: var(--text-light);
+.blog-detail .post-content p {
+    margin-bottom: 1.2rem;
 }
 
-/* Links dentro do conteúdo do post */
 .blog-detail .post-content a {
     color: var(--primary-color);
     text-decoration: none;
     position: relative;
     font-weight: 600;
 }
+
 .blog-detail .post-content a::after {
     content: '';
     position: absolute;
-    left: 0; bottom: -3px;
-    width: 100%; height: 2px;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 2px;
     background: var(--gradient-1);
     transform: scaleX(0);
     transition: transform .35s ease;
 }
-.blog-detail .post-content a:hover::after { transform: scaleX(1); }
-html[data-theme="dark"] .blog-detail .post-content a { color: var(--accent-color); }
 
-/* Fallback se data-theme não estiver setado mas usuário usa dark mode */
-@media (prefers-color-scheme: dark) {
-    html:not([data-theme]) .blog, html:not([data-theme]) .blog-detail { background: var(--bg-dark-2); }
-    html:not([data-theme]) .blog .post-card { background: var(--bg-dark); }
-    html:not([data-theme]) .blog .post-card h3 { color: var(--text-white); }
-    html:not([data-theme]) .blog-detail .post-content { color: var(--text-light); }
+.blog-detail .post-content a:hover::after {
+    transform: scaleX(1);
 }
 
-.blog-detail .post-content p {
-    margin-bottom: 1.2rem;
+/* ===== DARK MODE ===== */
+html[data-theme="dark"] .blog {
+    background: var(--bg-light) !important;
+}
+
+html[data-theme="dark"] .blog .post-card {
+    background: var(--bg-white) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+html[data-theme="dark"] .blog .post-card:hover {
+    box-shadow: 0 20px 50px rgba(102, 126, 234, 0.15);
+}
+
+html[data-theme="dark"] .blog .post-card h3 {
+    color: var(--text-dark);
+}
+
+html[data-theme="dark"] .blog .post-card p {
+    color: var(--text-light);
+    opacity: 0.85;
+}
+
+html[data-theme="dark"] .blog-detail {
+    background: var(--bg-light) !important;
+}
+
+html[data-theme="dark"] .blog-detail article h1 {
+    color: var(--text-dark);
+}
+
+html[data-theme="dark"] .blog-detail .post-content {
+    color: var(--text-light);
+}
+
+html[data-theme="dark"] .blog-detail .post-content a {
+    color: var(--accent-color);
+}
+
+/* Fallback para dark mode do sistema */
+@media (prefers-color-scheme: dark) {
+    html:not([data-theme]) .blog,
+    html:not([data-theme]) .blog-detail {
+        background: #1a202c !important;
+    }
+    
+    html:not([data-theme]) .blog .post-card {
+        background: #2d3748 !important;
+    }
+    
+    html:not([data-theme]) .blog .post-card h3 {
+        color: #f7fafc;
+    }
+    
+    html:not([data-theme]) .blog-detail .post-content {
+        color: #cbd5e0;
+    }
 }
 
 /* Responsive */
