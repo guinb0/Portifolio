@@ -85,9 +85,13 @@ def visitor_data_api(request):
         longitude__isnull=False
     )
     
-    # Agrupa visitantes por localização
+    # Agrupa visitantes por localização (IP único) ignorando múltiplas visitas
     locations = {}
+    unique_ips_global = set()
+    total_visits = 0
     for visitor in visitors:
+        total_visits += visitor.visit_count  # total de hits
+        unique_ips_global.add(visitor.ip_address)
         key = f"{visitor.latitude},{visitor.longitude}"
         if key not in locations:
             locations[key] = {
@@ -96,16 +100,33 @@ def visitor_data_api(request):
                 'country': visitor.country,
                 'region': visitor.region,
                 'city': visitor.city,
-                'count': visitor.visit_count,
+                'unique_ips': {visitor.ip_address},  # conjunto para contar únicos
+                'unique_count': 1,
+                'total_visits': visitor.visit_count,
                 'last_visit': visitor.last_visit.isoformat()
             }
         else:
-            # Se já existe essa localização exata, soma as visitas
-            locations[key]['count'] += visitor.visit_count
+            # Adiciona IP ao conjunto; atualiza contadores e última visita
+            if visitor.ip_address not in locations[key]['unique_ips']:
+                locations[key]['unique_ips'].add(visitor.ip_address)
+                locations[key]['unique_count'] += 1
+            locations[key]['total_visits'] += visitor.visit_count
             if visitor.last_visit.isoformat() > locations[key]['last_visit']:
                 locations[key]['last_visit'] = visitor.last_visit.isoformat()
-    
-    return JsonResponse({'locations': list(locations.values())})
+
+    # Normaliza saída (remove sets)
+    location_list = []
+    for loc in locations.values():
+        loc['unique_ips'] = len(loc['unique_ips'])
+        location_list.append(loc)
+
+    return JsonResponse({
+        'locations': location_list,
+        'summary': {
+            'unique_ips_global': len(unique_ips_global),
+            'total_visits': total_visits
+        }
+    })
 
 
 def language_selector(request):

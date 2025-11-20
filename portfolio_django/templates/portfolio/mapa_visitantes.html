@@ -7,7 +7,11 @@
     .map-container {
         padding: 140px 7% 80px; /* aumentado para não ficar sob a navbar */
         min-height: 100vh;
-        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        background: var(--bg-white); /* claro por padrão (tema claro) */
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+    html[data-theme="dark"] .map-container {
+        background: #000; /* fundo preto no tema escuro */
     }
     
     .map-content {
@@ -17,8 +21,12 @@
     
     .map-header {
         text-align: center;
-        color: white;
         margin-bottom: 2rem;
+        color: var(--text-dark);
+        transition: color 0.3s ease;
+    }
+    html[data-theme="dark"] .map-header {
+        color: #fff;
     }
     
     .map-header h1 {
@@ -35,7 +43,12 @@
         width: 100%;
         height: 600px;
         border-radius: 10px;
-        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+        background: #f0f0f0;
+    }
+    html[data-theme="dark"] #visitor-map {
+        box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+        background: #111;
     }
     
     .map-stats {
@@ -46,13 +59,18 @@
     }
     
     .stat-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
+        background: rgba(0,0,0,0.05);
         padding: 1.5rem;
         border-radius: 10px;
         text-align: center;
-        color: white;
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: var(--text-dark);
+        border: 1px solid rgba(0,0,0,0.1);
+        transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    html[data-theme="dark"] .stat-card {
+        background: rgba(255,255,255,0.08);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.2);
     }
     
     .stat-card i {
@@ -165,6 +183,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 const locations = data.locations;
+                const summary = data.summary;
                 
                 // Adiciona marcadores ao mapa
                 locations.forEach(location => {
@@ -184,12 +203,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     marker.bindPopup(popupContent);
                 });
                 
-                // Atualiza estatísticas
-                const totalVisitors = locations.reduce((sum, loc) => sum + loc.count, 0);
+                // Atualiza estatísticas (visitantes únicos por IP)
+                const totalUniqueIPs = summary ? summary.unique_ips_global : locations.reduce((sum, loc) => sum + loc.unique_ips, 0);
                 const uniqueCountries = new Set(locations.map(loc => loc.country)).size;
                 const uniqueCities = new Set(locations.map(loc => `${loc.city}, ${loc.country}`)).size;
-                
-                document.getElementById('total-visitors').textContent = totalVisitors;
+
+                document.getElementById('total-visitors').textContent = totalUniqueIPs;
                 document.getElementById('total-countries').textContent = uniqueCountries;
                 document.getElementById('total-cities').textContent = uniqueCities;
                 

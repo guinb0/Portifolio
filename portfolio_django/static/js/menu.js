@@ -111,5 +111,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Header transparency on scroll
+    const siteHeader = document.querySelector('header.site-header');
+    function handleScroll() {
+        if (!siteHeader) return;
+        if (window.scrollY > 40) {
+            siteHeader.classList.add('scrolled');
+        } else {
+            siteHeader.classList.remove('scrolled');
+        }
+    }
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+
     console.log('=== MENU.JS INICIALIZADO ===');
 });
