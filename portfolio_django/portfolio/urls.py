@@ -32,4 +32,5 @@ urlpatterns = [
     # Mapa de visitantes
     path('mapa-visitantes/', views.VisitorMapView.as_view(), name='mapa_visitantes'),
     path('api/visitor-data/', views.visitor_data_api, name='visitor_data_api'),
+    path('api/register-visitor/', views.register_visitor, name='register_visitor'),
 ]

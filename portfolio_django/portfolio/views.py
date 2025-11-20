@@ -4,7 +4,108 @@ Views para o portfolio
 from django.shortcuts import render
 from django.views.generic import TemplateView, ListView, DetailView
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.utils import timezone
 from .models import Post, Visitor
+import requests
+
+
+def get_client_ip(request):
+    """Extrai o IP real do visitante, considerando proxies"""
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0].strip()
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
+@csrf_exempt
+def register_visitor(request):
+    """Registra um novo visitante no banco de dados"""
+    if request.method == 'POST':
+        try:
+            ip_address = get_client_ip(request)
+            user_agent = request.META.get('HTTP_USER_AGENT', '')
+            
+            # Ignora IPs locais
+            if ip_address in ['127.0.0.1', 'localhost', '::1']:
+                return JsonResponse({'status': 'ignored', 'message': 'Local IP'})
+            
+            # Busca geolocalização do IP usando API gratuita
+            try:
+                response = requests.get(f'http://ip-api.com/json/{ip_address}', timeout=5)
+                geo_data = response.json()
+                
+                if geo_data.get('status') == 'success':
+                    # Verifica se já existe um visitante com este IP
+                    visitor, created = Visitor.objects.get_or_create(
+                        ip_address=ip_address,
+                        defaults={
+                            'city': geo_data.get('city', 'Desconhecido'),
+                            'region': geo_data.get('regionName', ''),
+                            'country': geo_data.get('country', 'Desconhecido'),
+                            'country_code': geo_data.get('countryCode', ''),
+                            'latitude': geo_data.get('lat', 0),
+                            'longitude': geo_data.get('lon', 0),
+                            'user_agent': user_agent,
+                            'visit_count': 1
+                        }
+                    )
+                    
+                    # Se já existia, atualiza a contagem e última visita
+                    if not created:
+                        visitor.visit_count += 1
+                        visitor.last_visit = timezone.now()
+                        visitor.user_agent = user_agent
+                        visitor.save()
+                    
+                    return JsonResponse({
+                        'status': 'success',
+                        'created': created,
+                        'visit_count': visitor.visit_count,
+                        'location': f"{visitor.city}, {visitor.country}"
+                    })
+                else:
+                    return JsonResponse({'status': 'error', 'message': 'Geolocation failed'})
+                    
+            except requests.RequestException as e:
+                return JsonResponse({'status': 'error', 'message': str(e)})
+                
+        except Exception as e:
+            return JsonResponse({'status': 'error', 'message': str(e)})
+    
+    return JsonResponse({'status': 'error', 'message': 'Method not allowed'}, status=405)
+
+
+def visitor_data_api(request):
+    """API para retornar dados dos visitantes em formato JSON para o mapa"""
+    visitors = Visitor.objects.filter(
+        latitude__isnull=False,
+        longitude__isnull=False
+    )
+    
+    # Agrupa visitantes por localização
+    locations = {}
+    for visitor in visitors:
+        key = f"{visitor.latitude},{visitor.longitude}"
+        if key not in locations:
+            locations[key] = {
+                'latitude': float(visitor.latitude),
+                'longitude': float(visitor.longitude),
+                'country': visitor.country,
+                'region': visitor.region,
+                'city': visitor.city,
+                'count': visitor.visit_count,
+                'last_visit': visitor.last_visit.isoformat()
+            }
+        else:
+            # Se já existe essa localização exata, soma as visitas
+            locations[key]['count'] += visitor.visit_count
+            if visitor.last_visit.isoformat() > locations[key]['last_visit']:
+                locations[key]['last_visit'] = visitor.last_visit.isoformat()
+    
+    return JsonResponse({'locations': list(locations.values())})
 
 
 def language_selector(request):
@@ -36,11 +137,8 @@ class CertificadosView(TemplateView):
     template_name = 'portfolio/certificados.html'
     
     def get_context_data(self, **kwargs):
-        from .models import Certificate
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Certificados - Guilherme Nunes'
-        context['language'] = 'pt'
-        context['certificates'] = Certificate.objects.filter(is_active=True).order_by('-date_issued')
         return context
 
 
@@ -66,6 +164,7 @@ class ProjectsPtView(TemplateView):
         context['projects'] = Project.objects.filter(is_active=True)
         return context
 
+
 class ProjectsEnView(TemplateView):
     """Projects page (English)"""
     template_name = 'portfolio/projects_en.html'
@@ -77,6 +176,7 @@ class ProjectsEnView(TemplateView):
         context['language'] = 'en'
         context['projects'] = Project.objects.filter(is_active=True)
         return context
+
 
 class ProjectsEsView(TemplateView):
     """Página de proyectos (Español)"""
@@ -94,53 +194,48 @@ class ProjectsEsView(TemplateView):
 # Views para diferentes idiomas
 def home_pt(request):
     """Home em português"""
-    from .models import Project, Certificate, Post
+    from .models import Project, Certificate
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
-    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home.html', {
         'language': 'pt',
         'page_title': 'Guilherme Nunes - Cientista de Dados',
-        'stats': stats,
-        'recent_posts': recent_posts
+        'stats': stats
     })
 
 
 def home_en(request):
     """Home em inglês"""
-    from .models import Project, Certificate, Post
+    from .models import Project, Certificate
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
-    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home_en.html', {
         'language': 'en',
         'page_title': 'Guilherme Nunes - Data Scientist',
-        'stats': stats,
-        'recent_posts': recent_posts
+        'stats': stats
     })
 
 
 def home_es(request):
     """Home em espanhol"""
-    from .models import Project, Certificate, Post
+    from .models import Project, Certificate
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
-    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home_es.html', {
         'language': 'es',
         'page_title': 'Guilherme Nunes - Científico de Datos',
-        'stats': stats,
-        'recent_posts': recent_posts
+        'stats': stats
     })
+
 
 class AboutView(TemplateView):
     """Página Sobre mim separada"""
@@ -152,6 +247,7 @@ class AboutView(TemplateView):
         context['language'] = 'pt'
         return context
 
+
 class AboutEnView(TemplateView):
     """English About page"""
     template_name = 'portfolio/about_en.html'
@@ -161,6 +257,7 @@ class AboutEnView(TemplateView):
         context['page_title'] = 'About - Guilherme Nunes'
         context['language'] = 'en'
         return context
+
 
 class AboutEsView(TemplateView):
     """Spanish About page"""
@@ -200,32 +297,3 @@ class VisitorMapView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Mapa de Visitantes - Guilherme Nunes'
         return context
-
-
-def visitor_data_api(request):
-    """API para retornar dados dos visitantes em formato JSON para o mapa"""
-    visitors = Visitor.objects.filter(
-        latitude__isnull=False,
-        longitude__isnull=False
-    ).values('country', 'region', 'city', 'latitude', 'longitude', 'visited_at')
-    
-    # Agrupa visitantes por localização
-    locations = {}
-    for visitor in visitors:
-        key = f"{visitor['latitude']},{visitor['longitude']}"
-        if key not in locations:
-            locations[key] = {
-                'latitude': float(visitor['latitude']),
-                'longitude': float(visitor['longitude']),
-                'country': visitor['country'],
-                'region': visitor['region'],
-                'city': visitor['city'],
-                'count': 1,
-                'last_visit': visitor['visited_at'].isoformat()
-            }
-        else:
-            locations[key]['count'] += 1
-            if visitor['visited_at'].isoformat() > locations[key]['last_visit']:
-                locations[key]['last_visit'] = visitor['visited_at'].isoformat()
-    
-    return JsonResponse({'locations': list(locations.values())})

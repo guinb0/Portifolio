@@ -111,7 +111,7 @@ class Post(models.Model):
 
 class Visitor(models.Model):
     """Modelo para rastreamento de visitantes"""
-    ip_address = models.GenericIPAddressField('Endereço IP')
+    ip_address = models.GenericIPAddressField('Endereço IP', unique=True)
     country = models.CharField('País', max_length=100, blank=True)
     country_code = models.CharField('Código do País', max_length=10, blank=True)
     region = models.CharField('Região/Estado', max_length=100, blank=True)
@@ -119,12 +119,15 @@ class Visitor(models.Model):
     latitude = models.DecimalField('Latitude', max_digits=9, decimal_places=6, null=True, blank=True)
     longitude = models.DecimalField('Longitude', max_digits=9, decimal_places=6, null=True, blank=True)
     user_agent = models.TextField('User Agent', blank=True)
+    visit_count = models.IntegerField('Contagem de Visitas', default=1)
+    first_visit = models.DateTimeField('Primeira Visita', auto_now_add=True)
+    last_visit = models.DateTimeField('Última Visita', auto_now=True)
     visited_at = models.DateTimeField('Visitado em', auto_now_add=True)
     
     class Meta:
         verbose_name = 'Visitante'
         verbose_name_plural = 'Visitantes'
-        ordering = ['-visited_at']
+        ordering = ['-last_visit']
     
     def __str__(self):
-        return f"{self.ip_address} - {self.country} ({self.visited_at.strftime('%d/%m/%Y %H:%M')})"
+        return f"{self.ip_address} - {self.city}, {self.country} ({self.visit_count} visitas)"

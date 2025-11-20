@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 <style>
     .map-container {
-        padding: 80px 20px 40px;
+        padding: 140px 7% 80px; /* aumentado para não ficar sob a navbar */
         min-height: 100vh;
         background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     }
@@ -118,6 +118,9 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // Registra o visitante primeiro
+    registerVisitor();
+    
     // Inicializa o mapa
     const map = L.map('visitor-map').setView([0, 0], 2);
     
@@ -135,48 +138,71 @@ document.addEventListener('DOMContentLoaded', function() {
         iconAnchor: [6, 6]
     });
     
-    // Busca dados dos visitantes
-    fetch('{% url "portfolio:visitor_data_api" %}')
-        .then(response => response.json())
-        .then(data => {
-            const locations = data.locations;
-            
-            // Adiciona marcadores ao mapa
-            locations.forEach(location => {
-                const marker = L.marker([location.latitude, location.longitude], {
-                    icon: customIcon
-                }).addTo(map);
-                
-                // Popup com informações
-                const popupContent = `
-                    <div style="text-align: center;">
-                        <strong>${location.city || 'Desconhecido'}, ${location.region || ''}</strong><br>
-                        <span style="color: #666;">${location.country}</span><br>
-                        <small>Visitantes: ${location.count}</small><br>
-                        <small>Última visita: ${new Date(location.last_visit).toLocaleDateString('pt-BR')}</small>
-                    </div>
-                `;
-                marker.bindPopup(popupContent);
-            });
-            
-            // Atualiza estatísticas
-            const totalVisitors = locations.reduce((sum, loc) => sum + loc.count, 0);
-            const uniqueCountries = new Set(locations.map(loc => loc.country)).size;
-            const uniqueCities = new Set(locations.map(loc => `${loc.city}, ${loc.country}`)).size;
-            
-            document.getElementById('total-visitors').textContent = totalVisitors;
-            document.getElementById('total-countries').textContent = uniqueCountries;
-            document.getElementById('total-cities').textContent = uniqueCities;
-            
-            // Ajusta o zoom para mostrar todos os marcadores
-            if (locations.length > 0) {
-                const bounds = L.latLngBounds(locations.map(loc => [loc.latitude, loc.longitude]));
-                map.fitBounds(bounds, { padding: [50, 50] });
+    // Função para registrar o visitante
+    function registerVisitor() {
+        fetch('{% url "portfolio:register_visitor" %}', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
             }
         })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Visitante registrado:', data);
+            // Após registrar, carrega os dados do mapa
+            loadMapData();
+        })
         .catch(error => {
-            console.error('Erro ao carregar dados dos visitantes:', error);
+            console.error('Erro ao registrar visitante:', error);
+            // Mesmo com erro, tenta carregar o mapa
+            loadMapData();
         });
+    }
+    
+    // Função para carregar dados do mapa
+    function loadMapData() {
+        fetch('{% url "portfolio:visitor_data_api" %}')
+            .then(response => response.json())
+            .then(data => {
+                const locations = data.locations;
+                
+                // Adiciona marcadores ao mapa
+                locations.forEach(location => {
+                    const marker = L.marker([location.latitude, location.longitude], {
+                        icon: customIcon
+                    }).addTo(map);
+                    
+                    // Popup com informações
+                    const popupContent = `
+                        <div style="text-align: center;">
+                            <strong>${location.city || 'Desconhecido'}, ${location.region || ''}</strong><br>
+                            <span style="color: #666;">${location.country}</span><br>
+                            <small>Visitantes: ${location.count}</small><br>
+                            <small>Última visita: ${new Date(location.last_visit).toLocaleDateString('pt-BR')}</small>
+                        </div>
+                    `;
+                    marker.bindPopup(popupContent);
+                });
+                
+                // Atualiza estatísticas
+                const totalVisitors = locations.reduce((sum, loc) => sum + loc.count, 0);
+                const uniqueCountries = new Set(locations.map(loc => loc.country)).size;
+                const uniqueCities = new Set(locations.map(loc => `${loc.city}, ${loc.country}`)).size;
+                
+                document.getElementById('total-visitors').textContent = totalVisitors;
+                document.getElementById('total-countries').textContent = uniqueCountries;
+                document.getElementById('total-cities').textContent = uniqueCities;
+                
+                // Ajusta o zoom para mostrar todos os marcadores
+                if (locations.length > 0) {
+                    const bounds = L.latLngBounds(locations.map(loc => [loc.latitude, loc.longitude]));
+                    map.fitBounds(bounds, { padding: [50, 50] });
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao carregar dados dos visitantes:', error);
+            });
+    }
 });
 </script>
 {% endblock %}
