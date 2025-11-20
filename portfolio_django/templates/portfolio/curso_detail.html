@@ -1,0 +1,173 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/courses.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="course-detail-section">
+    <div class="container">
+        <!-- Course Header -->
+        <div class="course-header">
+            {% if course.cover_image %}
+            <div class="course-cover">
+                <img src="{{ course.cover_image.url }}" alt="{{ course.title }}">
+            </div>
+            {% endif %}
+            
+            <div class="course-info">
+                <h1>{{ course.title }}</h1>
+                <p class="course-full-description">{{ course.description }}</p>
+                
+                <div class="course-stats">
+                    <div class="stat-item">
+                        <i class='bx bx-video'></i>
+                        <span>{{ lessons.count }}
+                            {% if language == 'en' %}
+                                {% if lessons.count == 1 %}Lesson{% else %}Lessons{% endif %}
+                            {% elif language == 'es' %}
+                                {% if lessons.count == 1 %}Clase{% else %}Clases{% endif %}
+                            {% else %}
+                                {% if lessons.count == 1 %}Aula{% else %}Aulas{% endif %}
+                            {% endif %}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lessons List -->
+        {% if lessons %}
+        <div class="lessons-container">
+            <h2 class="lessons-title">
+                {% if language == 'en' %}
+                    Course Content
+                {% elif language == 'es' %}
+                    Contenido del Curso
+                {% else %}
+                    Conteúdo do Curso
+                {% endif %}
+            </h2>
+            
+            <div class="lessons-list">
+                {% for lesson in lessons %}
+                <div class="lesson-item" data-lesson-id="{{ lesson.id }}">
+                    <div class="lesson-header" data-toggle-lesson="{{ lesson.id }}">
+                        <div class="lesson-number">{{ forloop.counter }}</div>
+                        <div class="lesson-info">
+                            <h3>{{ lesson.title }}</h3>
+                            {% if lesson.duration %}
+                            <span class="lesson-duration">
+                                <i class='bx bx-time'></i> {{ lesson.duration }}
+                            </span>
+                            {% endif %}
+                        </div>
+                        <button class="toggle-lesson-btn">
+                            <i class='bx bx-chevron-down'></i>
+                        </button>
+                    </div>
+                    
+                    <div class="lesson-content" id="lesson-content-{{ lesson.id }}">
+                        <p class="lesson-description">{{ lesson.description }}</p>
+                        
+                        <!-- Video Player -->
+                        <div class="video-container">
+                            {% if lesson.video_type == 'youtube' and lesson.youtube_url %}
+                                <iframe 
+                                    src="{{ lesson.get_youtube_embed_url }}" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                                </iframe>
+                            {% elif lesson.video_type == 'upload' and lesson.video_file %}
+                                <video controls controlsList="nodownload">
+                                    <source src="{{ lesson.video_file.url }}" type="video/mp4">
+                                    {% if language == 'en' %}
+                                        Your browser does not support the video tag.
+                                    {% elif language == 'es' %}
+                                        Tu navegador no soporta la etiqueta de video.
+                                    {% else %}
+                                        Seu navegador não suporta a tag de vídeo.
+                                    {% endif %}
+                                </video>
+                            {% else %}
+                                <div class="no-video">
+                                    <i class='bx bx-video-off'></i>
+                                    <p>
+                                        {% if language == 'en' %}
+                                            Video not available
+                                        {% elif language == 'es' %}
+                                            Video no disponible
+                                        {% else %}
+                                            Vídeo não disponível
+                                        {% endif %}
+                                    </p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class='bx bx-video-off'></i>
+            <p>
+                {% if language == 'en' %}
+                    No lessons available for this course yet.
+                {% elif language == 'es' %}
+                    Aún no hay clases disponibles para este curso.
+                {% else %}
+                    Nenhuma aula disponível para este curso ainda.
+                {% endif %}
+            </p>
+        </div>
+        {% endif %}
+        
+        <!-- Back Button -->
+        <div class="back-button-container">
+            <a href="{% url 'portfolio:cursos' %}" class="btn-back">
+                <i class='bx bx-left-arrow-alt'></i>
+                {% if language == 'en' %}
+                    Back to Courses
+                {% elif language == 'es' %}
+                    Volver a Cursos
+                {% else %}
+                    Voltar para Cursos
+                {% endif %}
+            </a>
+        </div>
+    </div>
+</section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Add click handlers to all lesson headers
+    const lessonHeaders = document.querySelectorAll('[data-toggle-lesson]');
+    
+    lessonHeaders.forEach(header => {
+        header.addEventListener('click', function() {
+            const lessonId = this.getAttribute('data-toggle-lesson');
+            const content = document.getElementById('lesson-content-' + lessonId);
+            const item = content.closest('.lesson-item');
+            const button = item.querySelector('.toggle-lesson-btn i');
+            
+            // Toggle active class
+            item.classList.toggle('active');
+            
+            // Rotate icon
+            if (item.classList.contains('active')) {
+                button.style.transform = 'rotate(180deg)';
+            } else {
+                button.style.transform = 'rotate(0deg)';
+            }
+        });
+        
+        // Add cursor pointer style
+        header.style.cursor = 'pointer';
+    });
+});
+</script>
+{% endblock %}

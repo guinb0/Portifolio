@@ -29,6 +29,7 @@
             {% endif %}
             <li><a href="{% url 'portfolio:home' %}#services"><i class='bx bx-briefcase'></i> {% if language == 'en' %}Services{% elif language == 'es' %}Servicios{% else %}Serviços{% endif %}</a></li>
             <li><a href="{% if language == 'en' %}{% url 'portfolio:projects_en' %}{% elif language == 'es' %}{% url 'portfolio:proyectos_es' %}{% else %}{% url 'portfolio:projetos' %}{% endif %}"><i class='bx bx-folder'></i> {% if language == 'en' %}Projects{% elif language == 'es' %}Proyectos{% else %}Projetos{% endif %}</a></li>
+            <li><a href="{% url 'portfolio:cursos' %}"><i class='bx bx-video'></i> {% if language == 'en' %}Courses{% elif language == 'es' %}Cursos{% else %}Cursos{% endif %}</a></li>
             <li><a href="{% url 'portfolio:blog' %}"><i class='bx bx-book-alt'></i> Blog</a></li>
             <li><a href="{% url 'portfolio:certificados' %}"><i class='bx bx-certification'></i> {% if language == 'en' %}Certificates{% elif language == 'es' %}Certificados{% else %}Certificados{% endif %}</a></li>
             <li><a href="{% url 'portfolio:redes_sociais' %}"><i class='bx bx-share-alt'></i> {% if language == 'en' %}Social Media{% elif language == 'es' %}Redes Sociales{% else %}Redes Sociais{% endif %}</a></li>

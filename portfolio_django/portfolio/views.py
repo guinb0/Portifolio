@@ -215,46 +215,52 @@ class ProjectsEsView(TemplateView):
 # Views para diferentes idiomas
 def home_pt(request):
     """Home em português"""
-    from .models import Project, Certificate
+    from .models import Project, Certificate, Post
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
+    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home.html', {
         'language': 'pt',
         'page_title': 'Guilherme Nunes - Cientista de Dados',
-        'stats': stats
+        'stats': stats,
+        'recent_posts': recent_posts
     })
 
 
 def home_en(request):
     """Home em inglês"""
-    from .models import Project, Certificate
+    from .models import Project, Certificate, Post
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
+    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home_en.html', {
         'language': 'en',
         'page_title': 'Guilherme Nunes - Data Scientist',
-        'stats': stats
+        'stats': stats,
+        'recent_posts': recent_posts
     })
 
 
 def home_es(request):
     """Home em espanhol"""
-    from .models import Project, Certificate
+    from .models import Project, Certificate, Post
     stats = {
         'experience': '3+',
         'projects': Project.objects.filter(is_active=True).count(),
         'certifications': Certificate.objects.filter(is_active=True).count()
     }
+    recent_posts = Post.objects.filter(published=True).order_by('-created_at')[:2]
     return render(request, 'portfolio/home_es.html', {
         'language': 'es',
         'page_title': 'Guilherme Nunes - Científico de Datos',
-        'stats': stats
+        'stats': stats,
+        'recent_posts': recent_posts
     })
 
 
@@ -317,4 +323,38 @@ class VisitorMapView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Mapa de Visitantes - Guilherme Nunes'
+        return context
+
+
+class CoursesView(ListView):
+    """View para lista de cursos"""
+    template_name = 'portfolio/cursos.html'
+    context_object_name = 'courses'
+    
+    def get_queryset(self):
+        from .models import Course
+        return Course.objects.filter(is_active=True).prefetch_related('lessons')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Cursos - Guilherme Nunes'
+        context['language'] = self.request.path.split('/')[1] if len(self.request.path.split('/')) > 1 else 'pt'
+        return context
+
+
+class CourseDetailView(DetailView):
+    """View para detalhes de um curso com suas aulas"""
+    template_name = 'portfolio/curso_detail.html'
+    context_object_name = 'course'
+    slug_url_kwarg = 'slug'
+    
+    def get_queryset(self):
+        from .models import Course
+        return Course.objects.filter(is_active=True).prefetch_related('lessons')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['lessons'] = self.object.lessons.filter(is_active=True)
+        context['page_title'] = f'{self.object.title} - Guilherme Nunes'
+        context['language'] = self.request.path.split('/')[1] if len(self.request.path.split('/')) > 1 else 'pt'
         return context

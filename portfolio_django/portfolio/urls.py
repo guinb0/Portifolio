@@ -25,6 +25,10 @@ urlpatterns = [
     path('en/about/', views.AboutEnView.as_view(), name='about_en'),
     path('es/sobre/', views.AboutEsView.as_view(), name='about_es'),
     
+    # Cursos
+    path('cursos/', views.CoursesView.as_view(), name='cursos'),
+    path('cursos/<slug:slug>/', views.CourseDetailView.as_view(), name='course_detail'),
+    
     # Blog
     path('blog/', views.BlogView.as_view(), name='blog'),
     path('blog/<slug:slug>/', views.BlogDetailView.as_view(), name='blog_detail'),

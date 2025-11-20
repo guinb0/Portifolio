@@ -2,7 +2,7 @@
 Configuração do Django Admin para portfolio
 """
 from django.contrib import admin
-from .models import Project, Certificate, Service, ContactMessage, Post, Visitor
+from .models import Project, Certificate, Service, ContactMessage, Post, Visitor, Course, Lesson
 
 
 @admin.register(Project)
@@ -66,3 +66,65 @@ class VisitorAdmin(admin.ModelAdmin):
     date_hierarchy = 'visited_at'
     readonly_fields = ['ip_address', 'country', 'country_code', 'region', 'city', 
                       'latitude', 'longitude', 'user_agent', 'visited_at']
+
+
+class LessonInline(admin.TabularInline):
+    """Inline para aulas dentro do curso"""
+    model = Lesson
+    extra = 1
+    fields = ['title', 'order', 'video_type', 'youtube_url', 'video_file', 'duration', 'is_active']
+    ordering = ['order']
+
+
+@admin.register(Course)
+class CourseAdmin(admin.ModelAdmin):
+    """Admin para cursos"""
+    list_display = ['title', 'order', 'is_active', 'created_at']
+    list_filter = ['is_active', 'created_at']
+    search_fields = ['title', 'description']
+    list_editable = ['order', 'is_active']
+    prepopulated_fields = {'slug': ('title',)}
+    date_hierarchy = 'created_at'
+    readonly_fields = ['created_at', 'updated_at']
+    inlines = [LessonInline]
+    
+    fieldsets = (
+        ('Informações Básicas', {
+            'fields': ('title', 'slug', 'description', 'cover_image')
+        }),
+        ('Configurações', {
+            'fields': ('order', 'is_active')
+        }),
+        ('Datas', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )
+
+
+@admin.register(Lesson)
+class LessonAdmin(admin.ModelAdmin):
+    """Admin para aulas"""
+    list_display = ['title', 'course', 'order', 'video_type', 'duration', 'is_active', 'created_at']
+    list_filter = ['course', 'video_type', 'is_active', 'created_at']
+    search_fields = ['title', 'description', 'course__title']
+    list_editable = ['order', 'is_active']
+    date_hierarchy = 'created_at'
+    readonly_fields = ['created_at', 'updated_at']
+    
+    fieldsets = (
+        ('Informações Básicas', {
+            'fields': ('course', 'title', 'description', 'order', 'duration')
+        }),
+        ('Vídeo', {
+            'fields': ('video_type', 'youtube_url', 'video_file'),
+            'description': 'Escolha o tipo de vídeo e preencha o campo correspondente'
+        }),
+        ('Configurações', {
+            'fields': ('is_active',)
+        }),
+        ('Datas', {
+            'fields': ('created_at', 'updated_at'),
+            'classes': ('collapse',)
+        }),
+    )

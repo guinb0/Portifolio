@@ -131,3 +131,69 @@ class Visitor(models.Model):
     
     def __str__(self):
         return f"{self.ip_address} - {self.city}, {self.country} ({self.visit_count} visitas)"
+
+
+class Course(models.Model):
+    """Modelo para cursos"""
+    title = models.CharField('Título', max_length=200)
+    slug = models.SlugField('Slug', max_length=220, unique=True)
+    description = models.TextField('Descrição')
+    cover_image = models.ImageField('Imagem de capa', upload_to='courses/', blank=True, null=True)
+    order = models.IntegerField('Ordem', default=0)
+    is_active = models.BooleanField('Ativo', default=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Atualizado em', auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Curso'
+        verbose_name_plural = 'Cursos'
+        ordering = ['order', '-created_at']
+    
+    def __str__(self):
+        return self.title
+    
+    def get_absolute_url(self):
+        return reverse('portfolio:course_detail', kwargs={'slug': self.slug})
+    
+    def get_lessons_count(self):
+        """Retorna o número de aulas do curso"""
+        return self.lessons.filter(is_active=True).count()
+
+
+class Lesson(models.Model):
+    """Modelo para aulas de um curso"""
+    VIDEO_TYPE_CHOICES = [
+        ('youtube', 'YouTube'),
+        ('upload', 'Vídeo Enviado'),
+    ]
+    
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons', verbose_name='Curso')
+    title = models.CharField('Título', max_length=200)
+    description = models.TextField('Descrição')
+    video_type = models.CharField('Tipo de Vídeo', max_length=10, choices=VIDEO_TYPE_CHOICES, default='youtube')
+    youtube_url = models.URLField('URL do YouTube', blank=True, help_text='Ex: https://www.youtube.com/watch?v=VIDEO_ID')
+    video_file = models.FileField('Arquivo de Vídeo', upload_to='lessons/videos/', blank=True, null=True)
+    order = models.IntegerField('Ordem', default=0)
+    duration = models.CharField('Duração', max_length=20, blank=True, help_text='Ex: 15:30')
+    is_active = models.BooleanField('Ativo', default=True)
+    created_at = models.DateTimeField('Criado em', auto_now_add=True)
+    updated_at = models.DateTimeField('Atualizado em', auto_now=True)
+    
+    class Meta:
+        verbose_name = 'Aula'
+        verbose_name_plural = 'Aulas'
+        ordering = ['order', 'created_at']
+    
+    def __str__(self):
+        return f"{self.course.title} - {self.title}"
+    
+    def get_youtube_embed_url(self):
+        """Converte URL do YouTube para formato embed"""
+        if self.youtube_url and 'youtube.com' in self.youtube_url:
+            if 'watch?v=' in self.youtube_url:
+                video_id = self.youtube_url.split('watch?v=')[1].split('&')[0]
+                return f"https://www.youtube.com/embed/{video_id}"
+            elif 'youtu.be/' in self.youtube_url:
+                video_id = self.youtube_url.split('youtu.be/')[1].split('?')[0]
+                return f"https://www.youtube.com/embed/{video_id}"
+        return self.youtube_url

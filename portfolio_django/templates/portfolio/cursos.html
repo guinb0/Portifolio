@@ -1,0 +1,97 @@
+{% extends 'portfolio/base.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/courses.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="courses-section">
+    <div class="container">
+        <div class="heading">
+            <h1>
+                {% if language == 'en' %}
+                    My <span>Courses</span>
+                {% elif language == 'es' %}
+                    Mis <span>Cursos</span>
+                {% else %}
+                    Meus <span>Cursos</span>
+                {% endif %}
+            </h1>
+            <p class="subtitle">
+                {% if language == 'en' %}
+                    Learn with structured and practical content
+                {% elif language == 'es' %}
+                    Aprende con contenido estructurado y práctico
+                {% else %}
+                    Aprenda com conteúdo estruturado e prático
+                {% endif %}
+            </p>
+        </div>
+
+        {% if courses %}
+        <div class="courses-grid">
+            {% for course in courses %}
+            <div class="course-card">
+                {% if course.cover_image %}
+                <div class="course-image">
+                    <img src="{{ course.cover_image.url }}" alt="{{ course.title }}">
+                    <div class="course-overlay">
+                        <i class='bx bx-play-circle'></i>
+                    </div>
+                </div>
+                {% else %}
+                <div class="course-image placeholder">
+                    <i class='bx bx-book-open'></i>
+                </div>
+                {% endif %}
+                
+                <div class="course-content">
+                    <h3>{{ course.title }}</h3>
+                    <p class="course-description">{{ course.description|truncatewords:20 }}</p>
+                    
+                    <div class="course-meta">
+                        <span class="lessons-count">
+                            <i class='bx bx-video'></i>
+                            {{ course.get_lessons_count }}
+                            {% if language == 'en' %}
+                                {% if course.get_lessons_count == 1 %}lesson{% else %}lessons{% endif %}
+                            {% elif language == 'es' %}
+                                {% if course.get_lessons_count == 1 %}clase{% else %}clases{% endif %}
+                            {% else %}
+                                {% if course.get_lessons_count == 1 %}aula{% else %}aulas{% endif %}
+                            {% endif %}
+                        </span>
+                    </div>
+                    
+                    <a href="{% url 'portfolio:course_detail' course.slug %}" class="btn-view-course">
+                        {% if language == 'en' %}
+                            View Course
+                        {% elif language == 'es' %}
+                            Ver Curso
+                        {% else %}
+                            Ver Curso
+                        {% endif %}
+                        <i class='bx bx-right-arrow-alt'></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <i class='bx bx-book-open'></i>
+            <p>
+                {% if language == 'en' %}
+                    No courses available yet. Check back soon!
+                {% elif language == 'es' %}
+                    Aún no hay cursos disponibles. ¡Vuelve pronto!
+                {% else %}
+                    Nenhum curso disponível ainda. Volte em breve!
+                {% endif %}
+            </p>
+        </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}
