@@ -91,15 +91,15 @@ html[data-theme="dark"] header.site-header.scrolled {
 .navbar {
     position: fixed !important;
     top: 0;
-    right: -100% !important; /* COMEÇA ESCONDIDA */
+    left: -100% !important; /* COMEÇA ESCONDIDA DO LADO ESQUERDO */
     width: 320px;
     height: 100vh;
     background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
-    box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
-    transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 5px 0 30px rgba(0, 0, 0, 0.3); /* sombra para a direita */
+    transition: left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
-    z-index: 1001;
+    z-index: 1100; /* acima do botão de menu */
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -112,7 +112,7 @@ html[data-theme="dark"] .navbar {
 }
 
 .navbar.active {
-    right: 0 !important; /* APARECE QUANDO ATIVA */
+    left: 0 !important; /* APARECE QUANDO ATIVA DO LADO ESQUERDO */
     visibility: visible !important;
 }
 
