@@ -171,6 +171,7 @@ class Lesson(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons', verbose_name='Curso')
     title = models.CharField('Título', max_length=200)
     description = models.TextField('Descrição')
+    thumbnail = models.ImageField('Thumbnail da Aula', upload_to='lessons/thumbnails/', blank=True, null=True, help_text='Imagem de capa da aula')
     video_type = models.CharField('Tipo de Vídeo', max_length=10, choices=VIDEO_TYPE_CHOICES, default='youtube')
     youtube_url = models.URLField('URL do YouTube', blank=True, help_text='Ex: https://www.youtube.com/watch?v=VIDEO_ID')
     video_file = models.FileField('Arquivo de Vídeo', upload_to='lessons/videos/', blank=True, null=True)

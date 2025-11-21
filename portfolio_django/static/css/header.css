@@ -660,4 +660,13 @@ html[data-theme="dark"] .theme-toggle-btn span {
         width: 18px;
         height: 18px;
     }
+
+    /* ===== ESPAÇAMENTO EXTRA ENTRE ITENS ESPECÍFICOS ===== */
+    .navbar-list li:has(a[href="#contact"]) {
+        margin-bottom: 1.5rem;
+}
+
+    .navbar-list li:nth-last-child(2) {
+        margin-bottom: 1.5rem;
+}
 }

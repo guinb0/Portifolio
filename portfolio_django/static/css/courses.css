@@ -196,36 +196,59 @@ html[data-theme="dark"] .course-meta {
     background: var(--bg-light);
 }
 
-.course-header {
+.course-header-compact {
     background: var(--bg-white);
-    border-radius: 15px;
-    padding: 2.5rem;
-    margin-bottom: 3rem;
-    box-shadow: 0 5px 20px var(--shadow);
-}
-
-html[data-theme="dark"] .course-header {
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
-}
-
-.course-cover {
-    width: 100%;
-    height: 350px;
-    overflow: hidden;
-    border-radius: 10px;
+    border-radius: 12px;
+    padding: 1.5rem;
     margin-bottom: 2rem;
+    box-shadow: 0 3px 15px var(--shadow);
 }
 
-.course-cover img {
-    width: 100%;
-    height: 100%;
+html[data-theme="dark"] .course-header-compact {
+    background: var(--bg-dark);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+}
+
+.course-compact-info {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.course-thumbnail-small {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
     object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px var(--shadow);
 }
 
-.course-info h1 {
-    font-size: 2.5rem;
+.course-title-info {
+    flex: 1;
+}
+
+.course-title-info h1 {
+    font-size: 1.8rem;
     color: var(--text-dark);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+html[data-theme="dark"] .course-title-info h1 {
+    color: var(--text-white);
+}
+
+.course-title-info .lessons-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.course-title-info .lessons-count i {
+    font-size: 1.2rem;
 }
 
 .course-full-description {
@@ -452,6 +475,173 @@ html[data-theme="dark"] .btn-back {
     font-size: 1.3rem;
 }
 
+/* ===== LESSON CARD STYLES ===== */
+.lesson-card {
+    background: var(--bg-white);
+    border-radius: 12px;
+    box-shadow: 0 3px 15px var(--shadow);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    margin-bottom: 1.5rem;
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 0;
+}
+
+.lesson-card:has(.lesson-thumbnail) {
+    grid-template-columns: 220px 1fr;
+}
+
+.lesson-card:not(:has(.lesson-thumbnail)) {
+    grid-template-columns: 1fr;
+}
+
+html[data-theme="dark"] .lesson-card {
+    background: var(--bg-dark);
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.5);
+}
+
+.lesson-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 20px var(--shadow-hover);
+}
+
+.lesson-thumbnail {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 140px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.lesson-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.lesson-thumbnail .play-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lesson-card:hover .play-overlay {
+    opacity: 1;
+}
+
+.lesson-thumbnail .play-overlay i {
+    font-size: 3rem;
+    color: white;
+}
+
+.lesson-content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.lesson-card .lesson-header {
+    background: rgba(102, 126, 234, 0.05);
+    padding: 1rem 1.5rem;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.lesson-card .lesson-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
+    background: var(--gradient-1);
+    color: white;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.lesson-card .lesson-duration {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-light);
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.lesson-card .lesson-body {
+    padding: 1.5rem;
+}
+
+.lesson-card .lesson-body h3 {
+    color: var(--text-dark);
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
+}
+
+html[data-theme="dark"] .lesson-card .lesson-body h3 {
+    color: var(--text-white);
+}
+
+.lesson-card .lesson-description {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.lesson-card .btn-watch {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--gradient-1);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.lesson-card .btn-watch:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.lesson-card .btn-watch i {
+    font-size: 1.3rem;
+}
+
+.lesson-card .no-video {
+    color: var(--text-light);
+    font-style: italic;
+    opacity: 0.7;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+html[data-theme="dark"] .section-title {
+    color: var(--text-white);
+}
+
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
     .courses-section,
@@ -464,30 +654,52 @@ html[data-theme="dark"] .btn-back {
         gap: 2rem;
     }
     
-    .course-info h1 {
-        font-size: 2rem;
-    }
-    
-    .course-header {
-        padding: 1.5rem;
-    }
-    
-    .course-cover {
-        height: 250px;
-    }
-    
-    .lesson-header {
+    .course-header-compact {
         padding: 1rem;
+    }
+    
+    .course-compact-info {
         gap: 1rem;
     }
     
-    .lesson-number {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+    .course-thumbnail-small {
+        width: 60px;
+        height: 60px;
     }
     
-    .lesson-info h3 {
+    .course-title-info h1 {
+        font-size: 1.4rem;
+    }
+    
+    .course-title-info .lessons-count {
+        font-size: 0.85rem;
+    }
+    
+    .lesson-card {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .lesson-thumbnail {
+        width: 100%;
+        height: 180px;
+        min-height: 180px;
+    }
+    
+    .lesson-card .lesson-header {
+        padding: 0.9rem 1rem;
+        flex-wrap: wrap;
+    }
+    
+    .lesson-card .lesson-number {
+        font-size: 0.85rem;
+        padding: 0.4rem 0.9rem;
+    }
+    
+    .lesson-card .lesson-duration {
+        font-size: 0.85rem;
+    }
+    
+    .lesson-card .lesson-body h3 {
         font-size: 1.1rem;
     }
 }

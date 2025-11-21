@@ -47,19 +47,20 @@ html[data-theme="dark"] .home {
 .home-text span {
     font-size: 1.4rem;
     font-weight: 700;
-    background: var(--gradient-2);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--primary-color);
     display: inline-block;
     animation: fadeInUp 0.8s ease;
+    opacity: 0.9;
 }
 
 .home-text h1 {
     font-size: 4rem;
     font-weight: 800;
     margin: 0.5rem 0;
-    color: var(--text-dark);
+    background: linear-gradient(135deg, #ec4899, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     line-height: 1.2;
     animation: fadeInUp 0.8s ease 0.2s backwards;
 }
