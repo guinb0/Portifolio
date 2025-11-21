@@ -12,6 +12,42 @@
             <h1><span>{% if language == 'en' %}Certificates{% elif language == 'es' %}Certificados{% else %}Certificados{% endif %}</span></h1>
             <h2 class="subtitle">{% if language == 'en' %}Achievements and professional milestones{% elif language == 'es' %}Logros y hitos profesionales{% else %}Certificados de cursos realizados{% endif %}</h2>
         </div>
+        
+        <!-- Order Filter -->
+        <div class="certificates-filter">
+            <form method="get" class="filter-form">
+                <label for="order">
+                    {% if language == 'en' %}
+                        Sort by:
+                    {% elif language == 'es' %}
+                        Ordenar por:
+                    {% else %}
+                        Ordenar por:
+                    {% endif %}
+                </label>
+                <select name="order" id="order" onchange="this.form.submit()">
+                    <option value="new" {% if selected_order == 'new' %}selected{% endif %}>
+                        {% if language == 'en' %}
+                            Newest First
+                        {% elif language == 'es' %}
+                            Más Recientes
+                        {% else %}
+                            Mais Recentes
+                        {% endif %}
+                    </option>
+                    <option value="old" {% if selected_order == 'old' %}selected{% endif %}>
+                        {% if language == 'en' %}
+                            Oldest First
+                        {% elif language == 'es' %}
+                            Más Antiguos
+                        {% else %}
+                            Mais Antigos
+                        {% endif %}
+                    </option>
+                </select>
+            </form>
+        </div>
+        
         <div class="certificates-grid">
             {% if certificates %}
                 {% for cert in certificates %}

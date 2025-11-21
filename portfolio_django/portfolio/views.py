@@ -162,7 +162,13 @@ class CertificadosView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Certificados - Guilherme Nunes'
         context['language'] = 'pt'
-        context['certificates'] = Certificate.objects.filter(is_active=True).order_by('-date_issued')
+        
+        order = self.request.GET.get('order', 'new')
+        if order == 'old':
+            context['certificates'] = Certificate.objects.filter(is_active=True).order_by('date_issued')
+        else:
+            context['certificates'] = Certificate.objects.filter(is_active=True).order_by('-date_issued')
+        context['selected_order'] = order
         return context
 
 
