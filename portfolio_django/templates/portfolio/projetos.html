@@ -4,7 +4,15 @@
 {% block content %}
 <section class="portfolio" style="padding:140px 7% 80px; min-height:100vh;" id="portfolio">
     <div class="heading">
-        <h1>Meus <span>Projetos</span></h1>
+        <h1>
+            {% if language == 'en' %}
+                My <span>Projects</span>
+            {% elif language == 'es' %}
+                Mis <span>Proyectos</span>
+            {% else %}
+                Meus <span>Projetos</span>
+            {% endif %}
+        </h1>
     </div>
     <div class="portfolio-container">
         {% for project in projects %}
@@ -16,7 +24,13 @@
             <div class="project-video">
                 <video controls preload="metadata">
                     <source src="{{ project.demo_video.url }}" type="video/mp4">
-                    Seu navegador não suporta vídeos.
+                    {% if language == 'en' %}
+                        Your browser does not support videos.
+                    {% elif language == 'es' %}
+                        Tu navegador no soporta videos.
+                    {% else %}
+                        Seu navegador não suporta vídeos.
+                    {% endif %}
                 </video>
             </div>
             {% elif project.image %}
@@ -42,7 +56,16 @@
             <!-- Repository Links -->
             {% if project.get_repositories_list %}
             <div class="project-repositories">
-                <h4><i class='bx bxl-github'></i> Repositórios:</h4>
+                <h4>
+                    <i class='bx bxl-github'></i>
+                    {% if language == 'en' %}
+                        Repositories:
+                    {% elif language == 'es' %}
+                        Repositorios:
+                    {% else %}
+                        Repositórios:
+                    {% endif %}
+                </h4>
                 <div class="repo-links">
                     {% for repo_url in project.get_repositories_list %}
                     <a href="{{ repo_url }}" target="_blank" class="repo-link">
@@ -59,7 +82,13 @@
             <div class="project-youtube">
                 <a href="{{ project.youtube_explanation_url }}" target="_blank" class="youtube-link">
                     <i class='bx bxl-youtube'></i>
-                    Ver Explicação no YouTube
+                    {% if language == 'en' %}
+                        Watch Explanation on YouTube
+                    {% elif language == 'es' %}
+                        Ver Explicación en YouTube
+                    {% else %}
+                        Ver Explicação no YouTube
+                    {% endif %}
                 </a>
             </div>
             {% endif %}
@@ -69,13 +98,27 @@
             <div class="project-live">
                 <a href="{{ project.url }}" target="_blank" class="live-link">
                     <i class='bx bx-link-external'></i>
-                    Ver Projeto ao Vivo
+                    {% if language == 'en' %}
+                        View Live Project
+                    {% elif language == 'es' %}
+                        Ver Proyecto en Vivo
+                    {% else %}
+                        Ver Projeto ao Vivo
+                    {% endif %}
                 </a>
             </div>
             {% endif %}
         </div>
         {% empty %}
-        <p style="text-align:center; color:var(--text-light); width:100%;">Nenhum projeto cadastrado ainda.</p>
+        <p style="text-align:center; color:var(--text-light); width:100%;">
+            {% if language == 'en' %}
+                No projects registered yet.
+            {% elif language == 'es' %}
+                Aún no hay proyectos registrados.
+            {% else %}
+                Nenhum projeto cadastrado ainda.
+            {% endif %}
+        </p>
         {% endfor %}
     </div>
 </section>

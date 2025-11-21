@@ -5,10 +5,6 @@
 <link rel="stylesheet" href="{% static 'css/courses.css' %}">
 {% endblock %}
 
-{% block extra_js %}
-<script src="{% static 'js/courses-filter.js' %}"></script>
-{% endblock %}
-
 {% block content %}
 <section class="courses-section">
     <div class="container">
@@ -33,55 +29,20 @@
             </p>
         </div>
 
-        <!-- Language Filter -->
-        <div class="language-filter">
-            <button class="filter-btn active" data-lang="all">
-                <i class='bx bx-world'></i>
-                {% if language == 'en' %}All{% elif language == 'es' %}Todos{% else %}Todos{% endif %}
-            </button>
-            <button class="filter-btn" data-lang="pt">
-                <img src="{% static 'images/flags/brazil.png' %}" alt="PT" class="flag-icon"> Português
-            </button>
-            <button class="filter-btn" data-lang="en">
-                <img src="{% static 'images/flags/usa.png' %}" alt="EN" class="flag-icon"> English
-            </button>
-            <button class="filter-btn" data-lang="es">
-                <img src="{% static 'images/flags/spain.png' %}" alt="ES" class="flag-icon"> Español
-            </button>
-        </div>
-
         {% if courses %}
         <div class="courses-grid">
             {% for course in courses %}
-            <div class="course-card" data-language="{{ course.language }}">
+            <div class="course-card">
                 {% if course.cover_image %}
                 <div class="course-image">
                     <img src="{{ course.cover_image.url }}" alt="{{ course.title }}">
                     <div class="course-overlay">
                         <i class='bx bx-play-circle'></i>
                     </div>
-                    <span class="course-language-badge">
-                        {% if course.language == 'pt' %}
-                            <img src="{% static 'images/flags/brazil.png' %}" alt="PT" class="flag-icon">
-                        {% elif course.language == 'en' %}
-                            <img src="{% static 'images/flags/usa.png' %}" alt="EN" class="flag-icon">
-                        {% elif course.language == 'es' %}
-                            <img src="{% static 'images/flags/spain.png' %}" alt="ES" class="flag-icon">
-                        {% endif %}
-                    </span>
                 </div>
                 {% else %}
                 <div class="course-image placeholder">
                     <i class='bx bx-book-open'></i>
-                    <span class="course-language-badge">
-                        {% if course.language == 'pt' %}
-                            <img src="{% static 'images/flags/brazil.png' %}" alt="PT" class="flag-icon">
-                        {% elif course.language == 'en' %}
-                            <img src="{% static 'images/flags/usa.png' %}" alt="EN" class="flag-icon">
-                        {% elif course.language == 'es' %}
-                            <img src="{% static 'images/flags/spain.png' %}" alt="ES" class="flag-icon">
-                        {% endif %}
-                    </span>
                 </div>
                 {% endif %}
                 
@@ -103,7 +64,7 @@
                         </span>
                     </div>
                     
-                    <a href="{% url 'portfolio:course_detail' course.slug %}" class="btn-view-course">
+                    <a href="{% if language == 'en' %}{% url 'portfolio:course_detail_en' course.slug %}{% elif language == 'es' %}{% url 'portfolio:course_detail_es' course.slug %}{% else %}{% url 'portfolio:course_detail' course.slug %}{% endif %}" class="btn-view-course">
                         {% if language == 'en' %}
                             View Course
                         {% elif language == 'es' %}

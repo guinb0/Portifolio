@@ -154,24 +154,66 @@ class HomeView(TemplateView):
 
 
 class CertificadosView(TemplateView):
-    """View para página de certificados"""
+    """View para página de certificados (Português)"""
     template_name = 'portfolio/certificados.html'
     
     def get_context_data(self, **kwargs):
         from .models import Certificate
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Certificados - Guilherme Nunes'
+        context['language'] = 'pt'
         context['certificates'] = Certificate.objects.filter(is_active=True).order_by('-date_issued')
         return context
 
 
+class CertificadosEnView(CertificadosView):
+    """Certificates page (English)"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Certificates - Guilherme Nunes'
+        context['language'] = 'en'
+        return context
+
+
+class CertificadosEsView(CertificadosView):
+    """Página de certificados (Español)"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Certificados - Guilherme Nunes'
+        context['language'] = 'es'
+        return context
+
+
 class RedesSociaisView(TemplateView):
-    """View para página de redes sociais"""
+    """View para página de redes sociais (Português)"""
     template_name = 'portfolio/redes_sociais.html'
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Redes Sociais - Guilherme Nunes'
+        context['language'] = 'pt'
+        return context
+
+
+class SocialEnView(TemplateView):
+    """Social Media page (English)"""
+    template_name = 'portfolio/redes_sociais.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Social Media - Guilherme Nunes'
+        context['language'] = 'en'
+        return context
+
+
+class SocialEsView(TemplateView):
+    """Página de redes sociales (Español)"""
+    template_name = 'portfolio/redes_sociais.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Redes Sociales - Guilherme Nunes'
+        context['language'] = 'es'
         return context
 
 
@@ -312,7 +354,7 @@ class AboutEsView(TemplateView):
 
 
 class BlogView(ListView):
-    """View para lista de posts do blog"""
+    """View para lista de posts do blog (Português)"""
     model = Post
     template_name = 'portfolio/blog.html'
     context_object_name = 'posts'
@@ -321,27 +363,94 @@ class BlogView(ListView):
     def get_queryset(self):
         return Post.objects.filter(published=True)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['language'] = 'pt'
+        context['page_title'] = 'Blog & Novidades - Guilherme Nunes'
+        return context
+
+
+class BlogEnView(BlogView):
+    """Blog list (English)"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['language'] = 'en'
+        context['page_title'] = 'Blog & News - Guilherme Nunes'
+        return context
+
+
+class BlogEsView(BlogView):
+    """Lista de blog (Español)"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['language'] = 'es'
+        context['page_title'] = 'Blog & Noticias - Guilherme Nunes'
+        return context
+
 
 class BlogDetailView(DetailView):
-    """View para detalhes de um post do blog"""
+    """View para detalhes de um post do blog (Português)"""
     model = Post
     template_name = 'portfolio/blog_detail.html'
     context_object_name = 'post'
     slug_url_kwarg = 'slug'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['language'] = 'pt'
+        context['page_title'] = f"{context['post'].title} - Guilherme Nunes"
+        return context
+
+
+class BlogDetailEnView(BlogDetailView):
+    """Blog post detail (English)"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['language'] = 'en'
+        context['page_title'] = f"{context['post'].title} - Guilherme Nunes"
+        return context
+
+
+class BlogDetailEsView(BlogDetailView):
+    """Detalle del post (Español)"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['language'] = 'es'
+        context['page_title'] = f"{context['post'].title} - Guilherme Nunes"
+        return context
+
 
 class VisitorMapView(TemplateView):
-    """View para mapa de visitantes"""
+    """View para mapa de visitantes (Português)"""
     template_name = 'portfolio/mapa_visitantes.html'
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Mapa de Visitantes - Guilherme Nunes'
+        context['language'] = 'pt'
+        return context
+
+
+class VisitorMapEnView(VisitorMapView):
+    """Visitor map (English)"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Visitor Map - Guilherme Nunes'
+        context['language'] = 'en'
+        return context
+
+
+class VisitorMapEsView(VisitorMapView):
+    """Mapa de visitantes (Español)"""
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Mapa de Visitantes - Guilherme Nunes'
+        context['language'] = 'es'
         return context
 
 
 class CoursesView(ListView):
-    """View para lista de cursos"""
+    """View para lista de cursos (Português)"""
     template_name = 'portfolio/cursos.html'
     context_object_name = 'courses'
     
@@ -352,7 +461,39 @@ class CoursesView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Cursos - Guilherme Nunes'
-        context['language'] = self.request.path.split('/')[1] if len(self.request.path.split('/')) > 1 else 'pt'
+        context['language'] = 'pt'
+        return context
+
+
+class CoursesEnView(ListView):
+    """View para lista de cursos (English)"""
+    template_name = 'portfolio/cursos.html'
+    context_object_name = 'courses'
+    
+    def get_queryset(self):
+        from .models import Course
+        return Course.objects.filter(is_active=True).prefetch_related('lessons')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Courses - Guilherme Nunes'
+        context['language'] = 'en'
+        return context
+
+
+class CoursesEsView(ListView):
+    """View para lista de cursos (Español)"""
+    template_name = 'portfolio/cursos.html'
+    context_object_name = 'courses'
+    
+    def get_queryset(self):
+        from .models import Course
+        return Course.objects.filter(is_active=True).prefetch_related('lessons')
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['page_title'] = 'Cursos - Guilherme Nunes'
+        context['language'] = 'es'
         return context
 
 
@@ -370,5 +511,11 @@ class CourseDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['lessons'] = self.object.lessons.filter(is_active=True)
         context['page_title'] = f'{self.object.title} - Guilherme Nunes'
-        context['language'] = self.request.path.split('/')[1] if len(self.request.path.split('/')) > 1 else 'pt'
+        path = self.request.path
+        if path.startswith('/en/'):  # /en/courses/slug/
+            context['language'] = 'en'
+        elif path.startswith('/es/'):  # /es/cursos/slug/
+            context['language'] = 'es'
+        else:
+            context['language'] = 'pt'
         return context

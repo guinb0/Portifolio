@@ -326,7 +326,7 @@ Este projeto está sob a licença MIT.
 
 **Guilherme Nunes**
 - GitHub: [@guinb0](https://github.com/guinb0)
-- LinkedIn: [guinb](https://www.linkedin.com/in/guinb/)
+- LinkedIn: [guinb](https://www.linkedin.com/in/guinbb/)
 - Email: guilhermenunesfev26@gmail.com
 
 ---

@@ -160,6 +160,7 @@ class Course(models.Model):
     is_active = models.BooleanField('Ativo', default=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
     updated_at = models.DateTimeField('Atualizado em', auto_now=True)
+    tags = models.CharField('Tags', max_length=200, blank=True, help_text='Separadas por vírgula')
     
     class Meta:
         verbose_name = 'Curso'
@@ -175,6 +176,12 @@ class Course(models.Model):
     def get_lessons_count(self):
         """Retorna o número de aulas do curso"""
         return self.lessons.filter(is_active=True).count()
+
+    def get_tags_list(self):
+        """Retorna lista de tags/categorias do curso"""
+        if not self.tags:
+            return []
+        return [tag.strip() for tag in self.tags.split(',') if tag.strip()]
 
 
 class Lesson(models.Model):

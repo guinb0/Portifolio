@@ -1,7 +1,9 @@
 {% extends 'portfolio/base.html' %}
 {% load static %}
 
-{% block title %}Redes Sociais - Guilherme Nunes{% endblock %}
+{% block title %}
+{% if language == 'en' %}Social Media - Guilherme Nunes{% elif language == 'es' %}Redes Sociales - Guilherme Nunes{% else %}Redes Sociais - Guilherme Nunes{% endif %}
+{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/social.css' %}">
@@ -10,7 +12,9 @@
 {% block content %}
 <section class="social-page">
     <div class="heading">
-        <h1><span>Redes Sociais</span></h1>
+        <h1><span>
+            {% if language == 'en' %}Social Media{% elif language == 'es' %}Redes Sociales{% else %}Redes Sociais{% endif %}
+        </span></h1>
     </div>
     
     <div class="social-container">
@@ -23,19 +27,23 @@
             <div class="social-info">
                 <h3>GitHub</h3>
                 <p class="handle">@guinb0</p>
-                <p class="description">Veja meus projetos e contribuições</p>
+                <p class="description">
+                    {% if language == 'en' %}See my projects and contributions{% elif language == 'es' %}Ve mis proyectos y contribuciones{% else %}Veja meus projetos e contribuições{% endif %}
+                </p>
             </div>
         </a>
         
         <!-- LinkedIn -->
-        <a href="https://www.linkedin.com/in/guinb/" target="_blank" class="social-link">
+        <a href="https://www.linkedin.com/in/guinbb/" target="_blank" class="social-link">
             <div class="social-icon">
                 <i class='bx bxl-linkedin'></i>
             </div>
             <div class="social-info">
                 <h3>LinkedIn</h3>
                 <p class="handle">guinb</p>
-                <p class="description">Conecte-se comigo profissionalmente</p>
+                <p class="description">
+                    {% if language == 'en' %}Connect with me professionally{% elif language == 'es' %}Conéctate conmigo profesionalmente{% else %}Conecte-se comigo profissionalmente{% endif %}
+                </p>
             </div>
         </a>
         
@@ -47,15 +55,17 @@
             <div class="social-info">
                 <h3>Email</h3>
                 <p class="handle">guilhermenunesfev26@gmail.com</p>
-                <p class="description">Entre em contato por email</p>
+                <p class="description">
+                    {% if language == 'en' %}Get in touch via email{% elif language == 'es' %}Ponte en contacto por correo{% else %}Entre em contato por email{% endif %}
+                </p>
             </div>
         </a>
         
     </div>
     
     <div class="back-button">
-        <a href="{% url 'portfolio:home' %}" class="btn">
-            <i class='bx bx-arrow-back'></i> Voltar ao Início
+        <a href="{% if language == 'en' %}{% url 'portfolio:home_en' %}{% elif language == 'es' %}{% url 'portfolio:home_es' %}{% else %}{% url 'portfolio:home' %}{% endif %}" class="btn">
+            <i class='bx bx-arrow-back'></i> {% if language == 'en' %}Back to Home{% elif language == 'es' %}Volver al Inicio{% else %}Voltar ao Início{% endif %}
         </a>
     </div>
 </section>

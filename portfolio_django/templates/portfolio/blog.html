@@ -8,8 +8,16 @@
 {% block content %}
 <section class="blog" id="blog">
   <div class="about-title">
-    <h1><span>Blog</span> & Novidades</h1>
-    <h2>Artigos, atualizações e bastidores dos projetos</h2>
+    <h1><span>Blog</span> {% if language == 'en' %}& News{% elif language == 'es' %}& Noticias{% else %}& Novidades{% endif %}</h1>
+    <h2>
+        {% if language == 'en' %}
+            Articles, updates and behind the scenes of projects
+        {% elif language == 'es' %}
+            Artículos, actualizaciones y detrás de escena de los proyectos
+        {% else %}
+            Artigos, atualizações e bastidores dos projetos
+        {% endif %}
+    </h2>
   </div>
 
   <div class="posts-grid">
@@ -22,14 +30,29 @@
           <h3>{{ post.title }}</h3>
           <p>{{ post.excerpt }}</p>
           <a href="{{ post.get_absolute_url }}" class="btn">
-            Ler mais <i class='bx bx-right-arrow-alt'></i>
+            {% if language == 'en' %}
+                Read more
+            {% elif language == 'es' %}
+                Leer más
+            {% else %}
+                Ler mais
+            {% endif %}
+            <i class='bx bx-right-arrow-alt'></i>
           </a>
         </article>
       {% endfor %}
     {% else %}
       <div class="empty">
         <i class='bx bx-news'></i>
-        <p>Sem posts ainda. Em breve novidades por aqui! 🚀</p>
+        <p>
+            {% if language == 'en' %}
+                No posts yet. News coming soon! 🚀
+            {% elif language == 'es' %}
+                Sin posts todavía. ¡Noticias próximamente! 🚀
+            {% else %}
+                Sem posts ainda. Em breve novidades por aqui! 🚀
+            {% endif %}
+        </p>
       </div>
     {% endif %}
   </div>

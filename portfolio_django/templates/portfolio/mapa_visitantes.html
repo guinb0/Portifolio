@@ -10,8 +10,12 @@
 <div class="map-container">
     <div class="map-content">
         <div class="map-header">
-            <h1><i class='bx bx-world'></i> Mapa de Visitantes</h1>
-            <p>Visitantes do mundo todo que acessaram este portfólio</p>
+            <h1><i class='bx bx-world'></i>
+                {% if language == 'en' %}Visitor Map{% elif language == 'es' %}Mapa de Visitantes{% else %}Mapa de Visitantes{% endif %}
+            </h1>
+            <p>
+                {% if language == 'en' %}Visitors from around the world who accessed this portfolio{% elif language == 'es' %}Visitantes de todo el mundo que accedieron a este portafolio{% else %}Visitantes do mundo todo que acessaram este portfólio{% endif %}
+            </p>
         </div>
         
         <div id="visitor-map"></div>
@@ -20,17 +24,19 @@
             <div class="stat-card">
                 <i class='bx bx-user'></i>
                 <h3 id="total-visitors">-</h3>
-                <p>Total de Visitantes</p>
+                <p>
+                    {% if language == 'en' %}Total Visitors{% elif language == 'es' %}Visitantes Totales{% else %}Total de Visitantes{% endif %}
+                </p>
             </div>
             <div class="stat-card">
                 <i class='bx bx-world'></i>
                 <h3 id="total-countries">-</h3>
-                <p>Países</p>
+                <p>{% if language == 'en' %}Countries{% elif language == 'es' %}Países{% else %}Países{% endif %}</p>
             </div>
             <div class="stat-card">
                 <i class='bx bx-map-pin'></i>
                 <h3 id="total-cities">-</h3>
-                <p>Cidades</p>
+                <p>{% if language == 'en' %}Cities{% elif language == 'es' %}Ciudades{% else %}Cidades{% endif %}</p>
             </div>
         </div>
     </div>

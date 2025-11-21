@@ -19,7 +19,7 @@
         </div>
         
         <ul class="navbar-list">
-            <li><a href="{% url 'portfolio:home' %}#home"><i class='bx bx-home-alt'></i> {% if language == 'en' %}Home{% elif language == 'es' %}Inicio{% else %}Home{% endif %}</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:home_en' %}{% elif language == 'es' %}{% url 'portfolio:home_es' %}{% else %}{% url 'portfolio:home' %}{% endif %}#home"><i class='bx bx-home-alt'></i> {% if language == 'en' %}Home{% elif language == 'es' %}Inicio{% else %}Home{% endif %}</a></li>
             {% if language == 'en' %}
             <li><a href="{% url 'portfolio:about_en' %}"><i class='bx bx-user'></i> About</a></li>
             {% elif language == 'es' %}
@@ -27,14 +27,14 @@
             {% else %}
             <li><a href="{% url 'portfolio:sobre' %}"><i class='bx bx-user'></i> Sobre</a></li>
             {% endif %}
-            <li><a href="{% url 'portfolio:home' %}#services"><i class='bx bx-briefcase'></i> {% if language == 'en' %}Services{% elif language == 'es' %}Servicios{% else %}Serviços{% endif %}</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:home_en' %}{% elif language == 'es' %}{% url 'portfolio:home_es' %}{% else %}{% url 'portfolio:home' %}{% endif %}#services"><i class='bx bx-briefcase'></i> {% if language == 'en' %}Services{% elif language == 'es' %}Servicios{% else %}Serviços{% endif %}</a></li>
             <li><a href="{% if language == 'en' %}{% url 'portfolio:projects_en' %}{% elif language == 'es' %}{% url 'portfolio:proyectos_es' %}{% else %}{% url 'portfolio:projetos' %}{% endif %}"><i class='bx bx-folder'></i> {% if language == 'en' %}Projects{% elif language == 'es' %}Proyectos{% else %}Projetos{% endif %}</a></li>
-            <li><a href="{% url 'portfolio:cursos' %}"><i class='bx bx-video'></i> {% if language == 'en' %}Courses{% elif language == 'es' %}Cursos{% else %}Cursos{% endif %}</a></li>
-            <li><a href="{% url 'portfolio:blog' %}"><i class='bx bx-book-alt'></i> Blog</a></li>
-            <li><a href="{% url 'portfolio:certificados' %}"><i class='bx bx-certification'></i> {% if language == 'en' %}Certificates{% elif language == 'es' %}Certificados{% else %}Certificados{% endif %}</a></li>
-            <li><a href="{% url 'portfolio:redes_sociais' %}"><i class='bx bx-share-alt'></i> {% if language == 'en' %}Social Media{% elif language == 'es' %}Redes Sociales{% else %}Redes Sociais{% endif %}</a></li>
-            <li><a href="{% url 'portfolio:mapa_visitantes' %}"><i class='bx bx-world'></i> {% if language == 'en' %}Visitor Map{% elif language == 'es' %}Mapa de Visitantes{% else %}Mapa de Visitantes{% endif %}</a></li>
-            <li><a href="{% url 'portfolio:home' %}#contact"><i class='bx bx-envelope'></i> {% if language == 'en' %}Contact{% elif language == 'es' %}Contacto{% else %}Contato{% endif %}</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:courses_en' %}{% elif language == 'es' %}{% url 'portfolio:cursos_es' %}{% else %}{% url 'portfolio:cursos' %}{% endif %}"><i class='bx bx-video'></i> {% if language == 'en' %}Courses{% elif language == 'es' %}Cursos{% else %}Cursos{% endif %}</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:blog_en' %}{% elif language == 'es' %}{% url 'portfolio:blog_es' %}{% else %}{% url 'portfolio:blog' %}{% endif %}"><i class='bx bx-book-alt'></i> Blog</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:certificates_en' %}{% elif language == 'es' %}{% url 'portfolio:certificados_es' %}{% else %}{% url 'portfolio:certificados' %}{% endif %}"><i class='bx bx-certification'></i> {% if language == 'en' %}Certificates{% elif language == 'es' %}Certificados{% else %}Certificados{% endif %}</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:social_en' %}{% elif language == 'es' %}{% url 'portfolio:redes_es' %}{% else %}{% url 'portfolio:redes_sociais' %}{% endif %}"><i class='bx bx-share-alt'></i> {% if language == 'en' %}Social Media{% elif language == 'es' %}Redes Sociales{% else %}Redes Sociais{% endif %}</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:visitors_map_en' %}{% elif language == 'es' %}{% url 'portfolio:mapa_visitantes_es' %}{% else %}{% url 'portfolio:mapa_visitantes' %}{% endif %}"><i class='bx bx-world'></i> {% if language == 'en' %}Visitor Map{% elif language == 'es' %}Mapa de Visitantes{% else %}Mapa de Visitantes{% endif %}</a></li>
+            <li><a href="{% if language == 'en' %}{% url 'portfolio:home_en' %}{% elif language == 'es' %}{% url 'portfolio:home_es' %}{% else %}{% url 'portfolio:home' %}{% endif %}#contact"><i class='bx bx-envelope'></i> {% if language == 'en' %}Contact{% elif language == 'es' %}Contacto{% else %}Contato{% endif %}</a></li>
             
             <!-- Dropdown de Idiomas -->
             <li class="dropdown">
