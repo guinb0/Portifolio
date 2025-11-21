@@ -2,7 +2,7 @@
 
 Portfolio profissional migrado de Flask para Django com arquitetura modular e fácil manutenção.
 
-## 🎯 Características
+##  Características
 
 - **Arquitetura Modular**: CSS, JavaScript e Templates divididos em seções independentes
 - **Dark Mode**: Tema escuro/claro com persistência no localStorage
@@ -12,7 +12,7 @@ Portfolio profissional migrado de Flask para Django com arquitetura modular e f�
 - **Admin Django**: Gerenciamento fácil de projetos, certificados e serviços
 - **SEO Friendly**: Estrutura otimizada para motores de busca
 
-## 📁 Estrutura do Projeto
+##  Estrutura do Projeto
 
 ```
 portfolio_django/

@@ -456,12 +456,29 @@ class CoursesView(ListView):
     
     def get_queryset(self):
         from .models import Course
-        return Course.objects.filter(is_active=True).prefetch_related('lessons')
+        qs = Course.objects.filter(is_active=True).prefetch_related('lessons')
+        # Filtros
+        order = self.request.GET.get('order')  # new|old
+        category = self.request.GET.get('category')  # tag string
+        if category and category != 'all':
+            qs = qs.filter(tags__icontains=category)
+        if order == 'old':
+            qs = qs.order_by('created_at')
+        else:  # default newest
+            qs = qs.order_by('-created_at')
+        return qs
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Cursos - Guilherme Nunes'
         context['language'] = 'pt'
+        # Categorias (tags) únicas
+        all_tags = []
+        for c in context['courses']:
+            all_tags.extend(c.get_tags_list())
+        context['categories'] = sorted(set([t for t in all_tags if t]))
+        context['selected_category'] = self.request.GET.get('category', 'all')
+        context['selected_order'] = self.request.GET.get('order', 'new')
         return context
 
 
@@ -472,12 +489,27 @@ class CoursesEnView(ListView):
     
     def get_queryset(self):
         from .models import Course
-        return Course.objects.filter(is_active=True).prefetch_related('lessons')
+        qs = Course.objects.filter(is_active=True).prefetch_related('lessons')
+        order = self.request.GET.get('order')
+        category = self.request.GET.get('category')
+        if category and category != 'all':
+            qs = qs.filter(tags__icontains=category)
+        if order == 'old':
+            qs = qs.order_by('created_at')
+        else:
+            qs = qs.order_by('-created_at')
+        return qs
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Courses - Guilherme Nunes'
         context['language'] = 'en'
+        all_tags = []
+        for c in context['courses']:
+            all_tags.extend(c.get_tags_list())
+        context['categories'] = sorted(set([t for t in all_tags if t]))
+        context['selected_category'] = self.request.GET.get('category', 'all')
+        context['selected_order'] = self.request.GET.get('order', 'new')
         return context
 
 
@@ -488,12 +520,27 @@ class CoursesEsView(ListView):
     
     def get_queryset(self):
         from .models import Course
-        return Course.objects.filter(is_active=True).prefetch_related('lessons')
+        qs = Course.objects.filter(is_active=True).prefetch_related('lessons')
+        order = self.request.GET.get('order')
+        category = self.request.GET.get('category')
+        if category and category != 'all':
+            qs = qs.filter(tags__icontains=category)
+        if order == 'old':
+            qs = qs.order_by('created_at')
+        else:
+            qs = qs.order_by('-created_at')
+        return qs
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Cursos - Guilherme Nunes'
         context['language'] = 'es'
+        all_tags = []
+        for c in context['courses']:
+            all_tags.extend(c.get_tags_list())
+        context['categories'] = sorted(set([t for t in all_tags if t]))
+        context['selected_category'] = self.request.GET.get('category', 'all')
+        context['selected_order'] = self.request.GET.get('order', 'new')
         return context
 
 

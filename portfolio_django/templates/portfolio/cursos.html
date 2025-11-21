@@ -29,19 +29,54 @@
             </p>
         </div>
 
+        <!-- Language Filter (Flags) -->
+        <div class="language-filter" style="display:flex; gap:.75rem; flex-wrap:wrap; margin-bottom:2rem;">
+            <button class="filter-btn active" data-lang="all" type="button">
+                <img src="{% static 'images/flags/world.png' %}" alt="All" class="flag-icon">
+                {% if language == 'en' %}All{% elif language == 'es' %}Todas{% else %}Todas{% endif %}
+            </button>
+            <button class="filter-btn" data-lang="pt" type="button">
+                <img src="{% static 'images/flags/brazil.png' %}" alt="PT" class="flag-icon">
+                PT
+            </button>
+            <button class="filter-btn" data-lang="en" type="button">
+                <img src="{% static 'images/flags/usa.png' %}" alt="EN" class="flag-icon">
+                EN
+            </button>
+            <button class="filter-btn" data-lang="es" type="button">
+                <img src="{% static 'images/flags/spain.png' %}" alt="ES" class="flag-icon">
+                ES
+            </button>
+        </div>
+
         {% if courses %}
         <div class="courses-grid">
             {% for course in courses %}
-            <div class="course-card">
+            <div class="course-card" data-language="{{ course.language }}">
                 {% if course.cover_image %}
                 <div class="course-image">
-                    <img src="{{ course.cover_image.url }}" alt="{{ course.title }}">
-                    <div class="course-overlay">
-                        <i class='bx bx-play-circle'></i>
+                    <div class="course-flag-badge">
+                        {% if course.language == 'pt' %}
+                            <img src="{% static 'images/flags/brazil.png' %}" alt="PT" class="flag-icon">
+                        {% elif course.language == 'en' %}
+                            <img src="{% static 'images/flags/usa.png' %}" alt="EN" class="flag-icon">
+                        {% elif course.language == 'es' %}
+                            <img src="{% static 'images/flags/spain.png' %}" alt="ES" class="flag-icon">
+                        {% endif %}
                     </div>
+                    <img src="{{ course.cover_image.url }}" alt="{{ course.title }}">
                 </div>
                 {% else %}
                 <div class="course-image placeholder">
+                    <div class="course-flag-badge">
+                        {% if course.language == 'pt' %}
+                            <img src="{% static 'images/flags/brazil.png' %}" alt="PT" class="flag-icon">
+                        {% elif course.language == 'en' %}
+                            <img src="{% static 'images/flags/usa.png' %}" alt="EN" class="flag-icon">
+                        {% elif course.language == 'es' %}
+                            <img src="{% static 'images/flags/spain.png' %}" alt="ES" class="flag-icon">
+                        {% endif %}
+                    </div>
                     <i class='bx bx-book-open'></i>
                 </div>
                 {% endif %}
@@ -94,4 +129,8 @@
         {% endif %}
     </div>
 </section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/courses-filter.js' %}"></script>
 {% endblock %}
