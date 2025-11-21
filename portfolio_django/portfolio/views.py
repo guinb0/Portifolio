@@ -158,8 +158,10 @@ class CertificadosView(TemplateView):
     template_name = 'portfolio/certificados.html'
     
     def get_context_data(self, **kwargs):
+        from .models import Certificate
         context = super().get_context_data(**kwargs)
         context['page_title'] = 'Certificados - Guilherme Nunes'
+        context['certificates'] = Certificate.objects.filter(is_active=True).order_by('-date_issued')
         return context
 
 
