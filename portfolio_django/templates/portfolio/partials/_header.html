@@ -39,7 +39,8 @@
             <!-- Dropdown de Idiomas -->
             <li class="dropdown">
                 <button class="dropdown-btn">
-                    <i class='bx bx-globe'></i> {% if language == 'en' %}Language{% elif language == 'es' %}Idioma{% else %}Idioma{% endif %}
+                    <i class='bx bx-globe'></i> 
+                    <span>{% if language == 'en' %}Language{% elif language == 'es' %}Idioma{% else %}Idioma{% endif %}</span>
                     <i class='bx bx-chevron-down'></i>
                 </button>
                 <ul class="dropdown-content">
@@ -60,8 +61,19 @@
                     </li>
                 </ul>
             </li>
+            
+            <!-- Toggle de Tema (Mobile) -->
+            <li class="navbar-theme-item">
+                <div class="navbar-theme-toggle-btn" id="navbar-theme-toggle">
+                    <div class="theme-text">
+                        <i class='bx bx-sun'></i>
+                        <span>{% if language == 'en' %}Theme{% elif language == 'es' %}Tema{% else %}Tema{% endif %}</span>
+                    </div>
+                    <div class="theme-switch">
+                        <span></span>
+                    </div>
+                </div>
+            </li>
         </ul>
-        
-        <!-- Removed theme toggle from navbar; now global outside header -->
     </nav>
 </header>

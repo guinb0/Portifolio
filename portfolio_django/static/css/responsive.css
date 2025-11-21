@@ -124,8 +124,14 @@
         font-size: 1.6rem;
     }
 
+    .home-img::before {
+        display: none;
+    }
+
     .home-img img {
         max-width: 280px;
+        border: none;
+        box-shadow: 0 10px 30px var(--shadow-hover);
     }
 
     .heading h1,

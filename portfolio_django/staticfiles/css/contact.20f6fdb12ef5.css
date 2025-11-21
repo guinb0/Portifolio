@@ -1,0 +1,109 @@
+/* ===== CONTACT SECTION ===== */
+.contact {
+    padding: 6rem 7%;
+    background: var(--bg-light);
+    position: relative;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+html[data-theme="dark"] .contact {
+    background: var(--bg-light);
+}
+
+html[data-theme="light"] .contact .heading h1 {
+    color: var(--text-dark) !important;
+    text-shadow: none;
+}
+html[data-theme="dark"] .contact .heading h1 {
+    color: #fff !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+}
+
+html[data-theme="light"] .contact .heading h1 span {
+    color: var(--text-dark) !important;
+}
+html[data-theme="dark"] .contact .heading h1 span {
+    color: #fff !important;
+}
+
+html[data-theme="light"] .contact .heading h1::after {
+    background: var(--text-dark);
+}
+html[data-theme="dark"] .contact .heading h1::after {
+    background: #fff;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+}
+
+.contact-info {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2.5rem;
+}
+
+.contact-box {
+    background: rgba(0,0,0,0.05);
+    padding: 3rem 2.5rem;
+    border-radius: 20px;
+    border: 2px solid rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: all 0.3s;
+    min-height: 140px;
+}
+html[data-theme="dark"] .contact-box {
+    background: rgba(255,255,255,0.12);
+    border: 2px solid rgba(255,255,255,0.25);
+}
+
+.contact-box:hover {
+    transform: translateY(-8px);
+    background: rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+html[data-theme="dark"] .contact-box:hover {
+    background: rgba(255,255,255,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.contact-box i {
+    font-size: 3rem;
+    color: var(--text-dark);
+    background: rgba(0,0,0,0.08);
+    padding: 1.2rem;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+html[data-theme="dark"] .contact-box i {
+    color: #fff;
+    background: rgba(255,255,255,0.18);
+}
+
+.contact-box .text {
+    flex: 1;
+    overflow: hidden;
+}
+
+.contact-box .text h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+html[data-theme="dark"] .contact-box .text h3 {
+    color: #fff;
+}
+
+.contact-box .text p {
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+html[data-theme="dark"] .contact-box .text p {
+    color: rgba(255,255,255,0.92);
+}
