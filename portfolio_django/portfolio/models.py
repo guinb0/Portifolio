@@ -11,7 +11,10 @@ class Project(models.Model):
     title = models.CharField('Título', max_length=200)
     description = models.TextField('Descrição')
     image = models.ImageField('Imagem', upload_to='projects/')
+    demo_video = models.FileField('Vídeo de Demonstração', upload_to='projects/videos/', blank=True, null=True, help_text='Vídeo curto de apresentação do projeto')
     url = models.URLField('URL do Projeto', blank=True)
+    repository_url = models.TextField('URLs dos Repositórios', blank=True, help_text='Uma URL por linha')
+    youtube_explanation_url = models.URLField('URL de Explicação (YouTube)', blank=True, help_text='Link para vídeo explicativo no YouTube')
     tags = models.CharField('Tags', max_length=200, help_text='Separadas por vírgula')
     order = models.IntegerField('Ordem', default=0)
     is_active = models.BooleanField('Ativo', default=True)
@@ -29,6 +32,12 @@ class Project(models.Model):
     def get_tags_list(self):
         """Retorna tags como lista"""
         return [tag.strip() for tag in self.tags.split(',') if tag.strip()]
+    
+    def get_repositories_list(self):
+        """Retorna lista de URLs dos repositórios"""
+        if not self.repository_url:
+            return []
+        return [url.strip() for url in self.repository_url.split('\n') if url.strip()]
 
 
 class Certificate(models.Model):
@@ -136,10 +145,17 @@ class Visitor(models.Model):
 
 class Course(models.Model):
     """Modelo para cursos"""
+    LANGUAGE_CHOICES = [
+        ('pt', 'Português'),
+        ('en', 'English'),
+        ('es', 'Español'),
+    ]
+    
     title = models.CharField('Título', max_length=200)
     slug = models.SlugField('Slug', max_length=220, unique=True)
     description = models.TextField('Descrição')
     cover_image = models.ImageField('Imagem de capa', upload_to='courses/', blank=True, null=True)
+    language = models.CharField('Idioma', max_length=2, choices=LANGUAGE_CHOICES, default='pt')
     order = models.IntegerField('Ordem', default=0)
     is_active = models.BooleanField('Ativo', default=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)

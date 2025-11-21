@@ -8,22 +8,71 @@
     </div>
     <div class="portfolio-container">
         {% for project in projects %}
-        <div class="box">
-            <div class="box-img">
+        <div class="project-card">
+            <h3 class="project-title">{{ project.title }}</h3>
+            
+            <!-- Demo Video -->
+            {% if project.demo_video %}
+            <div class="project-video">
+                <video controls preload="metadata">
+                    <source src="{{ project.demo_video.url }}" type="video/mp4">
+                    Seu navegador não suporta vídeos.
+                </video>
+            </div>
+            {% elif project.image %}
+            <div class="project-image">
                 <img src="{{ project.image.url }}" alt="{{ project.title }}">
             </div>
-            <div class="content">
-                {% if project.url %}<a href="{{ project.url }}" target="_blank" title="Ver Projeto"><i class='bx bx-link-external'></i></a>{% endif %}
-                <h3>{{ project.title }}</h3>
-                <div class="project-description">
-                    <p>{{ project.description }}</p>
-                    <div class="project-tags">
-                        {% for tag in project.get_tags_list %}
-                        <span class="project-tag">{{ tag }}</span>
-                        {% endfor %}
-                    </div>
+            {% endif %}
+            
+            <!-- Description -->
+            <div class="project-description">
+                <p>{{ project.description }}</p>
+            </div>
+            
+            <!-- Tags -->
+            {% if project.get_tags_list %}
+            <div class="project-tags">
+                {% for tag in project.get_tags_list %}
+                <span class="project-tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <!-- Repository Links -->
+            {% if project.get_repositories_list %}
+            <div class="project-repositories">
+                <h4><i class='bx bxl-github'></i> Repositórios:</h4>
+                <div class="repo-links">
+                    {% for repo_url in project.get_repositories_list %}
+                    <a href="{{ repo_url }}" target="_blank" class="repo-link">
+                        <i class='bx bx-git-repo-forked'></i>
+                        {{ repo_url|slice:":50" }}{% if repo_url|length > 50 %}...{% endif %}
+                    </a>
+                    {% endfor %}
                 </div>
             </div>
+            {% endif %}
+            
+            <!-- YouTube Explanation -->
+            {% if project.youtube_explanation_url %}
+            <div class="project-youtube">
+                <a href="{{ project.youtube_explanation_url }}" target="_blank" class="youtube-link">
+                    <i class='bx bxl-youtube'></i>
+                    Ver Explicação no YouTube
+                </a>
+            </div>
+            {% endif %}
+            
+            <!-- Project URL -->
+            {% if project.url %}
+            <div class="project-live">
+                <a href="{{ project.url }}" target="_blank" class="live-link">
+                    <i class='bx bx-link-external'></i>
+                    Ver Projeto ao Vivo
+                </a>
+            </div>
+            {% endif %}
         </div>
         {% empty %}
         <p style="text-align:center; color:var(--text-light); width:100%;">Nenhum projeto cadastrado ainda.</p>

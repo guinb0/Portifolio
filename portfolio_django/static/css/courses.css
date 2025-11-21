@@ -26,6 +26,58 @@ html[data-theme="dark"] .courses-section {
     margin-top: 1rem;
 }
 
+/* Language Filter */
+.language-filter {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--bg-white);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+    border-radius: 25px;
+    color: var(--text-dark);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+html[data-theme="dark"] .filter-btn {
+    background: var(--bg-dark);
+    color: var(--text-white);
+}
+
+.filter-btn:hover {
+    background: rgba(102, 126, 234, 0.1);
+    border-color: rgba(102, 126, 234, 0.4);
+    transform: translateY(-2px);
+}
+
+.filter-btn.active {
+    background: var(--gradient-1);
+    color: white;
+    border-color: transparent;
+}
+
+.filter-btn i {
+    font-size: 1.2rem;
+}
+
+.filter-btn .flag-icon {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
 /* Courses Grid */
 .courses-grid {
     display: grid;
@@ -39,9 +91,10 @@ html[data-theme="dark"] .courses-section {
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 5px 20px var(--shadow);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease, opacity 0.3s ease, transform 0.3s ease;
     display: flex;
     flex-direction: column;
+    opacity: 1;
 }
 
 html[data-theme="dark"] .course-card {
@@ -59,6 +112,25 @@ html[data-theme="dark"] .course-card {
     overflow: hidden;
     position: relative;
     background: var(--gradient-1);
+}
+
+.course-language-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    padding: 0.4rem;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+}
+
+.course-language-badge .flag-icon {
+    width: 28px;
+    height: 21px;
+    object-fit: cover;
+    display: block;
+    border-radius: 3px;
 }
 
 .course-image img {
