@@ -4,7 +4,7 @@ Full-stack web application demonstrating proficiency in Django development, REST
 
 ![Django](https://img.shields.io/badge/Django-4.2-092E20?style=for-the-badge&logo=django)
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
 
 ---
 
@@ -39,79 +39,7 @@ Full-stack web application demonstrating proficiency in Django development, REST
 
 **DevOps:** WhiteNoise | Railway | Git version control
 
----
 
-## Project Structure
-
-```
-Portifolio/
-├── config/                      # Django project configuration
-│   ├── settings.py             # Main settings
-│   ├── urls.py                 # URL routing
-│   └── wsgi.py                 # WSGI configuration
-│
-├── portfolio/                   # Main application
-│   ├── models.py               # Data models (Project, Certificate, Course, etc.)
-│   ├── views.py                # View controllers
-│   ├── urls.py                 # App-specific URLs
-│   ├── admin.py                # Admin panel configuration
-│   ├── middleware.py           # Custom middleware (visitor tracking)
-│   └── management/             # Custom management commands
-│
-├── templates/                   # HTML templates
-│   └── portfolio/
-│       ├── base.html           # Base template
-│       ├── home.html           # Main page
-│       ├── partials/           # Reusable components
-│       │   └── _header.html
-│       └── sections/           # Modular sections
-│           ├── _home.html
-│           ├── _about.html
-│           ├── _services.html
-│           ├── _portfolio.html
-│           ├── _certificates.css
-│           ├── _courses.html
-│           ├── _blog.html
-│           └── _contact.html
-│
-├── static/                      # Static files
-│   ├── css/                    # Modular CSS files
-│   │   ├── base.css           # Global styles and variables
-│   │   ├── header.css         # Navigation styles
-│   │   ├── home.css           # Hero section
-│   │   ├── about.css          # About section
-│   │   ├── services.css       # Services section
-│   │   ├── portfolio.css      # Projects gallery
-│   │   ├── certificates.css   # Certificates section
-│   │   ├── courses.css        # Courses section
-│   │   ├── blog.css           # Blog section
-│   │   ├── contact.css        # Contact form
-│   │   └── responsive.css     # Media queries
-│   │
-│   ├── js/                     # JavaScript modules
-│   │   ├── theme-toggle.js    # Dark mode functionality
-│   │   ├── menu.js            # Navigation menu
-│   │   ├── menu-mobile.js     # Mobile menu
-│   │   ├── scroll-reveal.js   # Scroll animations
-│   │   ├── stats-animation.js # Statistics counter
-│   │   └── courses-filter.js  # Course filtering
-│   │
-│   └── images/                 # Static images
-│       └── flags/              # Language selector flags
-│
-├── media/                       # User-uploaded content
-│   ├── projects/               # Project images and videos
-│   ├── certificates/           # Certificate images
-│   ├── courses/                # Course thumbnails
-│   ├── blog/                   # Blog post images
-│   └── profile/                # Profile pictures
-│
-├── db.sqlite3                  # SQLite database
-├── manage.py                   # Django management script
-└── requirements.txt            # Python dependencies
-```
-
----
 
 ## Quick Start
 
@@ -266,8 +194,3 @@ DATABASE_URL=postgresql://...  # If using PostgreSQL
 
 GitHub: [@guinb0](https://github.com/guinb0) | Project: [github.com/guinb0/Portifolio](https://github.com/guinb0/Portifolio)
 
----
-
-## License
-
-MIT License - Open source for portfolio and educational purposes
