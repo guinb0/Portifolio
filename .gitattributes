@@ -1,37 +1,36 @@
 # Python
-*.py linguist-language=Python
+*.py linguist-detectable=true
 
 # HTML Templates
-*.html linguist-language=HTML
+*.html linguist-detectable=true
 
 # CSS
-*.css linguist-language=CSS
+*.css linguist-detectable=true
 
 # JavaScript
-*.js linguist-language=JavaScript
+*.js linguist-detectable=true
 
 # Documentation
-*.md linguist-documentation
+*.md linguist-documentation=true linguist-detectable=false
 
 # SQLite Database - exclude from language stats
-*.sqlite3 linguist-vendored
-*.db linguist-vendored
+*.sqlite3 linguist-vendored=true
+*.db linguist-vendored=true
 
-# Static files - exclude from language stats
-staticfiles/** linguist-vendored
-static/admin/** linguist-vendored
+# Django admin static files - exclude from language stats
+staticfiles/admin/** linguist-vendored=true
 
 # Media files - exclude
-*.jpg linguist-generated
-*.jpeg linguist-generated
-*.png linguist-generated
-*.gif linguist-generated
-*.svg linguist-generated
-*.ico linguist-generated
+*.jpg binary
+*.jpeg binary
+*.png binary
+*.gif binary
+*.svg binary
+*.ico binary
 
 # Python bytecode - exclude
-*.pyc linguist-generated
-__pycache__/** linguist-generated
+*.pyc linguist-generated=true
+__pycache__/** linguist-generated=true
 
-# Migrations - vendored
-**/migrations/** linguist-vendored
+# Migrations - keep detectable as Python
+**/migrations/*.py linguist-detectable=true linguist-language=Python
