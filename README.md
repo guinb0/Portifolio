@@ -4,7 +4,7 @@ Full-stack web application demonstrating proficiency in Django development, REST
 
 ![Django](https://img.shields.io/badge/Django-4.2-092E20?style=for-the-badge&logo=django)
 ![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+
 
 ---
 
