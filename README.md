@@ -1,334 +1,273 @@
-# Portfolio Django - Guilherme Nunes
+# Professional Portfolio Platform
 
-Portfolio profissional migrado de Flask para Django com arquitetura modular e fácil manutenção.
+Full-stack web application demonstrating proficiency in Django development, RESTful architecture, and modern web technologies. This production-ready portfolio system showcases end-to-end software engineering capabilities including database design, API development, and deployment automation.
 
-##  Características
-
-- **Arquitetura Modular**: CSS, JavaScript e Templates divididos em seções independentes
-- **Dark Mode**: Tema escuro/claro com persistência no localStorage
-- **Responsivo**: Design adaptável para desktop, tablet e mobile
-- **Animações**: ScrollReveal e animações CSS suaves
-- **Internacionalização**: Suporte para PT, EN e ES
-- **Admin Django**: Gerenciamento fácil de projetos, certificados e serviços
-- **SEO Friendly**: Estrutura otimizada para motores de busca
-
-##  Estrutura do Projeto
-
-```
-portfolio_django/
-├── config/                  # Configurações do Django
-│   ├── __init__.py
-│   ├── settings.py         # Configurações principais
-│   ├── urls.py             # URLs principais
-│   └── wsgi.py             # WSGI config
-│
-├── portfolio/              # App principal
-│   ├── migrations/         # Migrações do banco
-│   ├── __init__.py
-│   ├── admin.py           # Configuração do Admin
-│   ├── apps.py            # Config da app
-│   ├── models.py          # Models (Project, Certificate, etc)
-│   ├── urls.py            # URLs da app
-│   └── views.py           # Views
-│
-├── templates/
-│   └── portfolio/
-│       ├── base.html                # Template base
-│       ├── home.html               # Template principal
-│       ├── partials/
-│       │   └── _header.html       # Header reutilizável
-│       └── sections/
-│           ├── _home.html         # Seção home
-│           ├── _stats.html        # Seção estatísticas
-│           ├── _about.html        # Seção sobre
-│           ├── _services.html     # Seção serviços
-│           ├── _portfolio.html    # Seção projetos
-│           └── _contact.html      # Seção contato
-│
-├── static/
-│   ├── css/
-│   │   ├── base.css              # Estilos globais e variáveis
-│   │   ├── header.css            # Estilos do header
-│   │   ├── home.css              # Estilos home e stats
-│   │   ├── about.css             # Estilos about
-│   │   ├── services.css          # Estilos services
-│   │   ├── portfolio.css         # Estilos portfolio
-│   │   ├── contact.css           # Estilos contact
-│   │   └── responsive.css        # Media queries
-│   │
-│   ├── js/
-│   │   ├── theme-toggle.js       # Toggle dark mode
-│   │   ├── menu-mobile.js        # Menu responsivo
-│   │   ├── scroll-reveal.js      # Animações scroll
-│   │   └── stats-animation.js    # Animação números
-│   │
-│   └── img/                      # Imagens do site
-│
-├── manage.py
-└── requirements.txt
-```
-
-## 🚀 Instalação
-
-### 1. Clone o repositório
-```bash
-git clone <seu-repositorio>
-cd portfolio_django
-```
-
-### 2. Crie um ambiente virtual
-```bash
-python -m venv venv
-
-# Linux/Mac
-source venv/bin/activate
-
-# Windows
-venv\Scripts\activate
-```
-
-### 3. Instale as dependências
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Configure o banco de dados
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-### 5. Crie um superusuário
-```bash
-python manage.py createsuperuser
-```
-
-### 6. Colete arquivos estáticos
-```bash
-python manage.py collectstatic --noinput
-```
-
-### 7. Execute o servidor
-```bash
-python manage.py runserver
-```
-
-Acesse: `http://127.0.0.1:8000/`
-
-## 🎨 Estrutura de Templates
-
-### Template Base (`base.html`)
-Contém a estrutura HTML comum a todas as páginas:
-- `<head>` com meta tags e links CSS
-- Header (incluído via partial)
-- Bloco de conteúdo
-- Scripts JavaScript
-
-### Seções Modulares
-Cada seção é um arquivo separado em `templates/portfolio/sections/`:
-
-- **`_home.html`**: Hero section com foto e call-to-action
-- **`_stats.html`**: Estatísticas animadas
-- **`_about.html`**: Sobre mim com foto e redes sociais
-- **`_services.html`**: Serviços oferecidos
-- **`_portfolio.html`**: Galeria de projetos
-- **`_contact.html`**: Informações de contato
-
-### Como usar as seções
-No template principal (`home.html`):
-```django
-{% extends 'portfolio/base.html' %}
-
-{% block content %}
-    {% include 'portfolio/sections/_home.html' %}
-    {% include 'portfolio/sections/_stats.html' %}
-    {% include 'portfolio/sections/_about.html' %}
-    {% include 'portfolio/sections/_services.html' %}
-    {% include 'portfolio/sections/_portfolio.html' %}
-    {% include 'portfolio/sections/_contact.html' %}
-{% endblock %}
-```
-
-## 🎨 Estrutura de CSS
-
-### CSS Modular
-Cada seção tem seu próprio arquivo CSS:
-
-- **`base.css`**: Variáveis CSS, reset, estilos globais
-- **`header.css`**: Navegação, logo, menu mobile, theme toggle
-- **`home.css`**: Hero section e estatísticas
-- **`about.css`**: Seção sobre
-- **`services.css`**: Cards de serviços
-- **`portfolio.css`**: Galeria de projetos
-- **`contact.css`**: Seção de contato
-- **`responsive.css`**: Media queries para todos os breakpoints
-
-### Variáveis CSS
-Definidas em `base.css`:
-```css
-:root {
-    --primary-color: #667eea;
-    --secondary-color: #764ba2;
-    --text-dark: #1a202c;
-    --text-light: #718096;
-    --bg-light: #f7fafc;
-    --bg-white: #ffffff;
-    --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    /* ... */
-}
-```
-
-### Dark Mode
-Variáveis sobrescritas automaticamente:
-```css
-body.dark {
-    --text-dark: #f7fafc;
-    --text-light: #cbd5e0;
-    --bg-light: #1a202c;
-    --bg-white: #2d3748;
-}
-```
-
-## 📱 JavaScript Modular
-
-### Arquivos JavaScript
-- **`theme-toggle.js`**: Toggle entre light/dark mode
-- **`menu-mobile.js`**: Funcionalidade do menu hambúrguer
-- **`scroll-reveal.js`**: Animações ao rolar a página
-- **`stats-animation.js`**: Animação dos números das estatísticas
-
-### Carregamento
-Todos os scripts são carregados no final do `base.html`:
-```html
-<script src="{% static 'js/theme-toggle.js' %}"></script>
-<script src="{% static 'js/menu-mobile.js' %}"></script>
-<script src="{% static 'js/scroll-reveal.js' %}"></script>
-<script src="{% static 'js/stats-animation.js' %}"></script>
-```
-
-## 🗄️ Models Django
-
-### Project
-```python
-class Project(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to='projects/')
-    url = models.URLField(blank=True)
-    tags = models.CharField(max_length=200)
-    order = models.IntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-```
-
-### Certificate
-```python
-class Certificate(models.Model):
-    title = models.CharField(max_length=200)
-    institution = models.CharField(max_length=200)
-    image = models.ImageField(upload_to='certificates/')
-    date_issued = models.DateField()
-    is_active = models.BooleanField(default=True)
-```
-
-### Service
-```python
-class Service(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    icon = models.CharField(max_length=100)  # classe boxicons
-    order = models.IntegerField(default=0)
-    is_active = models.BooleanField(default=True)
-```
-
-## 🔧 Admin Django
-
-Acesse `/admin` para gerenciar:
-- Projetos do portfolio
-- Certificados
-- Serviços oferecidos
-- Mensagens de contato
-
-## 🌐 Internacionalização
-
-### URLs disponíveis:
-- `/` - Português (padrão)
-- `/EN/` - English
-- `/ES/` - Español
-
-### Adicionar novo idioma:
-1. Crie o template: `templates/portfolio/home_fr.html`
-2. Adicione a view em `portfolio/views.py`
-3. Adicione a URL em `portfolio/urls.py`
-4. Adicione a bandeira no dropdown do header
-
-## 📝 Customização
-
-### Alterar cores
-Edite as variáveis em `static/css/base.css`:
-```css
-:root {
-    --primary-color: #sua-cor-aqui;
-    --secondary-color: #sua-cor-aqui;
-    /* ... */
-}
-```
-
-### Adicionar nova seção
-1. Crie o template: `templates/portfolio/sections/_nova_secao.html`
-2. Crie o CSS: `static/css/nova-secao.css`
-3. Inclua o CSS no `base.html`
-4. Inclua a seção no `home.html`
-
-### Modificar animações
-Edite `static/js/scroll-reveal.js`:
-```javascript
-ScrollReveal().reveal('.sua-classe', { 
-    origin: 'bottom',
-    distance: '80px',
-    duration: 2000
-});
-```
-
-## 🚀 Deploy
-
-### Preparação
-1. Configure `DEBUG = False` em `settings.py`
-2. Adicione seu domínio em `ALLOWED_HOSTS`
-3. Configure `SECRET_KEY` segura
-4. Configure banco de dados de produção
-
-### Heroku
-```bash
-# Criar Procfile
-echo "web: gunicorn config.wsgi" > Procfile
-
-# Instalar gunicorn
-pip install gunicorn
-pip freeze > requirements.txt
-
-# Deploy
-heroku create seu-app
-git push heroku main
-heroku run python manage.py migrate
-heroku run python manage.py createsuperuser
-```
-
-### Arquivos estáticos
-```bash
-python manage.py collectstatic --noinput
-```
-
-## 📄 Licença
-
-Este projeto está sob a licença MIT.
-
-## 👤 Autor
-
-**Guilherme Nunes**
-- GitHub: [@guinb0](https://github.com/guinb0)
-- LinkedIn: [guinb](https://www.linkedin.com/in/guinbb/)
-- Email: guilhermenunesfev26@gmail.com
+![Django](https://img.shields.io/badge/Django-4.2-092E20?style=for-the-badge&logo=django)
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python)
+![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 ---
 
-Desenvolvido com ❤️ usando Django
+## Technical Highlights
+
+**Core Competencies Demonstrated:**
+- Django ORM with complex model relationships and custom managers
+- RESTful API design principles and MVC architecture
+- Custom middleware implementation for analytics tracking
+- Database schema design with migrations and data integrity
+- Multi-language support (i18n) for global reach
+- Production deployment with CI/CD considerations
+- Security best practices (CSRF protection, SQL injection prevention, XSS mitigation)
+
+**Key Features:**
+- Content management system with CRUD operations
+- Image processing and media file handling
+- Visitor analytics and tracking system
+- Responsive UI with mobile-first approach
+- Performance optimization with static file compression
+- SEO implementation with meta tags and structured data
+
+---
+
+## Technology Stack
+
+**Backend:** Django 4.2 (Python 3.8+) | Pillow | python-decouple | Gunicorn
+
+**Frontend:** Vanilla JavaScript | CSS3 (Grid, Flexbox, Custom Properties) | ScrollReveal.js
+
+**Database:** SQLite (development) | PostgreSQL/MySQL ready
+
+**DevOps:** WhiteNoise | Railway | Git version control
+
+---
+
+## Project Structure
+
+```
+Portifolio/
+├── config/                      # Django project configuration
+│   ├── settings.py             # Main settings
+│   ├── urls.py                 # URL routing
+│   └── wsgi.py                 # WSGI configuration
+│
+├── portfolio/                   # Main application
+│   ├── models.py               # Data models (Project, Certificate, Course, etc.)
+│   ├── views.py                # View controllers
+│   ├── urls.py                 # App-specific URLs
+│   ├── admin.py                # Admin panel configuration
+│   ├── middleware.py           # Custom middleware (visitor tracking)
+│   └── management/             # Custom management commands
+│
+├── templates/                   # HTML templates
+│   └── portfolio/
+│       ├── base.html           # Base template
+│       ├── home.html           # Main page
+│       ├── partials/           # Reusable components
+│       │   └── _header.html
+│       └── sections/           # Modular sections
+│           ├── _home.html
+│           ├── _about.html
+│           ├── _services.html
+│           ├── _portfolio.html
+│           ├── _certificates.css
+│           ├── _courses.html
+│           ├── _blog.html
+│           └── _contact.html
+│
+├── static/                      # Static files
+│   ├── css/                    # Modular CSS files
+│   │   ├── base.css           # Global styles and variables
+│   │   ├── header.css         # Navigation styles
+│   │   ├── home.css           # Hero section
+│   │   ├── about.css          # About section
+│   │   ├── services.css       # Services section
+│   │   ├── portfolio.css      # Projects gallery
+│   │   ├── certificates.css   # Certificates section
+│   │   ├── courses.css        # Courses section
+│   │   ├── blog.css           # Blog section
+│   │   ├── contact.css        # Contact form
+│   │   └── responsive.css     # Media queries
+│   │
+│   ├── js/                     # JavaScript modules
+│   │   ├── theme-toggle.js    # Dark mode functionality
+│   │   ├── menu.js            # Navigation menu
+│   │   ├── menu-mobile.js     # Mobile menu
+│   │   ├── scroll-reveal.js   # Scroll animations
+│   │   ├── stats-animation.js # Statistics counter
+│   │   └── courses-filter.js  # Course filtering
+│   │
+│   └── images/                 # Static images
+│       └── flags/              # Language selector flags
+│
+├── media/                       # User-uploaded content
+│   ├── projects/               # Project images and videos
+│   ├── certificates/           # Certificate images
+│   ├── courses/                # Course thumbnails
+│   ├── blog/                   # Blog post images
+│   └── profile/                # Profile pictures
+│
+├── db.sqlite3                  # SQLite database
+├── manage.py                   # Django management script
+└── requirements.txt            # Python dependencies
+```
+
+---
+
+## Quick Start
+
+**Prerequisites:** Python 3.8+, pip, Git
+
+### Local Development Setup
+
+```bash
+# Clone repository
+git clone https://github.com/guinb0/Portifolio.git
+cd Portifolio
+
+# Create virtual environment
+python -m venv venv
+venv\Scripts\activate  # Windows
+source venv/bin/activate  # Linux/MacOS
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Database setup
+python manage.py migrate
+
+# Create admin user
+python manage.py createsuperuser
+
+# Run development server
+python manage.py runserver
+```
+
+**Access:** http://127.0.0.1:8000/
+
+---
+
+## Architecture & Design Patterns
+
+**Design Patterns Implemented:**
+- **MVC/MVT Architecture:** Clean separation of models, views, and templates
+- **Modular CSS Architecture:** Component-based styling for maintainability
+- **Custom Middleware:** Request/response processing for analytics
+- **Django Admin Customization:** Extended admin interface with custom actions
+
+**Code Quality:**
+- DRY (Don't Repeat Yourself) principles
+- Reusable template components with partials
+- Organized file structure following Django best practices
+- Comprehensive model relationships (One-to-Many, Many-to-Many)
+
+---
+
+## Production Deployment
+
+**Deployment Capabilities:**
+- Railway/Heroku ready with Procfile configuration
+- WhiteNoise for static file serving without CDN dependency
+- Gunicorn WSGI server for production
+- Environment variable configuration for security
+- PostgreSQL/MySQL database migration support
+
+**Production Checklist:**
+```bash
+# Static files optimization
+python manage.py collectstatic --noinput
+
+# Database migration
+python manage.py migrate
+
+# Production server
+gunicorn config.wsgi:application
+```
+
+**Environment Configuration:**
+```
+SECRET_KEY=<secure-random-key>
+DEBUG=False
+ALLOWED_HOSTS=yourdomain.com
+DATABASE_URL=postgresql://...  # If using PostgreSQL
+```
+
+---
+
+## Database Schema
+
+**Models & Relationships:**
+
+- **Project:** Portfolio items with media management, tagging system, ordering
+- **Certificate:** Professional credentials with image uploads and external verification
+- **Course:** Educational content with one-to-many lesson relationship
+- **Blog Post:** Content management with SEO optimization and slug generation
+- **Visitor:** Analytics tracking with IP-based identification and session management
+- **SiteConfig:** Singleton pattern for global site settings
+
+**Database Features:**
+- Custom model managers and querysets
+- Automated timestamp tracking (created_at, updated_at)
+- Data validation and integrity constraints
+- Efficient indexing for performance
+
+---
+
+## Security Implementation
+
+**Security Measures:**
+- CSRF protection on all forms
+- XSS prevention with Django template escaping
+- SQL injection protection via ORM
+- Secure password hashing with PBKDF2
+- Environment variable management for sensitive data
+- HTTPS enforcement in production
+- Clickjacking protection via X-Frame-Options
+- Content Security Policy headers
+
+**Production Security:**
+- `SECRET_KEY` externalized to environment variables
+- `DEBUG=False` enforcement
+- Restricted `ALLOWED_HOSTS`
+- Secure session cookies
+- SQL injection testing completed
+
+---
+
+## Skills Demonstrated
+
+**Backend Development:**
+- Django framework proficiency
+- Python object-oriented programming
+- Database design and optimization
+- RESTful API principles
+- Server-side rendering
+- File upload and media management
+
+**Frontend Development:**
+- Responsive web design
+- JavaScript DOM manipulation
+- CSS architecture and methodology
+- Cross-browser compatibility
+- Progressive enhancement
+
+**Software Engineering:**
+- Git version control
+- Code organization and documentation
+- Testing and debugging
+- Performance optimization
+- Deployment automation
+- Security best practices
+
+---
+
+## Author
+
+**Guilherme Nunes**
+
+GitHub: [@guinb0](https://github.com/guinb0) | Project: [github.com/guinb0/Portifolio](https://github.com/guinb0/Portifolio)
+
+---
+
+## License
+
+MIT License - Open source for portfolio and educational purposes
