@@ -1,0 +1,37 @@
+# Python
+*.py linguist-language=Python
+
+# HTML Templates
+*.html linguist-language=HTML
+
+# CSS
+*.css linguist-language=CSS
+
+# JavaScript
+*.js linguist-language=JavaScript
+
+# Documentation
+*.md linguist-documentation
+
+# SQLite Database - exclude from language stats
+*.sqlite3 linguist-vendored
+*.db linguist-vendored
+
+# Static files - exclude from language stats
+staticfiles/** linguist-vendored
+static/admin/** linguist-vendored
+
+# Media files - exclude
+*.jpg linguist-generated
+*.jpeg linguist-generated
+*.png linguist-generated
+*.gif linguist-generated
+*.svg linguist-generated
+*.ico linguist-generated
+
+# Python bytecode - exclude
+*.pyc linguist-generated
+__pycache__/** linguist-generated
+
+# Migrations - vendored
+**/migrations/** linguist-vendored
