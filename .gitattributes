@@ -1,19 +1,16 @@
-# Force language detection
-*.py linguist-language=Python
-*.html linguist-language=HTML
-*.css linguist-language=CSS
-*.js linguist-language=JavaScript
+# Exclude staticfiles folder (duplicates of static/)
+staticfiles/** linguist-vendored
 
 # Exclude documentation
 *.md linguist-documentation
 
-# Exclude vendored/generated files
-staticfiles/** linguist-vendored
+# Exclude database and bytecode
 *.sqlite3 linguist-vendored
 *.pyc linguist-generated
+__pycache__/** linguist-generated
 
-# Keep all source files detectable
-*.py linguist-detectable
-*.html linguist-detectable
-*.css linguist-detectable
-*.js linguist-detectable
+# Ensure all main languages are detected
+static/** linguist-detectable
+templates/** linguist-detectable
+portfolio/** linguist-detectable
+config/** linguist-detectable
