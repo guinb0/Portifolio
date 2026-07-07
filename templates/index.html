@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme Nunes Bezerra — Full Stack Developer</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Archivo:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/navbar.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/home.css')}}">
+</head>
+<body>
+
+    <!-- Include Navbar -->
+    {% include 'navbar.html' %}
+
+    <!-- Include Home -->
+    {% include 'home.html' %}
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="wrap">
+            <div class="sec-index reveal">01 — About me</div>
+            <div class="about-container">
+                <div class="about-img reveal">
+                    <img src="{{url_for('static',filename='img/IMG_2024_07_04_175231.png')}}" alt="Guilherme">
+                    <span class="tag">B.Sc. Computer Science · 2025</span>
+                </div>
+                <div class="about-text">
+                    <h2 class="reveal">Building <span class="serif-i">web products</span> with code that ships.</h2>
+                    <p class="reveal">Developer with 2+ years of hands-on software experience. I work with React, Node.js, HTML5, and CSS3 to build reusable components and web interfaces, alongside REST API development, SQL data modeling, Git, and production debugging.</p>
+                    <p class="reveal">I'm a Full Stack Developer at <strong>Level 33 Soluções</strong>, building React interfaces and Node.js APIs, and training AI agents with LangChain. Previously, I was an IT Intern at <strong>CGU</strong> (Brazil's federal internal control agency), developing Python and SQL solutions, internal applications, and report automations.</p>
+                    <p class="reveal">Since 2023, I've volunteered as a Data Engineer at <strong>Observatório Social do Brasil</strong>, integrating REST APIs, automating pipelines with AWS Lambda, and building dashboards and AI agents for public data. B.Sc. in Computer Science from Universidade Católica de Brasília (2025). Advanced English, collaborative profile, ready for distributed teams.</p>
+                    <div class="social reveal">
+                        <a href="https://github.com/guinb0" target="_blank" title="GitHub"><i class='bx bxl-github'></i></a>
+                        <a href="https://www.linkedin.com/in/guinbb" target="_blank" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="wrap">
+            <div class="sec-head">
+                <div>
+                    <div class="sec-index reveal">02 — Services</div>
+                    <h2 class="reveal">What I <span class="serif-i">do</span></h2>
+                </div>
+            </div>
+            <div class="services-container">
+                <div class="svc reveal">
+                    <span class="num">01</span>
+                    <div class="svc-body"><h3>Frontend Development</h3><p>Reusable React components, modern JavaScript (ES6+), and responsive interfaces with HTML5 and CSS3.</p></div>
+                    <i class='bx bx-code-alt ic'></i>
+                </div>
+                <div class="svc reveal">
+                    <span class="num">02</span>
+                    <div class="svc-body"><h3>Backend &amp; REST APIs</h3><p>Building and maintaining Node.js APIs for module integrations, with a focus on stability and delivery quality.</p></div>
+                    <i class='bx bx-server ic'></i>
+                </div>
+                <div class="svc reveal">
+                    <span class="num">03</span>
+                    <div class="svc-body"><h3>AI Agent Development</h3><p>Training and orchestrating AI agents with LangChain for task automation and intelligent workflows.</p></div>
+                    <i class='bx bx-bot ic'></i>
+                </div>
+                <div class="svc reveal">
+                    <span class="num">04</span>
+                    <div class="svc-body"><h3>SQL &amp; Data Modeling</h3><p>Data layers, dashboards, and SQL modeling to support analysis, reporting, and decision-making.</p></div>
+                    <i class='bx bxs-data ic'></i>
+                </div>
+                <div class="svc reveal">
+                    <span class="num">05</span>
+                    <div class="svc-body"><h3>Process Automation</h3><p>Automated pipelines with AWS Lambda, API integrations, and internal tools for report generation.</p></div>
+                    <i class='bx bx-cog ic'></i>
+                </div>
+                <div class="svc reveal">
+                    <span class="num">06</span>
+                    <div class="svc-body"><h3>Debugging &amp; Quality</h3><p>Production troubleshooting, performance optimization, Git-based collaboration, and testing principles.</p></div>
+                    <i class='bx bx-bug ic'></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section class="portfolio" id="portfolio">
+        <div class="wrap">
+            <div class="sec-index reveal">03 — Selected projects</div>
+            <div class="sec-head">
+                <h2 class="reveal">My <span class="serif-i">projects</span></h2>
+            </div>
+            <div class="portfolio-container">
+                <article class="proj proj--feat reveal">
+                    <div class="proj-img">
+                        <span class="feat-badge feat-badge--float">Featured — AI Agent</span>
+                        <div class="vig-demo"><div class="vig-top"><span class="vig-eye"><i class="bx bx-show"></i></span><div class="vig-id"><strong>VIG Agent</strong><span>Intelligent Assistant</span></div><span class="vig-live"></span></div><div class="vig-chat"><div class="vig-msg vig-user">What regulations support shutting down an establishment?</div><div class="vig-typing"><span></span><span></span><span></span></div><div class="vig-msg vig-bot">Shutdown is based on Law 6.437/77 and current sanitary regulations.<span class="vig-cursor"></span></div></div><div class="vig-input"><span>Ask a question…</span><i class="bx bx-send"></i></div></div>
+                    </div>
+                    <div class="proj-feat-text">
+                        <div class="proj-head"><h3>VIG Agent — AI Assistant</h3><span class="idx">/00</span></div>
+                        <p>Intelligent agent for sanitary inspection: answers questions about legislation, inspections, and indicators in natural language, builds pre-visit establishment dossiers, and cross-references people, companies, and municipalities. From agent design to end-user team training.</p>
+                        <div class="project-tags"><span class="project-tag">AI Agents</span><span class="project-tag">RAG</span><span class="project-tag">LLM</span><span class="project-tag">Python</span><span class="project-tag">Training</span></div>
+                    </div>
+                </article>
+                <article class="proj reveal">
+                    <div class="proj-img proj-img--shot">
+                        <img src="{{url_for('static',filename='img/automacao.png')}}" alt="Process Automation" class="proj-shot">
+                        <a href="https://colab.research.google.com/drive/1SO-nGi783-yHkXV03sQuOSnhj-mATxCh?usp=sharing" target="_blank" class="proj-arrow" title="View project"><i class='bx bx-link-external'></i></a>
+                    </div>
+                    <div class="proj-head"><h3>Process Automation</h3><span class="idx">/01</span></div>
+                    <p>Intelligent system integrating Python with APIs and spreadsheets to optimize workflows.</p>
+                    <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Automation</span><span class="project-tag">APIs</span></div>
+                </article>
+                <article class="proj reveal">
+                    <div class="proj-img proj-img--shot">
+                        <img src="{{url_for('static',filename='img/legislativo.png')}}" alt="SP Legislative Monitor" class="proj-shot">
+                        <a href="https://monitoramentolegislativo.streamlit.app/" target="_blank" class="proj-arrow" title="View project"><i class='bx bx-link-external'></i></a>
+                    </div>
+                    <div class="proj-head"><h3>SP Legislative Monitor</h3><span class="idx">/02</span></div>
+                    <p>Monitoring São Paulo's legislature through APIs and data processing.</p>
+                    <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">REST API</span><span class="project-tag">SQL</span></div>
+                </article>
+                <article class="proj reveal">
+                    <div class="proj-img">
+                        <div class="ouv-demo">
+                            <div class="ouv-top">
+                                <span class="ouv-shield"><i class="bx bx-shield-quarter"></i></span>
+                                <div class="ouv-id"><strong>Ouvidoria PWA</strong><span>Microsoft Presidio · spaCy PT-BR</span></div>
+                                <span class="ouv-live"></span>
+                            </div>
+                            <div class="ouv-stage">
+                                <div class="ouv-pane ouv-pane--raw">
+                                    <div class="ouv-label"><i class="bx bx-file"></i> Incoming complaint</div>
+                                    <div class="ouv-doc">
+                                        <p>Dear Ombudsman Office,</p>
+                                        <p>I, <mark class="pii">Maria Fernandes da Silva</mark>, holder of CPF <mark class="pii">987.654.321-00</mark> and RG <mark class="pii">2.345.678 SSP/DF</mark>, residing at <mark class="pii">SQN 304, Bloco B, Apt 120, Brasília — DF</mark>, wish to report irregularities in the sanitary licensing of the establishment managed by <mark class="pii">João Pedro Oliveira</mark> (CNPJ <mark class="pii">12.345.678/0001-90</mark>).</p>
+                                        <p>On <mark class="pii">March 15, 2026</mark>, I visited the unit at <mark class="pii">Setor Comercial Sul, Quadra 5, Lote 12</mark> and identified serious violations. I can be reached at <mark class="pii">maria.fernandes@email.com</mark> or <mark class="pii">(61) 99876-5432</mark> for further clarification.</p>
+                                    </div>
+                                </div>
+                                <div class="ouv-pane ouv-pane--scan">
+                                    <div class="ouv-label"><i class="bx bx-radar"></i> Analyzing sensitive data</div>
+                                    <div class="ouv-scanbar"><span></span></div>
+                                    <div class="ouv-detect">
+                                        <span class="ouv-chip ouv-chip--on">CPF</span>
+                                        <span class="ouv-chip ouv-chip--on">RG</span>
+                                        <span class="ouv-chip ouv-chip--on">PERSON</span>
+                                        <span class="ouv-chip ouv-chip--on">EMAIL</span>
+                                        <span class="ouv-chip ouv-chip--on">PHONE</span>
+                                        <span class="ouv-chip ouv-chip--on">LOCATION</span>
+                                        <span class="ouv-chip ouv-chip--on">CNPJ</span>
+                                        <span class="ouv-chip ouv-chip--on">DATE</span>
+                                    </div>
+                                    <p class="ouv-scan-text">Running Presidio NLP pipeline with Portuguese spaCy model and regex fallback…</p>
+                                </div>
+                                <div class="ouv-pane ouv-pane--safe">
+                                    <div class="ouv-label"><i class="bx bx-check-shield"></i> Anonymized output</div>
+                                    <div class="ouv-doc ouv-doc--safe">
+                                        <p>Dear Ombudsman Office,</p>
+                                        <p>I, <mark class="mask">[PERSON]</mark>, holder of CPF <mark class="mask">[CPF]</mark> and RG <mark class="mask">[RG]</mark>, residing at <mark class="mask">[LOCATION]</mark>, wish to report irregularities in the sanitary licensing of the establishment managed by <mark class="mask">[PERSON]</mark> (CNPJ <mark class="mask">[CNPJ]</mark>).</p>
+                                        <p>On <mark class="mask">[DATE]</mark>, I visited the unit at <mark class="mask">[LOCATION]</mark> and identified serious violations. I can be reached at <mark class="mask">[EMAIL]</mark> or <mark class="mask">[PHONE]</mark> for further clarification.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="ouv-foot">
+                                <span class="ouv-foot-item"><i class="bx bx-lock-alt"></i> 8 PII entities masked</span>
+                                <span class="ouv-foot-item"><i class="bx bx-check-circle"></i> LGPD · Privacy by Design</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/guinb0/ouvidoria-pwa" target="_blank" class="proj-arrow" title="View project"><i class='bx bx-link-external'></i></a>
+                    </div>
+                    <div class="proj-head"><h3>Ouvidoria PWA — PII Anonymization</h3><span class="idx">/03</span></div>
+                    <p>Full-stack ombudsman platform that automatically detects and masks personal data in citizen complaints — CPF, emails, phones, names, locations, and more. Built with .NET 9 Web API, Microsoft Presidio (Python + spaCy), and TypeScript + Vite, applying LGPD principles and Privacy by Design with intelligent NLP and regex fallback.</p>
+                    <div class="project-tags"><span class="project-tag">.NET 9</span><span class="project-tag">Microsoft Presidio</span><span class="project-tag">TypeScript</span><span class="project-tag">LGPD</span><span class="project-tag">PII</span></div>
+                </article>
+                <article class="proj reveal">
+                    <div class="proj-img proj-img--shot">
+                        <img src="{{url_for('static',filename='img/level33.png')}}" alt="Level 33 Website" class="proj-shot">
+                        <a href="https://level33.com.br" target="_blank" class="proj-arrow" title="View project"><i class='bx bx-link-external'></i></a>
+                    </div>
+                    <div class="proj-head"><h3>Level 33 — GovTech Website</h3><span class="idx">/04</span></div>
+                    <p>Corporate website and web interfaces for a GovTech company in Brasília — built with React and modern frontend practices as part of my work at Level 33 Soluções.</p>
+                    <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">JavaScript</span><span class="project-tag">GovTech</span><span class="project-tag">UX/UI</span></div>
+                </article>
+                <article class="proj reveal">
+                    <div class="proj-img proj-img--logo">
+                        <img src="{{url_for('static',filename='img/sos-comida.png')}}" alt="SOS Comida" class="proj-shot">
+                    </div>
+                    <div class="proj-head"><h3>SOS Comida — Food Donation Platform</h3><span class="idx">/05</span></div>
+                    <p>Platform for food donations and campaign management with authenticity verification — connecting donors and communities while validating campaign credibility to ensure trust, transparency, and real social impact.</p>
+                    <div class="project-tags"><span class="project-tag">React</span><span class="project-tag">Node.js</span><span class="project-tag">Social Impact</span><span class="project-tag">Campaigns</span><span class="project-tag">Verification</span></div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="wrap">
+            <div class="sec-index reveal">04 — Contact</div>
+            <h2 class="reveal">Let's <span class="serif-i">talk</span>.</h2>
+            <p class="sub reveal">Open to remote opportunities, collaborations, and full-stack developer roles.</p>
+            <div class="contact-info">
+                <a class="contact-box reveal" href="#">
+                    <i class='bx bxs-map'></i>
+                    <h3>Location</h3>
+                    <p>Brasília — DF, Brazil (Remote)</p>
+                </a>
+                <a class="contact-box reveal" href="tel:+5561995462222">
+                    <i class='bx bxs-phone-call'></i>
+                    <h3>Phone</h3>
+                    <p>+55 (61) 99546-2222</p>
+                </a>
+                <a class="contact-box reveal" href="mailto:guilhermenunesfev25@gmail.com">
+                    <i class='bx bxs-envelope'></i>
+                    <h3>Email</h3>
+                    <p>guilhermenunesfev25@gmail.com</p>
+                </a>
+            </div>
+            <div class="contact-foot">
+                <span>© 2026 Guilherme Nunes Bezerra</span>
+                <span>Full Stack Developer — Brasília, BR</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <script src="{{url_for('static',filename='js/main.js')}}"></script>
+</body>
+</html>
