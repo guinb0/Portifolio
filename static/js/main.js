@@ -1,5 +1,5 @@
 // =====================================================
-//  main.js  —  tema, menu mobile, header, reveal, contadores
+//  main.js  —  tema, header, reveal
 // =====================================================
 
 // --- Tema (persistente) ---
@@ -11,16 +11,6 @@ if (themeToggle) {
     body.classList.toggle('dark');
     try { localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light'); } catch (e) {}
   });
-}
-
-// --- Menu mobile ---
-const menuIcon = document.getElementById('menu-icon');
-const navbar = document.querySelector('.navbar');
-if (menuIcon && navbar) {
-  menuIcon.addEventListener('click', () => navbar.classList.toggle('active'));
-  document.querySelectorAll('.navbar a').forEach(l =>
-    l.addEventListener('click', () => navbar.classList.remove('active'))
-  );
 }
 
 // --- Header ao rolar ---
@@ -42,4 +32,3 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
   revIO.observe(el);
 });
 
-// --- Reveal ao aparecer ---

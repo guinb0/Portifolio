@@ -218,14 +218,47 @@ h1,h2,h3{font-family:var(--font-serif);font-weight:500;line-height:1.08;letter-s
 /* ---------- Responsivo ---------- */
 @media(max-width:900px){
   .about-container{grid-template-columns:1fr;gap:3rem}
-  .about-img{max-width:340px}
+  .about-img{max-width:340px;margin:0 auto}
   .contact-info{grid-template-columns:1fr}
   .contact-box{border-left:none;border-top:1px solid rgba(239,233,218,.16);padding:1.6rem 0}
   .contact-box:first-child{border-top:none}
 }
 @media(max-width:768px){
-  .portfolio-container{grid-template-columns:1fr}
-  .svc{grid-template-columns:1fr;gap:.6rem;padding:1.6rem 0}
+  .wrap{padding:0 1.25rem}
+  .about,.services,.portfolio{padding:4rem 0}
+  .contact{padding:4rem 0}
+  .about-text h2{max-width:none}
+  .about-img .tag{left:0;bottom:-12px}
+  .portfolio-container{grid-template-columns:1fr;gap:1.6rem}
+  .svc{grid-template-columns:1fr;gap:.5rem;padding:1.4rem 0}
+  .svc h3{font-size:1.25rem}
   .svc .ic{display:none}
-  .proj.proj--feat{grid-template-columns:1fr;gap:1.2rem}
+  .proj.proj--feat{grid-template-columns:1fr;gap:1rem;padding:1rem}
+  .proj-feat-text .proj-head h3{font-size:1.35rem}
+  .proj-head h3{font-size:1.2rem}
+  .proj-head{gap:.75rem;align-items:flex-start}
+  .feat-badge--float{top:8px;left:8px;max-width:calc(100% - 3.5rem);font-size:.52rem;line-height:1.35;white-space:normal}
+  .proj-arrow{opacity:1;transform:none;width:38px;height:38px;font-size:1.15rem}
+  .proj:hover{transform:none}
+  .contact h2{max-width:none;font-size:clamp(2rem,9vw,3rem)}
+  .contact .sub{font-size:.76rem;margin-bottom:2rem}
+  .contact-box p{font-size:1.05rem}
+  .contact-foot{flex-direction:column;align-items:flex-start;gap:.4rem}
+  .ouv-foot{flex-direction:column;align-items:flex-start;gap:.35rem}
+  .ouv-foot-item{white-space:normal}
+  .vig-msg{font-size:.72rem}
+  .vig-id strong{font-size:.78rem}
+}
+@media(max-width:480px){
+  .wrap{padding:0 1rem}
+  .home-text h1{font-size:clamp(2.6rem,12vw,3.4rem)}
+  .home-text .lead{font-size:1rem;max-width:none}
+  .btn-group{flex-direction:column;width:100%}
+  .btn{width:100%;justify-content:center}
+  .sec-head{margin-bottom:2rem}
+  .sec-head h2{font-size:clamp(1.75rem,8vw,2.4rem)}
+  .project-tag{font-size:.62rem}
+  .proj-img{aspect-ratio:4/3}
+  .proj.proj--feat .proj-img{aspect-ratio:4/3}
+  .photo-frame::before{transform:translate(8px,8px)}
 }
