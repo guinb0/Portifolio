@@ -23,6 +23,19 @@
 .photo-cap{display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.85rem}
 
 @media(max-width:900px){
-  .home-grid{grid-template-columns:1fr;gap:3rem}
-  .home-photo{order:-1;max-width:340px}
+  .home-grid{grid-template-columns:1fr;gap:2.5rem}
+  .home-photo{order:-1;max-width:300px;margin:0 auto}
+}
+@media(max-width:768px){
+  .home{min-height:auto;padding:6.5rem 0 4rem}
+  .home-text .eyebrow{font-size:.66rem;letter-spacing:.16em}
+  .home-text h1{margin-top:1rem}
+  .home-text .role{margin-bottom:1.2rem}
+  .home-text .lead{margin-bottom:1.8rem}
+  .photo-cap{font-size:.62rem}
+}
+@media(max-width:480px){
+  .home{padding:5.5rem 0 3.5rem}
+  .home-photo{max-width:260px}
+  .photo-frame{padding:10px}
 }
