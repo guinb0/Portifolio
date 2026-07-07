@@ -11,4 +11,5 @@ uploads/*
 *.sqlite3
 .DS_Store
 Thumbs.db
+docs/
 Guilherme Nunes - Portfolio (standalone).html
